@@ -1,9 +1,11 @@
-.example-card {
-  max-width: 600px;
-  position: relative;
+.demo-table {
+  width: 100%;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+.demo-button-container {
+  padding-bottom: 16px;
+}
+
+.demo-button + .demo-button {
+  margin-left: 8px;
 }
