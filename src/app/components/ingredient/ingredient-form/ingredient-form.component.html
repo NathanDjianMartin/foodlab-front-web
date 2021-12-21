@@ -1,0 +1,18 @@
+<p>ingredient-form works!</p>
+
+<div>
+    <form [formGroup]="ingredientFormGroup">
+        <input type="text" formControlName="name">
+        <input type="number" formControlName="unitaryPrice">
+        <input type="text" formControlName="unit">
+        <input type="number" formControlName="stockQuantity">
+        <div class="input-field col s12">
+            <select name="categories" id="categories" formControlName="ingredientCategory">
+                <option *ngFor="let category of ingredientCategories | async"
+                        value="{{category.id}}">{{category.name}}</option>
+            </select>
+            <label>Select a category</label>
+        </div>
+    </form>
+</div>
+<button (click)="createIngredient()">Valider</button>

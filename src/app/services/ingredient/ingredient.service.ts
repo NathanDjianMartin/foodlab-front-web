@@ -11,7 +11,12 @@ export class IngredientService {
   constructor(private httpService: HttpClient) { }
 
   jsonToIngredient(json: any): Ingredient{
-    return new Ingredient(json.name, json.unitaryPrice, json.unit, json.id);
+    console.log(json);
+    let ingredient: Ingredient =  new Ingredient(json.name, json.unitaryPrice, json.unit, json.stockQuantity, json.id, json.ingredientCategoryId);
+    if(json.allergenCategoryId){
+      ingredient.allergenCategoryId = json.allergenCategoryId;
+    }
+    return ingredient;
   }
 
   getAllIngredients(): Observable<Ingredient[]> {

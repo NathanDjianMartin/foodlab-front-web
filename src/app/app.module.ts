@@ -6,11 +6,13 @@ import {AppComponent} from './app.component';
 import {TabIngredientsComponent} from './components/ingredient/tab-ingredients/tab-ingredients.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { IngredientFormComponent } from './components/ingredient/ingredient-form/ingredient-form.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        TabIngredientsComponent
+        TabIngredientsComponent,
+        IngredientFormComponent
     ],
     imports: [
         BrowserModule,
