@@ -1,4 +1,4 @@
-<p>tab-ingredients works!</p>
+<h2 class="center-align">Ingredients list</h2>
 
 <div class="row container tab-center">
     <table class="highlight">
@@ -7,6 +7,9 @@
             <th>Name</th>
             <th>Unitary Price</th>
             <th>Stock Quantity</th>
+            <th>Category</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
         </thead>
 
@@ -15,7 +18,19 @@
             <td>{{ingredient.name}}</td>
             <td>{{ingredient.unitaryPrice + "$/" + ingredient.unit}}</td>
             <td>{{ingredient.stockQuantity + " " + ingredient.unit}}</td>
+            <td>{{ingredient.ingredientCategoryName}}</td>
+            <td>
+<!--                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>-->
+                <button class="btn-small waves-effect waves-light action">Update</button>
+            </td>
+            <td>
+                <button class="btn-small waves-effect waves-light action">Delete</button>
+            </td>
         </tr>
         </tbody>
     </table>
+
+</div>
+<div class="row container right-align">
+    <button class="btn waves-effect waves-light" [routerLink]="['/ingredients/add']">Add an ingredient</button>
 </div>

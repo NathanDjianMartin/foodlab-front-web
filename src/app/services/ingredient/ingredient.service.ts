@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Ingredient} from "../../models/ingredient/ingredient";
 import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +13,19 @@ export class IngredientService {
 
   jsonToIngredient(json: any): Ingredient{
     console.log(json);
-    let ingredient: Ingredient =  new Ingredient(json.name, json.unitaryPrice, json.unit, json.stockQuantity, json.ingredientCategory);
+    let ingredient: Ingredient =  new Ingredient(json.name, json.unitaryPrice, json.unit, json.stockQuantity, json.ingredientCategory.id);
     ingredient.id = json.id;
     if(json.allergenCategory){
       ingredient.allergenCategory = json.allergenCategory;
     }
+    ingredient.ingredientCategoryName = json.ingredientCategory.name;
     return ingredient;
   }
 
   getAllIngredients(): Observable<Ingredient[]> {
-    return this.httpService.get<Ingredient[]>("http://localhost:3000/ingredient");
+    return this.httpService.get<Ingredient[]>("http://localhost:3000/ingredient").pipe(
+        map(data =>
+            data.map( json => this.jsonToIngredient(json))));
   }
 
   createIngredient(ingredient: Ingredient): Observable<Ingredient>{

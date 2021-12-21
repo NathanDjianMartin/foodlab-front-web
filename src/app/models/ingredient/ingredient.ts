@@ -8,6 +8,7 @@ export class Ingredient {
     public stockQuantity: number;
     public allergenCategory?: number;
     public ingredientCategory: number;
+    public ingredientCategoryName?: string;
 
     constructor(name: string, unitaryPrice: number, unit: string, stockQuantity: number, ingredientCategory: number) {
         this.name = name;
