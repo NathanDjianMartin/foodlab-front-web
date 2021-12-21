@@ -1,18 +1,40 @@
-<p>ingredient-form works!</p>
 
-<div>
-    <form [formGroup]="ingredientFormGroup">
-        <input type="text" formControlName="name">
-        <input type="number" formControlName="unitaryPrice">
-        <input type="text" formControlName="unit">
-        <input type="number" formControlName="stockQuantity">
-        <div class="input-field col s12">
-            <select name="categories" id="categories" formControlName="ingredientCategory">
-                <option *ngFor="let category of ingredientCategories | async"
-                        value="{{category.id}}">{{category.name}}</option>
-            </select>
-            <label>Select a category</label>
+<h2 class="center-align">Add an ingredient</h2>
+
+<div class="row container">
+    <form class="col s12" [formGroup]="ingredientFormGroup">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="name" type="text" class="validate" formControlName="name">
+                <label for="name">Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="unit" type="number" class="validate" formControlName="unit">
+                <label for="unit">Unit</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="unitaryPrice" type="number" class="validate" formControlName="unitaryPrice">
+                <label for="unitaryPrice">Unitary price</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="stockQuantity" type="number" class="validate" formControlName="stockQuantity">
+                <label for="stockQuantity">Stock Quantity</label>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <select formControlName="ingredientCategory">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option *ngFor="let category of ingredientCategories | async"
+                            value="{{category.id}}">{{category.name}}</option>
+                </select>
+                <label>Select a category</label>
+            </div>
+
         </div>
     </form>
+    <button class="btn waves-effect waves-light" type="submit" name="action" (click)="createIngredient()">Submit
+        <i class="material-icons right">send</i>
+    </button>
 </div>
-<button (click)="createIngredient()">Valider</button>

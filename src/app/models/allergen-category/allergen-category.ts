@@ -1,6 +1,4 @@
-import {Optional} from "@angular/core";
-
-export class IngredientCategory {
+export class AllergenCategory {
     public id?: number;
     public name: string;
 
@@ -8,3 +6,4 @@ export class IngredientCategory {
         this.name = name;
     }
 }
+
