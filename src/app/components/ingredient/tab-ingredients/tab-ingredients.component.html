@@ -1,0 +1,11 @@
+<p>tab-ingredients works!</p>
+<div *ngFor="let ingredient of ingredients | async">
+    <li>{{ingredient.name}}</li>
+</div>
+
+<form [formGroup]="ingredientFormGroup">
+    <input type="text" formControlName="name">
+    <input type="number" formControlName="unitaryPrice">
+    <input type="text" formControlName="unit">
+</form>
+<button (click)="createIngredient()">coucou toi</button>
