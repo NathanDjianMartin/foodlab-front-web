@@ -1,5 +1,21 @@
 <p>tab-ingredients works!</p>
-<div *ngFor="let ingredient of ingredients | async">
-    <li>{{ingredient.name}}</li>
-</div>
 
+<div class="row container tab-center">
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Unitary Price</th>
+            <th>Stock Quantity</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let ingredient of ingredients | async">
+            <td>{{ingredient.name}}</td>
+            <td>{{ingredient.unitaryPrice + "$/" + ingredient.unit}}</td>
+            <td>{{ingredient.stockQuantity + " " + ingredient.unit}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -5,6 +5,7 @@ import {Ingredient} from "../../../models/ingredient/ingredient";
 import {IngredientCategoryService} from "../../../services/ingredient-category/ingredient-category.service";
 import {IngredientCategory} from "../../../models/ingredient-category/ingredient-category";
 import {Observable} from "rxjs";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ingredient-form',
@@ -16,6 +17,7 @@ export class IngredientFormComponent implements OnInit {
   ingredientFormGroup!: FormGroup;
 
   constructor(
+      private router : Router,
       private ingredientService: IngredientService,
       private ingredientCategoryService: IngredientCategoryService,
       private fb: FormBuilder
@@ -38,9 +40,11 @@ export class IngredientFormComponent implements OnInit {
           this.ingredientFormGroup.get("name")?.value,
           this.ingredientFormGroup.get("unitaryPrice")?.value,
           this.ingredientFormGroup.get("unit")?.value,
-          this.ingredientFormGroup.get("ingredientCategory")?.value,
-          this.ingredientFormGroup.get("stockQuantity")?.value);
+          this.ingredientFormGroup.get("stockQuantity")?.value,
+          this.ingredientFormGroup.get("ingredientCategory")?.value);
+      console.log(ingredient)
       this.ingredientService.createIngredient(ingredient).subscribe(ingredient => console.log("ingredient crée"));
+      this.router.navigate(['ingredients']);
     }
   }
 

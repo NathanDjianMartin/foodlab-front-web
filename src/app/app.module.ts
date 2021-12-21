@@ -7,12 +7,14 @@ import {TabIngredientsComponent} from './components/ingredient/tab-ingredients/t
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import { IngredientFormComponent } from './components/ingredient/ingredient-form/ingredient-form.component';
+import { NavbarComponent } from './components/general/navbar/navbar.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         TabIngredientsComponent,
-        IngredientFormComponent
+        IngredientFormComponent,
+        NavbarComponent
     ],
     imports: [
         BrowserModule,

@@ -6,16 +6,15 @@ export class Ingredient {
     public unitaryPrice: number;
     public unit: string;
     public stockQuantity: number;
-    public allergenCategoryId?: number;
-    public ingredientCategoryId: number;
+    public allergenCategory?: number;
+    public ingredientCategory: number;
 
-    constructor(name: string, unitaryPrice: number, unit: string, stockQuantity: number, ingredientCategoryId: number, @Optional() allergenCategoryId?: number, @Optional()id?: number) {
-        this.id = id;
+    constructor(name: string, unitaryPrice: number, unit: string, stockQuantity: number, ingredientCategory: number) {
         this.name = name;
         this.unitaryPrice = unitaryPrice;
         this.unit = unit;
         this.stockQuantity = stockQuantity;
-        this.allergenCategoryId = allergenCategoryId;
-        this.ingredientCategoryId = ingredientCategoryId;
+        this.ingredientCategory = ingredientCategory;
     }
+
 }
