@@ -13,6 +13,8 @@ import { AddAllergenCategoryComponent } from './components/allergen-category/add
 import { AllergenCategoryListComponent } from './components/allergen-category/allergen-category-list/allergen-category-list.component';
 import { IngredientCategoryListComponent } from './components/ingredient-category/ingredient-category-list/ingredient-category-list.component';
 import { FooterComponent } from './components/general/footer/footer.component';
+import { TabRecipesComponent } from './components/recipe/tab-recipes/tab-recipes.component';
+import { AddRecipeComponent } from './components/recipe/add-recipe/add-recipe.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +26,9 @@ import { FooterComponent } from './components/general/footer/footer.component';
         AddAllergenCategoryComponent,
         AllergenCategoryListComponent,
         IngredientCategoryListComponent,
-        FooterComponent
+        FooterComponent,
+        TabRecipesComponent,
+        AddRecipeComponent
     ],
     imports: [
         BrowserModule,

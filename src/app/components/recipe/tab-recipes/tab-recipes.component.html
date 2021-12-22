@@ -1,0 +1,36 @@
+<h2 class="center-align">Recipes list</h2>
+
+<div class="row container tab-center">
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Nomber of guests</th>
+            <th>Category</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let recipe of recipes | async">
+            <td>{{recipe.name}}</td>
+            <td>{{recipe.author}}</td>
+            <td>{{recipe.guestsNumber}}</td>
+            <td>{{recipe.recipeCategoryName}}</td>
+            <td>
+                <!--                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>-->
+                <button class="btn-small waves-effect waves-light action">Update</button>
+            </td>
+            <td>
+                <button class="btn-small waves-effect waves-light action" (click)="deleteIngredient(recipe)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="row container right-align">
+    <button class="btn waves-effect waves-light" [routerLink]="['/recipe/add']">Add a recipe</button>
+</div>
+
+

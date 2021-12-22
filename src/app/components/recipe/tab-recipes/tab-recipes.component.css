@@ -1,0 +1,14 @@
+tab-center{
+    margin: 0 auto;
+    width: 100px;
+}
+.btn{
+    background-color: #903739 !important;
+}
+h2{
+    color: #4f5e62;
+}
+.action{
+    background-color: #729598 !important;
+    size: 2px !important;
+}
