@@ -1,0 +1,43 @@
+<h2 class="center-align">Add a recipe</h2>
+
+<div class="row container">
+    <form class="col s12" [formGroup]="recipeFormGroup">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="name" type="text" class="validate" formControlName="name">
+                <label for="name">Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="unit" type="text" class="validate" formControlName="author">
+                <label for="unit">Author</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="unitaryPrice" type="number" class="validate" formControlName="guestsNumber">
+                <label for="unitaryPrice">Number of guests</label>
+            </div>
+            <div class="input-field col s6">
+                <select formControlName="recipeCategory">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option *ngFor="let category of recipeCategories | async"
+                            value="{{category.id}}">{{category.name}}</option>
+                </select>
+                <label>Select a recipe category</label>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row container center-align">
+    <button class="btn-small waves-effect waves-light" (click)="manageRecipeCategoryAction()">Manage recipe category</button>
+</div>
+<!--<div class="container row">-->
+<!--    <div *ngIf="manageIngredientCategory" class="col s6">-->
+<!--        <app-ingredient-category-list></app-ingredient-category-list>-->
+<!--        <app-add-ingredient-category></app-add-ingredient-category>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="row container right-align">
+    <button class="btn waves-effect waves-light" type="submit" name="action" (click)="createRecipe()">Submit
+        <i class="material-icons right">send</i>
+    </button>
+</div>

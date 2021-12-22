@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {TabIngredientsComponent} from "./components/ingredient/tab-ingredients/tab-ingredients.component";
 import {IngredientFormComponent} from "./components/ingredient/ingredient-form/ingredient-form.component";
 import {TabRecipesComponent} from "./components/recipe/tab-recipes/tab-recipes.component";
+import {RecipeFormComponent} from "./components/recipe/recipe-form/recipe-form.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'recipes',
     component: TabRecipesComponent
+  },
+  {
+    path: 'recipes/add',
+    component: RecipeFormComponent
   }
 ];
 
