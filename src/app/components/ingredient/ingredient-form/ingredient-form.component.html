@@ -46,16 +46,16 @@
     <button class="btn-small waves-effect waves-light" (click)="manageIngredientCategoryAction()">Manage ingredient category</button>
     <button class="btn-small waves-effect waves-light" (click)="manageAllergenCategoryAction()">Manage allergen category</button>
 </div>
-
-<div *ngIf="manageIngredientCategory" class="container col s6">
+<div class="container row">
+<div *ngIf="manageIngredientCategory" class="col s6">
     <app-ingredient-category-list></app-ingredient-category-list>
     <app-add-ingredient-category></app-add-ingredient-category>
 </div>
-<div *ngIf="manageAllergenCategory" class="container col s6">
+<div *ngIf="manageAllergenCategory" class="col s6">
     <app-allergen-category-list></app-allergen-category-list>
     <app-add-allergen-category></app-add-allergen-category>
 </div>
-
+</div>
 <div class="row container right-align">
     <button class="btn waves-effect waves-light" type="submit" name="action" (click)="createIngredient()">Submit
         <i class="material-icons right">send</i>

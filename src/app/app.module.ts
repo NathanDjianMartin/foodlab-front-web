@@ -12,6 +12,7 @@ import { AddIngredientCategoryComponent } from './components/ingredient-category
 import { AddAllergenCategoryComponent } from './components/allergen-category/add-allergen-category/add-allergen-category.component';
 import { AllergenCategoryListComponent } from './components/allergen-category/allergen-category-list/allergen-category-list.component';
 import { IngredientCategoryListComponent } from './components/ingredient-category/ingredient-category-list/ingredient-category-list.component';
+import { FooterComponent } from './components/general/footer/footer.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { IngredientCategoryListComponent } from './components/ingredient-categor
         AddIngredientCategoryComponent,
         AddAllergenCategoryComponent,
         AllergenCategoryListComponent,
-        IngredientCategoryListComponent
+        IngredientCategoryListComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,

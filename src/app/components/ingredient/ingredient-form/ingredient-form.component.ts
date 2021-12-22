@@ -45,12 +45,12 @@ export class IngredientFormComponent implements OnInit {
   }
 
   manageAllergenCategoryAction() {
-    this.manageIngredientCategory = false;
+    //this.manageIngredientCategory = false;
     this.manageAllergenCategory = true;
   }
 
   manageIngredientCategoryAction() {
-    this.manageAllergenCategory = false;
+    //this.manageAllergenCategory = false;
     this.manageIngredientCategory = true;
   }
 
