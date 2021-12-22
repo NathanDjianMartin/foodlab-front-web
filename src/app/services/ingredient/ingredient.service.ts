@@ -31,4 +31,8 @@ export class IngredientService {
   createIngredient(ingredient: Ingredient): Observable<Ingredient>{
     return this.httpService.post<Ingredient>("http://localhost:3000/ingredient", ingredient);
   }
+
+  deleteIngredient(id: number){
+    return this.httpService.delete<number>(`http://localhost:3000/ingredient/${id}`);
+  }
 }

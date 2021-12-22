@@ -18,6 +18,8 @@ export class IngredientFormComponent implements OnInit {
   ingredientCategories!: Observable<IngredientCategory[]>;
   allergenCategories!: Observable<AllergenCategory[]>
   ingredientFormGroup!: FormGroup;
+  manageAllergenCategory!: boolean;
+  manageIngredientCategory!: boolean;
 
   constructor(
       private router : Router,
@@ -28,6 +30,8 @@ export class IngredientFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.manageAllergenCategory = false;
+    this.manageIngredientCategory = false;
     this.ingredientCategories = this.ingredientCategoryService.getAllIngredientCategories();
     this.allergenCategories = this.allergenCategoryService.getAllAllergenCategories();
     console.log(this.ingredientCategories);
@@ -38,6 +42,16 @@ export class IngredientFormComponent implements OnInit {
       stockQuantity:[null,[Validators.required]],
       ingredientCategory:[null,[Validators.required]],
       allergenCategory:[]});
+  }
+
+  manageAllergenCategoryAction() {
+    this.manageIngredientCategory = false;
+    this.manageAllergenCategory = true;
+  }
+
+  manageIngredientCategoryAction() {
+    this.manageAllergenCategory = false;
+    this.manageIngredientCategory = true;
   }
 
   createIngredient(){

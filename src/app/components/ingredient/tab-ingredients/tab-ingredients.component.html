@@ -24,7 +24,7 @@
                 <button class="btn-small waves-effect waves-light action">Update</button>
             </td>
             <td>
-                <button class="btn-small waves-effect waves-light action">Delete</button>
+                <button class="btn-small waves-effect waves-light action" (click)="deleteIngredient(ingredient)">Delete</button>
             </td>
         </tr>
         </tbody>
@@ -34,3 +34,5 @@
 <div class="row container right-align">
     <button class="btn waves-effect waves-light" [routerLink]="['/ingredients/add']">Add an ingredient</button>
 </div>
+
+

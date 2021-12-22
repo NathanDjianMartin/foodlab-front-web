@@ -8,13 +8,21 @@ import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import { IngredientFormComponent } from './components/ingredient/ingredient-form/ingredient-form.component';
 import { NavbarComponent } from './components/general/navbar/navbar.component';
+import { AddIngredientCategoryComponent } from './components/ingredient-category/add-ingredient-category/add-ingredient-category.component';
+import { AddAllergenCategoryComponent } from './components/allergen-category/add-allergen-category/add-allergen-category.component';
+import { AllergenCategoryListComponent } from './components/allergen-category/allergen-category-list/allergen-category-list.component';
+import { IngredientCategoryListComponent } from './components/ingredient-category/ingredient-category-list/ingredient-category-list.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         TabIngredientsComponent,
         IngredientFormComponent,
-        NavbarComponent
+        NavbarComponent,
+        AddIngredientCategoryComponent,
+        AddAllergenCategoryComponent,
+        AllergenCategoryListComponent,
+        IngredientCategoryListComponent
     ],
     imports: [
         BrowserModule,

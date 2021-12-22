@@ -25,6 +25,6 @@ export class IngredientCategoryService {
     };
 
     createIngredientCategory(ingredientCategory: IngredientCategory): Observable<IngredientCategory> {
-        return this.httpService.post<IngredientCategory>("http://localhost:3000/ingredient", ingredientCategory);
+        return this.httpService.post<IngredientCategory>("http://localhost:3000/ingredient-category", ingredientCategory);
     }
 }
