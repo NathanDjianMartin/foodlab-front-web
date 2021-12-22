@@ -29,7 +29,8 @@ export class TabIngredientsComponent implements OnInit {
     }
 
     deleteIngredient(ingredient: Ingredient){
-        this.ingredientService.deleteIngredient(ingredient.id!).subscribe();
+        this.ingredientService.deleteIngredient(ingredient.id!).subscribe((data) => {
+            this.ngOnInit() });
     }
 
 }

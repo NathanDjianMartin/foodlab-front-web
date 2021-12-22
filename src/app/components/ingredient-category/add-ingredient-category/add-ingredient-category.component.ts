@@ -22,7 +22,9 @@ export class AddIngredientCategoryComponent implements OnInit {
 
   createIngredientCategory(){
     let ingredientCategory = new IngredientCategory(this.ingredientCategoryFormGroup.get("name")?.value);
-    this.ingredientCategoryService.createIngredientCategory(ingredientCategory).subscribe();
+    this.ingredientCategoryService.createIngredientCategory(ingredientCategory).subscribe( (data) => {
+        this.ngOnInit() }
+    );
   }
 
 }

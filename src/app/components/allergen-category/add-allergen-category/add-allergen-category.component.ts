@@ -22,7 +22,8 @@ export class AddAllergenCategoryComponent implements OnInit {
 
   createAllergenCategory(){
     let allergenCategory = new AllergenCategory(this.allergenCategoryFormGroup.get("name")?.value);
-    this.allergenCategoryService.createAllergenCategory(allergenCategory).subscribe();
+    this.allergenCategoryService.createAllergenCategory(allergenCategory).subscribe((data) => {
+      this.ngOnInit() });
   }
 
 }

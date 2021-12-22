@@ -27,4 +27,8 @@ export class IngredientCategoryService {
     createIngredientCategory(ingredientCategory: IngredientCategory): Observable<IngredientCategory> {
         return this.httpService.post<IngredientCategory>("http://localhost:3000/ingredient-category", ingredientCategory);
     }
+
+    deleteIngredientCategory(id: number) {
+        return this.httpService.delete<number>(`http://localhost:3000/ingredient-category/${id}`);
+    }
 }

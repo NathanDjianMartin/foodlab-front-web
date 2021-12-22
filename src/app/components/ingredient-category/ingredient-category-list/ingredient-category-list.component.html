@@ -1,5 +1,8 @@
 <div class="row">
     <ul class="collection col s10">
-        <li *ngFor="let category of ingredientCategories  | async" class="collection-item">{{category.name}}</li>
+        <li *ngFor="let category of ingredientCategories  | async" class="collection-item">
+            <button class="btn-small waves-effect waves-light" (click)="deleteIngredientCategory(category)">x</button>
+            {{category.name}}
+        </li>
     </ul>
 </div>
