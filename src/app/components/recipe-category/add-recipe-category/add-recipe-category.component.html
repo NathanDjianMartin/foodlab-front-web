@@ -1,0 +1,7 @@
+<div class="row">
+    <div class="input-field col s8"  [formGroup]="recipeCategoryFormGroup">
+        <input id="name" type="text" class="validate" formControlName="name">
+        <label for="name">Name</label>
+    </div>
+    <button class="btn-small waves-effect waves-light col s2" (click)="createRecipeCategory()">Add</button>
+</div>

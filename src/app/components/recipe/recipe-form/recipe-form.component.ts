@@ -15,7 +15,7 @@ import {Recipe} from "../../../models/recipe/recipe";
 export class RecipeFormComponent implements OnInit {
   recipeCategories!: Observable<RecipeCategory[]>;
   recipeFormGroup!: FormGroup;
-  managerecipeCategory!: boolean;
+  manageRecipeCategory!: boolean;
 
   constructor(
       private router : Router,
@@ -25,7 +25,7 @@ export class RecipeFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.managerecipeCategory = false;
+    this.manageRecipeCategory = false;
     this.recipeCategories = this.recipeCategoryService.getAllIngredientCategories();
     this.recipeFormGroup = this.fb.group({
       name:[null, [Validators.required]],
@@ -36,7 +36,7 @@ export class RecipeFormComponent implements OnInit {
 
 
   manageRecipeCategoryAction() {
-    this.managerecipeCategory = true;
+    this.manageRecipeCategory = true;
   }
 
 

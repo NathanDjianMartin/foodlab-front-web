@@ -15,6 +15,8 @@ import { IngredientCategoryListComponent } from './components/ingredient-categor
 import { FooterComponent } from './components/general/footer/footer.component';
 import { TabRecipesComponent } from './components/recipe/tab-recipes/tab-recipes.component';
 import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
+import { AddRecipeCategoryComponent } from './components/recipe-category/add-recipe-category/add-recipe-category.component';
+import { RecipeCategoryListComponent } from './components/recipe-category/recipe-category-list/recipe-category-list.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form
         IngredientCategoryListComponent,
         FooterComponent,
         TabRecipesComponent,
-        RecipeFormComponent
+        RecipeFormComponent,
+        AddRecipeCategoryComponent,
+        RecipeCategoryListComponent,
     ],
     imports: [
         BrowserModule,
@@ -39,5 +43,4 @@ import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form
     providers: [],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
