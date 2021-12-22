@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AllergenCategoryService} from "../../../services/allergen-category/allergen-category.service";
 import {AllergenCategory} from "../../../models/allergen-category/allergen-category";
+import {IngredientCategory} from "../../../models/ingredient-category/ingredient-category";
 
 @Component({
   selector: 'app-add-allergen-category',

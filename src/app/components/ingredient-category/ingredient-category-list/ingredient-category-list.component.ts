@@ -19,8 +19,12 @@ export class IngredientCategoryListComponent implements OnInit {
     }
 
     deleteIngredientCategory(ingredientCategory: IngredientCategory) {
-        this.ingredientCategoryService.deleteIngredientCategory(ingredientCategory.id!).subscribe((data) => {
+        this.ingredientCategoryService.deleteIngredientCategory(ingredientCategory.id!).subscribe(
+            (data) => {
                 this.ngOnInit()
+            },
+            (error) => {
+                console.log("oups")
             }
         );
     }

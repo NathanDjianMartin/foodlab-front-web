@@ -1,9 +1,10 @@
 <div class="row">
     <ul class="collection col s10">
         <li *ngFor="let category of allergenCategories  | async" class="collection-item">
-            <button class="btn-small waves-effect waves-light">x</button>
+            <button class="btn-small waves-effect waves-light" (click)="deleteAllergenCategory(category)">x</button>
             {{category.name}}
         </li>
-
     </ul>
+
 </div>
+<span *ngIf="this.errorService.message != null">{{this.errorService.message}}</span>

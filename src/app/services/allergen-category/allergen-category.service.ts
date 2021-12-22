@@ -27,4 +27,8 @@ export class AllergenCategoryService {
   createAllergenCategory(allergenCategory: AllergenCategory): Observable<AllergenCategory> {
     return this.httpService.post<AllergenCategory>("http://localhost:3000/allergen-category", allergenCategory);
   }
+
+  deleteAllergenCategory(id: number) {
+    return this.httpService.delete<number>(`http://localhost:3000/allergen-category/${id}`);
+  }
 }
