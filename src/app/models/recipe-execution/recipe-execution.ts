@@ -7,7 +7,8 @@ export class RecipeExecution {
     public stepDescription?: string;
     public duration?: number;
     public ingredients?: Ingredient[];
-    public recipeExecution?: RecipeExecution;
+    public steps?: RecipeExecution[];
+    public recipeExecutionId?: number;
 
     constructor(isStep: boolean, stepTitle: string) {
         this.isStep = isStep;

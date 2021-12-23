@@ -22,6 +22,7 @@ export class RecipeIngredientsListComponent implements OnInit {
     this.recipe = this.recipeService.currentRecipe!;
     console.log(this.recipe!.recipeExecutionId!);
     if(this.recipe != null && this.recipe.recipeExecutionId != null) {
+      //TODO: recalculer car probablement faut si la recette contient une progression qui contient elle même des progressions
       this.ingredientsWithinStep = this.ingredientWithinStepService.getAllIngredientsInRecipe(this.recipe!.recipeExecutionId!);
     }
   }
