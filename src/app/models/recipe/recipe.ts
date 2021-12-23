@@ -1,3 +1,5 @@
+import {RecipeExecution} from "../recipe-execution/recipe-execution";
+
 export class Recipe {
     public id?: number;
     public name: string;
@@ -5,6 +7,7 @@ export class Recipe {
     public guestsNumber: number;
     public recipeCategory: number;
     public recipeCategoryName?: string;
+    public recipeExecutionId?: number;
 
     //TODO: ajouter attribut recipeExecution et costData
 

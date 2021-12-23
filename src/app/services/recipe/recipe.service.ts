@@ -17,6 +17,10 @@ export class RecipeService {
     let recipe: Recipe =  new Recipe(json.name, json.author, json.guestsNumber, json.recipeCategory.id);
     recipe.id = json.id;
     recipe.recipeCategoryName = json.recipeCategory.name;
+    if(json.recipeExecutionId != null) {
+      recipe.recipeExecutionId = json.recipeExecutionId
+    }
+    console.log(recipe.recipeExecutionId)
     return recipe;
   }
 
