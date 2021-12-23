@@ -7,7 +7,7 @@ export class Ingredient {
     public unit: string;
     public stockQuantity: number;
     public allergenCategory?: number;
-    public ingredientCategory: number;
+    public ingredientCategoryId: number;
     public ingredientCategoryName?: string;
 
     constructor(name: string, unitaryPrice: number, unit: string, stockQuantity: number, ingredientCategory: number) {
@@ -15,7 +15,7 @@ export class Ingredient {
         this.unitaryPrice = unitaryPrice;
         this.unit = unit;
         this.stockQuantity = stockQuantity;
-        this.ingredientCategory = ingredientCategory;
+        this.ingredientCategoryId = ingredientCategory;
     }
 
 }

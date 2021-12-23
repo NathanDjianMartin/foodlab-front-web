@@ -17,6 +17,10 @@ import { TabRecipesComponent } from './components/recipe/tab-recipes/tab-recipes
 import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
 import { AddRecipeCategoryComponent } from './components/recipe-category/add-recipe-category/add-recipe-category.component';
 import { RecipeCategoryListComponent } from './components/recipe-category/recipe-category-list/recipe-category-list.component';
+import { RecipeExecutionListComponent } from './components/recipe/recipe-execution-list/recipe-execution-list.component';
+import { RecipeIngredientsListComponent } from './components/recipe/recipe-ingredients-list/recipe-ingredients-list.component';
+import { RecipeHeaderComponent } from './components/recipe/recipe-header/recipe-header.component';
+import { RecipeDetailsComponent } from './components/recipe/recipe-details/recipe-details.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +37,10 @@ import { RecipeCategoryListComponent } from './components/recipe-category/recipe
         RecipeFormComponent,
         AddRecipeCategoryComponent,
         RecipeCategoryListComponent,
+        RecipeExecutionListComponent,
+        RecipeIngredientsListComponent,
+        RecipeHeaderComponent,
+        RecipeDetailsComponent,
     ],
     imports: [
         BrowserModule,

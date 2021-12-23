@@ -13,7 +13,7 @@ export class IngredientService {
 
   jsonToIngredient(json: any): Ingredient{
     console.log(json);
-    let ingredient: Ingredient =  new Ingredient(json.name, json.unitaryPrice, json.unit, json.stockQuantity, json.ingredientCategory.id);
+    let ingredient: Ingredient =  new Ingredient(json.name, json.unitaryPrice, json.unit, json.stockQuantity, json.ingredientCategoryId);
     ingredient.id = json.id;
     if(json.allergenCategory){
       ingredient.allergenCategory = json.allergenCategory;

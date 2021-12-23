@@ -61,7 +61,7 @@ export class IngredientFormComponent implements OnInit {
           this.ingredientFormGroup.get("unitaryPrice")?.value,
           this.ingredientFormGroup.get("unit")?.value,
           this.ingredientFormGroup.get("stockQuantity")?.value,
-          this.ingredientFormGroup.get("ingredientCategory")?.value);
+          Number(this.ingredientFormGroup.get("ingredientCategory")?.value));
       if(this.ingredientFormGroup.get("allergenCategory")?.value != null){
         ingredient.allergenCategory = this.ingredientFormGroup.get("allergenCategory")?.value;
       }
