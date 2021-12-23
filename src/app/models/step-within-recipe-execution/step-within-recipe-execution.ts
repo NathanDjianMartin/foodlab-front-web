@@ -1,4 +1,5 @@
 export class StepWithinRecipeExecution {
+    //attributes in database
     public id?: number;
     public stepId: number;
     public recipeExecutionId: number;

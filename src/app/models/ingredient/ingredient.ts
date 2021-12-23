@@ -1,6 +1,7 @@
 import {Optional} from "@angular/core";
 
 export class Ingredient {
+    //attributes in database
     public id?: number;
     public name: string;
     public unitaryPrice: number;
@@ -8,6 +9,8 @@ export class Ingredient {
     public stockQuantity: number;
     public allergenCategory?: number;
     public ingredientCategoryId: number;
+
+    //stored attributes for the front
     public ingredientCategoryName?: string;
 
     constructor(name: string, unitaryPrice: number, unit: string, stockQuantity: number, ingredientCategory: number) {
