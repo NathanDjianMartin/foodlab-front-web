@@ -12,4 +12,5 @@ export class RecipeIngredientsListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 }

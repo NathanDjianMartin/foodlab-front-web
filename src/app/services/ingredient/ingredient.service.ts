@@ -28,6 +28,13 @@ export class IngredientService {
             data.map( json => this.jsonToIngredient(json))));
   }
 
+  getAllIngredientsInRecipe(recipeId: number): Observable<Ingredient[]> {
+    //TODO
+    return this.httpService.get<Ingredient[]>("http://localhost:3000/ingredient").pipe(
+        map(data =>
+            data.map( json => this.jsonToIngredient(json))));
+  }
+
   createIngredient(ingredient: Ingredient): Observable<Ingredient>{
     return this.httpService.post<Ingredient>("http://localhost:3000/ingredient", ingredient);
   }

@@ -12,7 +12,7 @@
         </thead>
 
         <tbody>
-        <tr *ngFor="let recipe of recipes | async">
+        <tr *ngFor="let recipe of recipes | async" (click)="selectRecipe(recipe)">
             <td>{{recipe.name}}</td>
             <td>{{recipe.author}}</td>
             <td>{{recipe.guestsNumber}}</td>

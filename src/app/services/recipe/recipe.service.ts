@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class RecipeService {
+  currentRecipe?: Recipe;
 
   constructor(private httpService: HttpClient) { }
 
@@ -17,6 +18,17 @@ export class RecipeService {
     recipe.id = json.id;
     recipe.recipeCategoryName = json.recipeCategory.name;
     return recipe;
+  }
+
+  selectRecipe(selectedRecipe :Recipe){
+    this.currentRecipe = selectedRecipe;
+  }
+
+  getOneRecipe(): Observable<Recipe> {
+    let id = this.currentRecipe!.id;
+    return this.httpService.get<Recipe>(`http://localhost:3000/recipe/${id}`).pipe(
+        map( json => this.jsonToRecipe(json))
+    )
   }
 
   getAllRecipes(): Observable<Recipe[]> {
