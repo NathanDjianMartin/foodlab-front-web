@@ -4,4 +4,4 @@
     <app-recipe-ingredients-list [recipe]="this.recipe" class="col s4"></app-recipe-ingredients-list>
     <app-recipe-execution-list [recipeExecutionId]="recipe.recipeExecutionId" class="col s8"></app-recipe-execution-list>
 </div>
-
+<app-add-step-within-recipe-execution [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-step-within-recipe-execution>

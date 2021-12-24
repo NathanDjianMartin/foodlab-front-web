@@ -28,6 +28,12 @@ export class IngredientService {
             data.map( json => this.jsonToIngredient(json))));
   }
 
+  getOne(id: number): Observable<Ingredient> {
+    return this.httpService.get<Ingredient>(`http://localhost:3000/ingredient/${id}`).pipe(
+        map( json => this.jsonToIngredient(json))
+    )
+  }
+
   createIngredient(ingredient: Ingredient): Observable<Ingredient>{
     return this.httpService.post<Ingredient>("http://localhost:3000/ingredient", ingredient);
   }

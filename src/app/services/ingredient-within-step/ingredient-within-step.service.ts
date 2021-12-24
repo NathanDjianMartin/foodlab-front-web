@@ -15,7 +15,7 @@ export class IngredientWithinStepService {
 
   jsonToIngredientWithinStep(json: any): IngredientWithinStep{
     console.log(json);
-    let ingredientWithinStep: IngredientWithinStep =  new IngredientWithinStep(json.name, json.quantity);
+    let ingredientWithinStep: IngredientWithinStep =  new IngredientWithinStep(json.name, json.quantity, json.recipeExecutionId);
     ingredientWithinStep.id = json.id;
     if(json.ingredient){
       ingredientWithinStep.ingredientDetails = this.ingredientService.jsonToIngredient(json.ingredient);

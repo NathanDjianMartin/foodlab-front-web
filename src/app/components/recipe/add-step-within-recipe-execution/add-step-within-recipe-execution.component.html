@@ -1,0 +1,39 @@
+<h2 class="center-align">Add a step</h2>
+
+<div class="row container">
+    <form class="col s12" [formGroup]="recipeExecutionFormGroup">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="stepTitle" type="text" class="validate" formControlName="stepTitle">
+                <label for="stepTitle">Step title</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="stepDescription" type="text" class="validate" formControlName="stepDescription">
+                <label for="stepDescription">Step description</label>
+            </div>
+        </div>
+    </form>
+    <form class="col s12" [formGroup]="ingredientWithQuantityFormGroup">
+        <div class="row">
+            <div class="input-field col s12">
+                <select formControlName="ingredient">
+                    <option value="" disabled selected>Choose an ingredient</option>
+                    <option *ngFor="let ingredient of ingredients | async"
+                            value="{{ingredient.id}}">{{ingredient.name}}</option>
+                </select>
+                <label>Select an ingredient</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="quantity" type="number" class="validate" formControlName="quantity">
+                <label for="quantity">Quantity</label>
+            </div>
+            <button class="btn-small waves-effect waves-light" (click)="addIngredient()">Add ingredient</button>
+        </div>
+    </form>
+</div>
+
+<div class="row container right-align">
+    <button class="btn waves-effect waves-light" type="submit" name="action" (click)="createStep()">Submit
+        <i class="material-icons right">send</i>
+    </button>
+</div>

@@ -21,7 +21,7 @@ import { RecipeExecutionListComponent } from './components/recipe/recipe-executi
 import { RecipeIngredientsListComponent } from './components/recipe/recipe-ingredients-list/recipe-ingredients-list.component';
 import { RecipeHeaderComponent } from './components/recipe/recipe-header/recipe-header.component';
 import { RecipeDetailsComponent } from './components/recipe/recipe-details/recipe-details.component';
-import { AddStepWithinRecipeExecutionComponent } from './components/add-step-within-recipe-execution/add-step-within-recipe-execution.component';
+import { AddStepWithinRecipeExecutionComponent } from './components/recipe/add-step-within-recipe-execution/add-step-within-recipe-execution.component';
 
 @NgModule({
     declarations: [
