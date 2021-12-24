@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../../services/user/user.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Credentials} from "../../../models/user/credentials/credentials";
+import {Credentials} from "../../../models/user/credentials";
+import {ErrorService} from "../../../services/error/error.service";
+import {LocalStorageService} from "../../../services/local-storage/local-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +17,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
       private userService: UserService,
-      private fb: FormBuilder
+      private fb: FormBuilder,
+      private errorService: ErrorService,
+      private localStorageService: LocalStorageService,
+      private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -32,10 +38,12 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(credentials).subscribe({
       next: (data) => {
-        alert(JSON.parse(JSON.stringify(data)).access_token)
+        const token: string = JSON.parse(JSON.stringify(data)).access_token;
+        this.localStorageService.set('jwt', token);
+        this.router.navigate(['/profile']);
       },
       error: (err) => {
-        alert(err.error.message)
+        alert(`Error: ${err.error.message}`);
       }
     })
   }
