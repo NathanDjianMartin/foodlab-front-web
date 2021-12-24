@@ -4,6 +4,9 @@ import {IngredientWithinStep} from "../../../models/ingredient-within-step/ingre
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {IngredientWithinStepService} from "../../../services/ingredient-within-step/ingredient-within-step.service";
 import {Observable} from "rxjs";
+import {RecipeExecution} from "../../../models/recipe-execution/recipe-execution";
+import {StepWithinRecipeExecutionService} from "../../../services/step-within-recipe-execution/step-within-recipe-execution.service";
+import {StepWithinRecipeExecution} from "../../../models/step-within-recipe-execution/step-within-recipe-execution";
 
 @Component({
   selector: 'app-recipe-execution-list',
@@ -12,17 +15,17 @@ import {Observable} from "rxjs";
 })
 export class RecipeExecutionListComponent implements OnInit {
   recipe!: Recipe;
-  ingredientsWithinStep!: Observable<IngredientWithinStep[]>;
+  stepsWithinRecipe!: Observable<StepWithinRecipeExecution[]>;
 
   constructor(private recipeService: RecipeService,
-              private ingredientWithinStepService: IngredientWithinStepService) {
+              private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) {
   }
-
+  //
   ngOnInit(): void {
-    this.recipe = this.recipeService.currentRecipe!;
-    if(this.recipe != null && this.recipe.recipeExecutionId != null) {
-      this.ingredientsWithinStep = this.ingredientWithinStepService.getAllIngredientsInRecipe(this.recipe!.recipeExecutionId!);
-    }
+  //   this.recipe = this.recipeService.currentRecipe!;
+  //   if(this.recipe != null && this.recipe.recipeExecutionId != null) {
+  //     this.stepsWithinRecipe = this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipe!.recipeExecutionId!);
+  //   }
   }
 
 

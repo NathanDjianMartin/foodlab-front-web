@@ -11,6 +11,7 @@ export class Recipe {
 
     //stored attributes for the front
     public recipeCategoryName?: string;
+    public steps?: RecipeExecution[];
 
     //TODO: ajouter attribut recipeExecution et costData
 

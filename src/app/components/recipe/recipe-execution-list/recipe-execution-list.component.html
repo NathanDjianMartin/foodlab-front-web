@@ -3,9 +3,8 @@
         <div class="card-panel teal">
             <table>
                 <tbody>
-                <tr>
-                    <td>{{this.recipe.guestsNumber}}</td>
-                    <td>{{this.recipe.recipeCategoryName}}</td>
+                <tr *ngFor="let step of this.stepsWithinRecipe| async">
+                    <td>{{step.recipeExecution!.stepTitle}}</td>
                 </tr>
                 </tbody>
             </table>
