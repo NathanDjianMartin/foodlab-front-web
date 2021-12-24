@@ -5,6 +5,9 @@
                 <tbody>
                 <tr *ngFor="let step of this.stepsWithinRecipe| async">
                     <td>{{step.recipeExecution!.stepTitle}}</td>
+                    <div *ngIf="step.recipeExecution!.isStep == false" class="cols s12">
+                        <app-recipe-execution-list [recipeExecutionId]="step.recipeExecution!.id!"></app-recipe-execution-list>
+                    </div>
                 </tr>
                 </tbody>
             </table>

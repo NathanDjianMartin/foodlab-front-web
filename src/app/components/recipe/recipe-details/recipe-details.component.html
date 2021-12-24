@@ -1,7 +1,7 @@
 <h2 class="center-align">{{this.recipe.name}}</h2>
 <div class="container row">
-    <app-recipe-header class="col s8"></app-recipe-header>
-    <app-recipe-ingredients-list class="col s4"></app-recipe-ingredients-list>
-    <app-recipe-execution-list class="col s8"></app-recipe-execution-list>
+    <app-recipe-header [recipe]="this.recipe" class="col s8"></app-recipe-header>
+    <app-recipe-ingredients-list [recipe]="this.recipe" class="col s4"></app-recipe-ingredients-list>
+    <app-recipe-execution-list [recipeExecutionId]="recipe.recipeExecutionId" class="col s8"></app-recipe-execution-list>
 </div>
 

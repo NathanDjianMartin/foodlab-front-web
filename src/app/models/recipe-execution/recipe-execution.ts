@@ -15,7 +15,7 @@ export class RecipeExecution {
 
     //stored attributes for the front
     public ingredients?: Ingredient[];
-    public steps?: RecipeExecution[];
+    public steps?: StepWithinRecipeExecution[];
     //Pour connaitre le numéro de l'étape dans la recette
     //TODO: il faudra surement le placer ailleurs
     public number?: number;

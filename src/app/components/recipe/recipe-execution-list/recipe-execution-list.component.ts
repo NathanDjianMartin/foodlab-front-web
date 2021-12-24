@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
 import {IngredientWithinStep} from "../../../models/ingredient-within-step/ingredient-within-step";
 import {RecipeService} from "../../../services/recipe/recipe.service";
@@ -14,18 +14,22 @@ import {StepWithinRecipeExecution} from "../../../models/step-within-recipe-exec
   styleUrls: ['./recipe-execution-list.component.css']
 })
 export class RecipeExecutionListComponent implements OnInit {
-  recipe!: Recipe;
+  @Input() recipeExecutionId?: number;
+
   stepsWithinRecipe!: Observable<StepWithinRecipeExecution[]>;
 
   constructor(private recipeService: RecipeService,
               private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) {
   }
-  //
+
   ngOnInit(): void {
-  //   this.recipe = this.recipeService.currentRecipe!;
-  //   if(this.recipe != null && this.recipe.recipeExecutionId != null) {
-  //     this.stepsWithinRecipe = this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipe!.recipeExecutionId!);
-  //   }
+     if(this.recipeExecutionId != null) {
+
+       console.log("heyyyyyyyyyyyyyyyyy")
+       this.stepsWithinRecipe = this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipeExecutionId);
+       console.log(this.stepsWithinRecipe);
+
+     }
   }
 
 

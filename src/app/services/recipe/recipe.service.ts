@@ -24,12 +24,11 @@ export class RecipeService {
     return recipe;
   }
 
-  selectRecipe(selectedRecipe :Recipe){
+  selectRecipe(selectedRecipe: Recipe){
     this.currentRecipe = selectedRecipe;
   }
 
-  getOneRecipe(): Observable<Recipe> {
-    let id = this.currentRecipe!.id;
+  getOneRecipe(id: number): Observable<Recipe>{
     return this.httpService.get<Recipe>(`http://localhost:3000/recipe/${id}`).pipe(
         map( json => this.jsonToRecipe(json))
     )

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {Observable} from "rxjs";
@@ -11,7 +11,7 @@ import {IngredientWithinStep} from "../../../models/ingredient-within-step/ingre
   styleUrls: ['./recipe-ingredients-list.component.css']
 })
 export class RecipeIngredientsListComponent implements OnInit {
-  recipe!: Recipe;
+  @Input() recipe!: Recipe;
   ingredientsWithinStep!: Observable<IngredientWithinStep[]>;
 
   constructor(private recipeService: RecipeService,
@@ -19,7 +19,6 @@ export class RecipeIngredientsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipe = this.recipeService.currentRecipe!;
     console.log(this.recipe!.recipeExecutionId!);
     if(this.recipe != null && this.recipe.recipeExecutionId != null) {
       //TODO: recalculer car probablement faut si la recette contient une progression qui contient elle même des progressions

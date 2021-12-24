@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {Observable} from "rxjs";
@@ -9,13 +9,12 @@ import {Observable} from "rxjs";
   styleUrls: ['./recipe-header.component.css']
 })
 export class RecipeHeaderComponent implements OnInit {
-  recipe!: Recipe;
+  @Input() recipe!: Recipe;
 
   constructor(private recipeService: RecipeService) {
   }
 
   ngOnInit(): void {
-    this.recipe = this.recipeService.currentRecipe!;
   }
 
 }

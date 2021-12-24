@@ -26,9 +26,9 @@ export class TabRecipesComponent implements OnInit {
       this.ngOnInit() });
   }
 
-  selectRecipe(selectedRecipe :Recipe){
+  selectRecipe(selectedRecipe: Recipe){
     this.recipeService.selectRecipe(selectedRecipe);
-    this.router.navigate(["/recipe/details"])
+    this.router.navigate(["/recipe/details",selectedRecipe.id])
   }
 
 }
