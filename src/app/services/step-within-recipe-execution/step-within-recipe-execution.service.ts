@@ -34,7 +34,19 @@ export class StepWithinRecipeExecutionService {
     }
 
     createStepWithinRecipeExecution(stepWithinRecipeExecution: StepWithinRecipeExecution): Observable<StepWithinRecipeExecution> {
-        return this.httpService.post<StepWithinRecipeExecution>("http://localhost:3000/step-within-recipe-execution", stepWithinRecipeExecution);
+        console.log( {
+            "stepId": stepWithinRecipeExecution.stepId,
+            "recipeExecutionId": stepWithinRecipeExecution.recipeExecutionId,
+            "number": stepWithinRecipeExecution.number
+        });
+        return this.httpService.post<StepWithinRecipeExecution>("http://localhost:3000/step-within-recipe-execution",
+            {
+            "stepId": stepWithinRecipeExecution.stepId,
+            "recipeExecutionId": stepWithinRecipeExecution.recipeExecutionId,
+            "number": stepWithinRecipeExecution.number
+        }).pipe(
+            map( json => this.jsonToStepWithinRecipeExecution(json))
+        );
     }
 
     deleteStepWithinRecipeExecution(id: number) {

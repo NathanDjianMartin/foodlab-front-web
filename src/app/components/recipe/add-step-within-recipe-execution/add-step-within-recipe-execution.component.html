@@ -11,15 +11,25 @@
                 <input id="stepDescription" type="text" class="validate" formControlName="stepDescription">
                 <label for="stepDescription">Step description</label>
             </div>
+            <div class="input-field col s12">
+                <input id="duration" type="number" class="validate" formControlName="duration">
+                <label for="duration">Step description</label>
+            </div>
         </div>
     </form>
+
+    <app-tab-ingredients-to-add *ngIf="newIngredient != null"
+                                [newIngredient]="this.newIngredient"
+                                (ingredientsSelectedEvent)="changeIngredientsSelected($event)"
+    ></app-tab-ingredients-to-add>
+
     <form class="col s12" [formGroup]="ingredientWithQuantityFormGroup">
         <div class="row">
             <div class="input-field col s12">
                 <select formControlName="ingredient">
                     <option value="" disabled selected>Choose an ingredient</option>
                     <option *ngFor="let ingredient of ingredients | async"
-                            value="{{ingredient.id}}">{{ingredient.name}}</option>
+                            value={{ingredient.id}}>{{ingredient.name}}</option>
                 </select>
                 <label>Select an ingredient</label>
             </div>

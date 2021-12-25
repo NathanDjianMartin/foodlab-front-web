@@ -22,6 +22,7 @@ import { RecipeIngredientsListComponent } from './components/recipe/recipe-ingre
 import { RecipeHeaderComponent } from './components/recipe/recipe-header/recipe-header.component';
 import { RecipeDetailsComponent } from './components/recipe/recipe-details/recipe-details.component';
 import { AddStepWithinRecipeExecutionComponent } from './components/recipe/add-step-within-recipe-execution/add-step-within-recipe-execution.component';
+import { TabIngredientsToAddComponent } from './components/recipe/tab-ingredients-to-add/tab-ingredients-to-add.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { AddStepWithinRecipeExecutionComponent } from './components/recipe/add-s
         RecipeHeaderComponent,
         RecipeDetailsComponent,
         AddStepWithinRecipeExecutionComponent,
+        TabIngredientsToAddComponent,
     ],
     imports: [
         BrowserModule,
