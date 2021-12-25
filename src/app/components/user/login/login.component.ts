@@ -36,15 +36,6 @@ export class LoginComponent implements OnInit {
         this.loginFormGroup.get('password')?.value
     )
 
-    this.userService.login(credentials).subscribe({
-      next: (data) => {
-        const token: string = JSON.parse(JSON.stringify(data)).access_token;
-        this.localStorageService.set('jwt', token);
-        this.router.navigate(['/profile']);
-      },
-      error: (err) => {
-        alert(`Error: ${err.error.message}`);
-      }
-    })
+    this.userService.login(credentials);
   }
 }

@@ -6,6 +6,7 @@ import {TabRecipesComponent} from "./components/recipe/tab-recipes/tab-recipes.c
 import {RecipeFormComponent} from "./components/recipe/recipe-form/recipe-form.component";
 import {LoginComponent} from "./components/user/login/login.component";
 import {ProfileComponent} from "./components/user/profile/profile.component";
+import {AuthenticatedGuardGuard} from "./guards/authenticated/authenticated-guard.guard";
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthenticatedGuardGuard]
   }
 ];
 

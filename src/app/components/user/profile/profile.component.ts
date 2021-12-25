@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
         error: (err) => {
           alert(`Error: ${err.error.message}`);
         }
-      })
+      });
     } else {
       alert('Error: jwt is null');
     }

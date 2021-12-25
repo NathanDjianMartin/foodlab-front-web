@@ -16,7 +16,16 @@ export class UserService {
   ) { }
 
   login(credentials: Credentials) {
-    return this.httpClient.post('http://localhost:3000/auth/login', credentials);
+    this.httpClient.post('http://localhost:3000/auth/login', credentials).subscribe({
+      next: (data) => {
+        const token: string = JSON.parse(JSON.stringify(data)).access_token;
+        this.localStorageService.set('jwt', token);
+        this.router.navigate(['/profile']);
+      },
+      error: (err) => {
+        alert(`Error during login request: ${err.error.message}`);
+      }
+    });
   }
 
   logout() {
