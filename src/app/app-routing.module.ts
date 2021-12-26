@@ -7,6 +7,7 @@ import {RecipeFormComponent} from "./components/recipe/recipe-form/recipe-form.c
 import {LoginComponent} from "./components/user/login/login.component";
 import {ProfileComponent} from "./components/user/profile/profile.component";
 import {AuthenticatedGuardGuard} from "./guards/authenticated/authenticated-guard.guard";
+import {UserCreationComponent} from "./components/user/user-creation/user-creation.component";
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthenticatedGuardGuard]
+  },
+  {
+    path: 'user-creation',
+    component: UserCreationComponent
   }
 ];
 

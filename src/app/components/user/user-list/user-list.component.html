@@ -1,0 +1,9 @@
+<div class="container">
+    <ul class="collection with-header">
+        <li class="collection-header"><h4>Users</h4></li>
+        <li *ngFor="let user of users" class="collection-item">
+            {{user.name}}
+            <span *ngIf="user.isAdmin" class="new badge" data-badge-caption="admin"></span>
+        </li>
+    </ul>
+</div>

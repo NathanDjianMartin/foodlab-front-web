@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Credentials} from "../../models/user/credentials";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../local-storage/local-storage.service";
+import {User} from "../../models/user/user";
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,19 @@ export class UserService {
       'Authorization': `Bearer ${jwt}`
     });
     return this.httpClient.get('http://localhost:3000/user/profile', { headers: headers });
+  }
+
+  findAll(jwt: string) {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    });
+    return this.httpClient.get('http://localhost:3000/user', { headers: headers });
+  }
+
+  create(user: User, jwt: string) {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    });
+    return this.httpClient.post('http://localhost:3000/user', { headers: headers, ...user });
   }
 }

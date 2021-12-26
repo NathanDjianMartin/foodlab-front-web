@@ -23,6 +23,8 @@ import { RecipeHeaderComponent } from './components/recipe/recipe-header/recipe-
 import { RecipeDetailsComponent } from './components/recipe/recipe-details/recipe-details.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
+import { UserCreationComponent } from './components/user/user-creation/user-creation.component';
+import { UserListComponent } from './components/user/user-list/user-list.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +47,8 @@ import { ProfileComponent } from './components/user/profile/profile.component';
         RecipeDetailsComponent,
         LoginComponent,
         ProfileComponent,
+        UserCreationComponent,
+        UserListComponent,
     ],
     imports: [
         BrowserModule,
