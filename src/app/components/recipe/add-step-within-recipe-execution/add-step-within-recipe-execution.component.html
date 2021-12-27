@@ -25,13 +25,13 @@
 
     <form class="col s12" [formGroup]="ingredientWithQuantityFormGroup">
         <div class="row">
-            <div class="input-field col s12">
+            <div class="input col s12">
+                <label>Select an ingredient</label>
                 <select formControlName="ingredient">
-                    <option value="" disabled selected>Choose an ingredient</option>
+                    <option value="" selected disabled>Choose an ingredient</option>
                     <option *ngFor="let ingredient of ingredients | async"
                             value={{ingredient.id}}>{{ingredient.name}}</option>
                 </select>
-                <label>Select an ingredient</label>
             </div>
             <div class="input-field col s12">
                 <input id="quantity" type="number" class="validate" formControlName="quantity">

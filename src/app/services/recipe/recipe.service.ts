@@ -41,7 +41,24 @@ export class RecipeService {
   }
 
   createRecipe(recipe: Recipe): Observable<Recipe>{
-    return this.httpService.post<Recipe>("http://localhost:3000/recipe", recipe);
+    console.log(recipe);
+    return this.httpService.post<Recipe>("http://localhost:3000/recipe", {
+      name: recipe.name,
+      author: recipe.author,
+      guestsNumber: recipe.guestsNumber,
+      recipeCategoryId: Number(recipe.recipeCategory),
+    });
+  }
+
+  updateRecipe(recipe: Recipe): Observable<Recipe>{
+    //TODO: vérifier id not null ou undifined
+    return this.httpService.patch<Recipe>(`http://localhost:3000/recipe/${recipe.id!}`, {
+      name: recipe.name,
+      author: recipe.author,
+      guestsNumber: recipe.guestsNumber,
+      recipeCategoryId: recipe.recipeCategory,
+      recipeExecutionId: recipe.recipeExecutionId
+    });
   }
 
   deleteRecipe(id: number){

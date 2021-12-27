@@ -22,21 +22,22 @@
 
         </div>
         <div class="row">
-            <div class="input-field col s6">
+            <div class="input col s6">
+
+                <label>Select an ingredient category</label>
                 <select formControlName="ingredientCategory">
                     <option value="" disabled selected>Choose your option</option>
                     <option *ngFor="let category of ingredientCategories | async"
                             value="{{category.id}}">{{category.name}}</option>
                 </select>
-                <label>Select an ingredient category</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input col s6">
+                <label>Select an allergen category</label>
                 <select formControlName="allergenCategory">
                     <option value="" disabled selected>Choose your option</option>
                     <option *ngFor="let category of allergenCategories | async"
                             value="{{category.id}}">{{category.name}}</option>
                 </select>
-                <label>Select an allergen category</label>
             </div>
         </div>
     </form>

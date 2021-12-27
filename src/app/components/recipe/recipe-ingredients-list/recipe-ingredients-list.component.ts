@@ -31,18 +31,21 @@ export class RecipeIngredientsListComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.stepId!);
     if(this.stepId != null) {
-      //TODO: recalculer car probablement faut si la recette contient une progression qui contient elle même des progressions
+      //Récupérer la liste des ingrédients contenu dans la recette (ne prend pas en compte les ingrédients contenu
+      // dans une sous recette de la recette puisqu'on appel récursivement le composant avec ses sous recettes
       this.ingredientsWithinStep =this.ingredientWithinStepService.getAllIngredientsInRecipe(this.stepId!);
+
+      /*this.recipeExecutionService.getOne(this.stepId).subscribe( (step) => {
+        this.step = step;
+      })
+      this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.stepId).subscribe( (steps) => {
+        this.steps = steps;
+      })*/
+      //récupérer toutes les progressions contenu dans la recette
+      this.stepWithinRecipeExecutionService.getAllProgressionWithinRecipeExecution(this.stepId).subscribe( (progressions) => {
+        this.progressionWithinStep = progressions;
+      })
     }
-    this.recipeExecutionService.getOne(this.stepId).subscribe( (step) => {
-      this.step = step;
-    })
-    this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.stepId).subscribe( (steps) => {
-      this.steps = steps;
-    })
-    this.stepWithinRecipeExecutionService.getAllProgressionWithinRecipeExecution(this.stepId).subscribe( (progressions) => {
-      this.progressionWithinStep = progressions;
-    })
   }
 
 

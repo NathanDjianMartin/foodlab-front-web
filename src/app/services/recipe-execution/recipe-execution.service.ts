@@ -13,7 +13,7 @@ export class RecipeExecutionService {
   jsonToRecipeExecution(json: any): RecipeExecution{
     let recipeExecution: RecipeExecution =  new RecipeExecution(json.isStep, json.stepTitle);
     if(json.stepDescription && json.duration){
-      recipeExecution.stepDescription = json.stepTitle;
+      recipeExecution.stepDescription = json.stepDescription;
       recipeExecution.duration = json.duration;
     }
     recipeExecution.id = json.id;

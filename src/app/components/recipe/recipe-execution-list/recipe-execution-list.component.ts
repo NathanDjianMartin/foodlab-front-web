@@ -24,11 +24,7 @@ export class RecipeExecutionListComponent implements OnInit {
 
   ngOnInit(): void {
      if(this.recipeExecutionId != null) {
-
-       console.log("heyyyyyyyyyyyyyyyyy")
        this.stepsWithinRecipe = this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipeExecutionId);
-       console.log(this.stepsWithinRecipe);
-
      }
   }
 

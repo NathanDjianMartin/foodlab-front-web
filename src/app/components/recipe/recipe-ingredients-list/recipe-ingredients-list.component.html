@@ -1,7 +1,7 @@
 <p *ngIf="this.stepId == null || this.ingredientsWithinStep.length < 1">
     This recipe does not yet contain any ingredient
 </p>
-<div *ngIf="this.ingredientsWithinStep.length > 0">
+<div *ngIf="this.stepId != null && this.ingredientsWithinStep.length > 0">
     <h6>{{this.stepName}}</h6>
     <table class="highlight">
         <thead>
