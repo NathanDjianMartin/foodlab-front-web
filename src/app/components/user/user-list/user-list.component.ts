@@ -30,4 +30,8 @@ export class UserListComponent implements OnInit {
       })
     }
   }
+
+  deleteUser(): void {
+    alert('TODO');
+  }
 }

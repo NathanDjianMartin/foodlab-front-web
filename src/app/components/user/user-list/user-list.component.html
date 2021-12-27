@@ -2,8 +2,11 @@
     <ul class="collection with-header">
         <li class="collection-header"><h4>Users</h4></li>
         <li *ngFor="let user of users" class="collection-item">
-            {{user.name}}
-            <span *ngIf="user.isAdmin" class="new badge" data-badge-caption="admin"></span>
+            <div>
+                {{user.name}}
+                <button class="secondary-content" (click)="deleteUser()">delete</button>
+                <span *ngIf="user.isAdmin" class="new badge" data-badge-caption="admin"></span>
+            </div>
         </li>
     </ul>
 </div>

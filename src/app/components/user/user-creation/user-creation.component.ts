@@ -3,6 +3,7 @@ import {UserService} from "../../../services/user/user.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../../models/user/user";
 import {LocalStorageService} from "../../../services/local-storage/local-storage.service";
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-user-creation',
@@ -30,25 +31,31 @@ export class UserCreationComponent implements OnInit {
 
   createUser(): void {
 
-    const name = this.userCreationForm.get('name')?.value;
-    const email = this.userCreationForm.get('email')?.value;
-    const password = this.userCreationForm.get('password')?.value;
-    const isAdmin = this.userCreationForm.get('isAdmin')?.value;
-    const user = new User(name, email, password, isAdmin);
+    if (this.userCreationForm.valid) {
+      const name = this.userCreationForm.get('name')?.value;
+      const email = this.userCreationForm.get('email')?.value;
+      const password = bcrypt.hashSync(this.userCreationForm.get('password')?.value, 8);
+      //const password = this.userCreationForm.get('password')?.value;
+      const isAdmin = this.userCreationForm.get('isAdmin')?.value;
+      const user = new User(name, email, password, isAdmin);
 
-    const jwt: string | null = this.localStorageService.get('jwt');
+      const jwt: string | null = this.localStorageService.get('jwt');
 
-    if (jwt !== null) {
-      this.userService.create(user, jwt).subscribe({
-        next: (data) => {
-          alert(JSON.parse(JSON.stringify(data)));
-        },
-        error: (err) => {
-          alert(err.error.message);
-        }
-      });
+      if (jwt !== null) {
+        this.userService.create(user, jwt).subscribe({
+          next: (data) => {
+            this.userCreationForm.reset();
+            alert(`User ${name} successfully created!`);
+          },
+          error: (err) => {
+            alert(err.error.message);
+          }
+        });
+      } else {
+        alert('You must be logged in to create a user!');
+      }
     } else {
-      alert('You must be logged in to create a user!');
+      alert('The form is invalid!')
     }
   }
 }
