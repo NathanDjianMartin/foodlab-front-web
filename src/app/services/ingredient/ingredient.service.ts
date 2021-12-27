@@ -12,13 +12,14 @@ export class IngredientService {
   constructor(private httpService: HttpClient) { }
 
   jsonToIngredient(json: any): Ingredient{
-    console.log(json);
     let ingredient: Ingredient =  new Ingredient(json.name, json.unitaryPrice, json.unit, json.stockQuantity, json.ingredientCategoryId);
     ingredient.id = json.id;
     if(json.allergenCategory){
       ingredient.allergenCategory = json.allergenCategory;
     }
-    ingredient.ingredientCategoryName = json.ingredientCategory.name;
+    if(json.ingredientCategory){
+      ingredient.ingredientCategoryName = json.ingredientCategory.name;
+    }
     return ingredient;
   }
 
@@ -26,6 +27,12 @@ export class IngredientService {
     return this.httpService.get<Ingredient[]>("http://localhost:3000/ingredient").pipe(
         map(data =>
             data.map( json => this.jsonToIngredient(json))));
+  }
+
+  getOne(id: number): Observable<Ingredient> {
+    return this.httpService.get<Ingredient>(`http://localhost:3000/ingredient/${id}`).pipe(
+        map( json => this.jsonToIngredient(json))
+    )
   }
 
   createIngredient(ingredient: Ingredient): Observable<Ingredient>{

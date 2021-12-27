@@ -1,1 +1,19 @@
-<p>recipe-execution-list works!</p>
+<p *ngIf="this.recipeExecutionId == null">
+    This recipe does not yet contain any step
+</p>
+<table class="row">
+    <tbody>
+    <tr draggable="true" *ngFor="let step of this.stepsWithinRecipe| async">
+        <td *ngIf="step.step!.isStep == true">
+            <li>{{step.step!.stepTitle}}</li>
+            {{step.step!.stepDescription!}}
+        </td>
+
+        <div *ngIf="step.step!.isStep == false" class="cols s12">
+            <li class="font-weight">{{step.step!.stepTitle}}</li>
+            <app-recipe-execution-list [recipeExecutionId]="step.step!.id!"></app-recipe-execution-list>
+        </div>
+    </tr>
+    </tbody>
+</table>
+

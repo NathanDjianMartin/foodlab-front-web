@@ -1,0 +1,14 @@
+select{
+    display: flex;
+}
+.btn{
+    background-color: #903739 !important;
+}
+h2{
+    color: #4f5e62;
+}
+.btn-small{
+    background-color: #729598 !important;
+    margin: 10px;
+}
+

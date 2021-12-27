@@ -1,0 +1,18 @@
+<div *ngIf="this.ingredientsSelected.length > 0">
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let ingredient of ingredientsSelected ">
+            <td>{{ingredient.ingredientDetails!.name}}</td>
+            <td>{{ingredient.quantity + " " + ingredient!.ingredientDetails!.unit}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn-small waves-effect waves-light right-align" (click)="validate()">Validate ingredients</button>
+</div>

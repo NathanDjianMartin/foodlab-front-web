@@ -25,6 +25,8 @@ import { LoginComponent } from './components/user/login/login.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { UserCreationComponent } from './components/user/user-creation/user-creation.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
+import { AddStepWithinRecipeExecutionComponent } from './components/recipe/add-step-within-recipe-execution/add-step-within-recipe-execution.component';
+import { TabIngredientsToAddComponent } from './components/recipe/tab-ingredients-to-add/tab-ingredients-to-add.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +51,8 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
         ProfileComponent,
         UserCreationComponent,
         UserListComponent,
+        AddStepWithinRecipeExecutionComponent,
+        TabIngredientsToAddComponent,
     ],
     imports: [
         BrowserModule,

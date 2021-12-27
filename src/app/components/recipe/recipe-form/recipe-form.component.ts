@@ -48,8 +48,11 @@ export class RecipeFormComponent implements OnInit {
           this.recipeFormGroup.get("guestsNumber")?.value,
           this.recipeFormGroup.get("recipeCategory")?.value);
       console.log(recipe)
-      this.recipeService.createRecipe(recipe).subscribe(recipe => console.log("recipe crée"));
-      this.router.navigate(['recipes']);
+      this.recipeService.createRecipe(recipe).subscribe(recipe => {
+        console.log("recipe créée")
+        this.router.navigate(['recipe/details', recipe.id!] );
+      });
+
     }
   }
 

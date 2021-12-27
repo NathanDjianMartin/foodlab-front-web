@@ -4,6 +4,7 @@ import {TabIngredientsComponent} from "./components/ingredient/tab-ingredients/t
 import {IngredientFormComponent} from "./components/ingredient/ingredient-form/ingredient-form.component";
 import {TabRecipesComponent} from "./components/recipe/tab-recipes/tab-recipes.component";
 import {RecipeFormComponent} from "./components/recipe/recipe-form/recipe-form.component";
+import {RecipeDetailsComponent} from "./components/recipe/recipe-details/recipe-details.component";
 import {LoginComponent} from "./components/user/login/login.component";
 import {ProfileComponent} from "./components/user/profile/profile.component";
 import {AuthenticatedGuardGuard} from "./guards/authenticated/authenticated-guard.guard";
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'user-creation',
     component: UserCreationComponent
+  },
+  {
+    path: "recipe/details/:id",
+    component: RecipeDetailsComponent
   }
 ];
 

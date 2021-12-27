@@ -1,1 +1,24 @@
-<p>recipe-ingredients-list works!</p>
+<p *ngIf="this.stepId == null || this.ingredientsWithinStep.length < 1">
+    This recipe does not yet contain any ingredient
+</p>
+<div *ngIf="this.stepId != null && this.ingredientsWithinStep.length > 0">
+    <h6>{{this.stepName}}</h6>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let ingredientWithinStep of ingredientsWithinStep">
+            <td>{{ingredientWithinStep.ingredientDetails!.name}}</td>
+            <td>{{ingredientWithinStep.quantity + " " + ingredientWithinStep!.ingredientDetails!.unit}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngFor="let progression of progressionWithinStep">
+    <app-recipe-ingredients-list [stepId]="progression.stepId" [stepName]="progression.step!.stepTitle"></app-recipe-ingredients-list>
+</div>
