@@ -54,7 +54,6 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
   }
 
   changeIngredientsSelected($event: IngredientWithinStep[]) {
-    // @ts-ignore
     this.ingredientsSelected = $event;
   }
 
@@ -72,8 +71,7 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
     let step = await this.recipeExecutionService.createRecipeExecution(steps).subscribe(step => {
       let stepInRecipeExecution = new StepWithinRecipeExecution(step.id!, this.recipeExecutionId, 1);
       this.stepWithinRecipeExecutionService.createStepWithinRecipeExecution(stepInRecipeExecution).subscribe();
-      console.log(this.ingredientsSelected)
-      //TODO: vérifier que c'est pas undifined
+
       if (this.ingredientsSelected != undefined) {
         for (var ingredientInStep of this.ingredientsSelected!) {
           let ing = new IngredientWithinStep(ingredientInStep.ingredientId, ingredientInStep.quantity, step.id!);

@@ -3,6 +3,7 @@ import {Recipe} from "../../../models/recipe/recipe";
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
+import {RecipeExecution} from "../../../models/recipe-execution/recipe-execution";
 
 @Component({
   selector: 'app-recipe-details',

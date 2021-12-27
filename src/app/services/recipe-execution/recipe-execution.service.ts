@@ -29,6 +29,12 @@ export class RecipeExecutionService {
             data.map( json => this.jsonToRecipeExecution(json))));
   }
 
+  getOne(id: number): Observable<RecipeExecution> {
+    return this.httpService.get<RecipeExecution>(`http://localhost:3000/recipe-execution/${id}`).pipe(
+        map( json => this.jsonToRecipeExecution(json))
+    );
+  }
+
   createRecipeExecution(recipeExecution: RecipeExecution): Observable<RecipeExecution>{
     return this.httpService.post<RecipeExecution>("http://localhost:3000/recipe-execution", recipeExecution);
   }

@@ -1,7 +1,17 @@
 <h2 class="center-align">{{this.recipe.name}}</h2>
 <div class="container row">
-    <app-recipe-header [recipe]="this.recipe" class="col s8"></app-recipe-header>
-    <app-recipe-ingredients-list [recipe]="this.recipe" class="col s4"></app-recipe-ingredients-list>
-    <app-recipe-execution-list [recipeExecutionId]="recipe.recipeExecutionId" class="col s8"></app-recipe-execution-list>
+    <div class="col s8">
+    <app-recipe-header [recipe]="this.recipe"></app-recipe-header>
+    <app-recipe-execution-list [recipeExecutionId]="recipe.recipeExecutionId"></app-recipe-execution-list>
+</div>
+    <div class="row col s4">
+        <div class="col s12">
+            <div class="card-panel teal">
+                <h5>Ingredients</h5>
+                <app-recipe-ingredients-list [stepId]="this.recipe!.recipeExecutionId!" [stepName]="'General'"></app-recipe-ingredients-list>
+            </div>
+        </div>
+    </div>
+
 </div>
 <app-add-step-within-recipe-execution [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-step-within-recipe-execution>

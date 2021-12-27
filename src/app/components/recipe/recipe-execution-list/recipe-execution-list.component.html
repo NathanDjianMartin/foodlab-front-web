@@ -1,12 +1,15 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel teal">
+            <p *ngIf="this.recipeExecutionId == null">
+                This recipe does not yet contain any step
+            </p>
             <table>
                 <tbody>
                 <tr *ngFor="let step of this.stepsWithinRecipe| async">
-                    <td>{{step.recipeExecution!.stepTitle}}</td>
-                    <div *ngIf="step.recipeExecution!.isStep == false" class="cols s12">
-                        <app-recipe-execution-list [recipeExecutionId]="step.recipeExecution!.id!"></app-recipe-execution-list>
+                    <td>{{step.step!.stepTitle}}</td>
+                    <div *ngIf="step.step!.isStep == false" class="cols s12">
+                        <app-recipe-execution-list [recipeExecutionId]="step.step!.id!"></app-recipe-execution-list>
                     </div>
                 </tr>
                 </tbody>

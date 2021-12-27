@@ -20,7 +20,7 @@ export class StepWithinRecipeExecutionService {
         stepWithinRecipeExecution.id = json.id;
         if (json.step) {
             //je stock la recipeExecution
-            stepWithinRecipeExecution.recipeExecution = this.recipeExecutionService.jsonToRecipeExecution(json.step);
+            stepWithinRecipeExecution.step = this.recipeExecutionService.jsonToRecipeExecution(json.step);
             //new RecipeExecution(json.isStep, json.stepTitle, json.stepDescription, json.duration)
             //stepWithinRecipeExecution.recipeExecution.id = json.step.id;
         }
@@ -29,6 +29,12 @@ export class StepWithinRecipeExecutionService {
 
     getAllStepWithinRecipeExecution(id: number): Observable<StepWithinRecipeExecution[]> {
         return this.httpService.get<StepWithinRecipeExecution[]>(`http://localhost:3000/step-within-recipe-execution/steps/${id}`).pipe(
+            map(data =>
+                data.map(json => this.jsonToStepWithinRecipeExecution(json))));
+    }
+
+    getAllProgressionWithinRecipeExecution(id: number): Observable<StepWithinRecipeExecution[]> {
+        return this.httpService.get<StepWithinRecipeExecution[]>(`http://localhost:3000/step-within-recipe-execution/progressions/${id}`).pipe(
             map(data =>
                 data.map(json => this.jsonToStepWithinRecipeExecution(json))));
     }

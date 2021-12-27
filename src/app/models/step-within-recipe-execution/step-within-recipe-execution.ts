@@ -8,7 +8,7 @@ export class StepWithinRecipeExecution {
     public number: number;
 
     //attributes stored for the frond
-    public recipeExecution?: RecipeExecution;
+    public step?: RecipeExecution;
 
     constructor(stepId: number, recipeExecutionId: number, number: number) {
         this.stepId = stepId;
