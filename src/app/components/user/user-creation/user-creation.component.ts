@@ -46,12 +46,10 @@ export class UserCreationComponent implements OnInit {
   }
 
   createUser(): void {
-
     if (this.userCreationForm.valid) {
       const name = this.userCreationForm.get('name')?.value;
       const email = this.userCreationForm.get('email')?.value;
       const password = bcrypt.hashSync(this.userCreationForm.get('password')?.value, 8);
-      //const password = this.userCreationForm.get('password')?.value;
       const isAdmin = this.userCreationForm.get('isAdmin')?.value;
       const user = new User(name, email, password, isAdmin);
 
@@ -61,7 +59,7 @@ export class UserCreationComponent implements OnInit {
         this.userService.create(user, jwt).subscribe({
           next: (data) => {
             this.userCreationForm.reset();
-            this.fetchUserList();
+            this.users.push(user);
             alert(`User ${name} successfully created!`);
           },
           error: (err) => {
