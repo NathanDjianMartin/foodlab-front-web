@@ -13,6 +13,7 @@ import * as bcrypt from 'bcryptjs';
 export class UserCreationComponent implements OnInit {
 
   userCreationForm!: FormGroup;
+  users: User[] = []
 
   constructor(
       private userService: UserService,
@@ -25,8 +26,23 @@ export class UserCreationComponent implements OnInit {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      isAdmin: ['']
+      isAdmin: [false]
     });
+    this.fetchUserList();
+  }
+
+  fetchUserList(): void {
+    const jwt: string | null = this.localStorageService.get('jwt');
+    if (jwt !== null) {
+      this.userService.findAll(jwt).subscribe({
+        next: (data) => {
+          this.users = JSON.parse(JSON.stringify(data));
+        },
+        error: (err) => {
+          alert(`Error: ${err.error.message}`);
+        }
+      })
+    }
   }
 
   createUser(): void {
@@ -45,6 +61,7 @@ export class UserCreationComponent implements OnInit {
         this.userService.create(user, jwt).subscribe({
           next: (data) => {
             this.userCreationForm.reset();
+            this.fetchUserList();
             alert(`User ${name} successfully created!`);
           },
           error: (err) => {
