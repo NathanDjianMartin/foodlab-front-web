@@ -1,0 +1,31 @@
+<div class="row container tab-center">
+    <h4>{{this.category.name}}</h4>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Nomber of guests</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngIf="recipes.length<1">
+            <td>No recipes registered for this category</td>
+        </tr>
+        <tr *ngFor="let recipe of recipes" (click)="selectRecipe(recipe)">
+            <td>{{recipe.name}}</td>
+            <td>{{recipe.author}}</td>
+            <td>{{recipe.guestsNumber}}</td>
+            <td>
+                <!--                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>-->
+                <button class="btn-small waves-effect waves-light action">Update</button>
+            </td>
+            <td>
+                <button class="btn-small waves-effect waves-light action" (click)="deleteIngredient(recipe)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+

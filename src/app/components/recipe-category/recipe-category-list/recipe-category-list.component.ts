@@ -15,7 +15,7 @@ export class RecipeCategoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipeCategories = this.recipeCategoryService.getAllIngredientCategories();
+    this.recipeCategories = this.recipeCategoryService.getAllRecipeCategories();
   }
 
   deleteRecipeCategory(ingredientCategory: RecipeCategory) {

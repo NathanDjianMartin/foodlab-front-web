@@ -26,7 +26,7 @@ export class RecipeFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.manageRecipeCategory = false;
-    this.recipeCategories = this.recipeCategoryService.getAllIngredientCategories();
+    this.recipeCategories = this.recipeCategoryService.getAllRecipeCategories();
     this.recipeFormGroup = this.fb.group({
       name:[null, [Validators.required]],
       author:[null, [Validators.required]],
