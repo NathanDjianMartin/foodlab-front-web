@@ -1,0 +1,4 @@
+<h2 class="center-align">Ingredients stock</h2>
+<div *ngFor="let category of categories | async">
+    <app-ingredient-stock-by-category [category]="category"></app-ingredient-stock-by-category>
+</div>
