@@ -25,3 +25,6 @@ tab-center{
     background-color: #729598 !important;
     size: 2px !important;
 }
+.toast{
+    transparent: true;
+}
