@@ -42,7 +42,7 @@ export class IngredientFormComponent implements OnInit {
     this.initIngredientForm();
   }
 
-  private initIngredientForm() : void {
+  initIngredientForm() : void {
     let name = null;
     let unitaryPrice = null;
     let unit = null;
@@ -115,7 +115,7 @@ export class IngredientFormComponent implements OnInit {
           this.ingredientFormGroup.get("name")?.value,
           this.ingredientFormGroup.get("unitaryPrice")?.value,
           this.ingredientFormGroup.get("unit")?.value,
-          this.ingredientFormGroup.get("stockQuantity")?.value,
+          Number(this.ingredientFormGroup.get("stockQuantity")?.value),
           Number(this.ingredientFormGroup.get("ingredientCategory")?.value));
       formIngredient.id = this.ingredientId;
       if(this.ingredientFormGroup.get("allergenCategory")?.value != null){
@@ -146,13 +146,12 @@ export class IngredientFormComponent implements OnInit {
     const ingredient: Ingredient | null = this.getIngredientFromForm();
     if (ingredient !== null) {
       this.ingredientService.updateIngredient(ingredient).subscribe({
-        next: (ingredient) => {
-          alert(`Ingredient ${ingredient.name} updated!`);
+        next: (data) => {
+          alert(`Ingredient \"${ingredient.name}\" updated!`);
         }, error: (err) => {
-          alert(`Error while updating ingredient ${ingredient.name}: ${err.message}`);
+          alert(`Error while updating ingredient \"${ingredient.name}\": ${err.message}`);
       }
       });
-      //this.router.navigate(['ingredients']);
     }
   }
 

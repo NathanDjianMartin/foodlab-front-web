@@ -3,6 +3,7 @@ import {IngredientService} from "../../../services/ingredient/ingredient.service
 import {Ingredient} from "../../../models/ingredient/ingredient";
 import {Observable} from "rxjs";
 import * as M from 'materialize-css';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-tab-ingredients',
@@ -12,8 +13,10 @@ import * as M from 'materialize-css';
 export class TabIngredientsComponent implements OnInit {
     ingredients!: Observable<Ingredient[]>;
 
-    constructor(private ingredientService: IngredientService) {
-    }
+    constructor(
+        private ingredientService: IngredientService,
+        private router: Router
+    ) {}
 
 
     ngOnInit(): void {
@@ -33,4 +36,7 @@ export class TabIngredientsComponent implements OnInit {
             this.ngOnInit() });
     }
 
+    editIngredient(ingredientId: number | undefined) {
+        this.router.navigate([`/ingredients/edit/${ingredientId}`]);
+    }
 }

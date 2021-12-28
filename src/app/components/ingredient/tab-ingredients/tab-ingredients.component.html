@@ -21,7 +21,7 @@
             <td>{{ingredient.ingredientCategoryName}}</td>
             <td>
 <!--                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>-->
-                <button class="btn-small waves-effect waves-light action">Edit</button>
+                <button class="btn-small waves-effect waves-light action" (click)="editIngredient(ingredient.id)">Edit</button>
             </td>
             <td>
                 <button class="btn-small waves-effect waves-light action" (click)="deleteIngredient(ingredient)">Delete</button>

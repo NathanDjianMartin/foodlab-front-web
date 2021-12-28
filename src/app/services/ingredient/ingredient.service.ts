@@ -45,7 +45,7 @@ export class IngredientService {
   }
 
   updateIngredient(ingredient: Ingredient){
-    return this.httpService.patch<Ingredient>(`http://localhost:3000/ingredient/${ingredient.id}`, {
+    return this.httpService.patch(`http://localhost:3000/ingredient/${ingredient.id}`, {
       "name": ingredient.name,
       "unitaryPrice": ingredient.unitaryPrice,
       "unit": ingredient.unit,

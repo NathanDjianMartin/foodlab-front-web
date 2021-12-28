@@ -1,6 +1,6 @@
 
 
-<h2 class="center-align" *ngIf="this.ingredientId === null; else updateTitle">Add an ingredient</h2>
+<h2 class="center-align" *ngIf="this.ingredientId == null; else updateTitle">Add an ingredient</h2>
 <ng-template #updateTitle>
     <h2 class="center-align" >Edit ingredient</h2>
 </ng-template>
@@ -17,11 +17,11 @@
                 <label for="unit" class="active">Unit</label>
             </div>
             <div class="input-field col s6">
-                <input id="unitaryPrice" type="number" class="validate" formControlName="unitaryPrice">
+                <input id="unitaryPrice" type="number" step="0.01" min="0" class="validate" formControlName="unitaryPrice">
                 <label for="unitaryPrice" class="active">Unitary price</label>
             </div>
             <div class="input-field col s6">
-                <input id="stockQuantity" type="number" class="validate" formControlName="stockQuantity">
+                <input id="stockQuantity" type="number" step="0.01" min="0" class="validate" formControlName="stockQuantity">
                 <label for="stockQuantity" class="active">Stock Quantity</label>
             </div>
         </div>
@@ -71,7 +71,7 @@
 <!-- Update or Submit buttons -->
 <div class="row container right-align">
 
-    <button *ngIf="this.ingredientId === null; else updateButton" class="btn waves-effect waves-light" type="submit" name="action" (click)="createIngredient()">Submit
+    <button *ngIf="this.ingredientId == null; else updateButton" class="btn waves-effect waves-light" type="submit" name="action" (click)="createIngredient()">Submit
         <i class="material-icons right">send</i>
     </button>
 
