@@ -5,6 +5,7 @@ import {RecipeCategory} from "../../../models/recipe-category/recipe-category";
 import {Recipe} from "../../../models/recipe/recipe";
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {Router} from "@angular/router";
+import {ErrorService} from "../../../services/error/error.service";
 
 @Component({
   selector: 'app-tab-recipes-by-category',
@@ -16,7 +17,8 @@ export class TabRecipesByCategoryComponent implements OnInit {
   recipes!: Recipe[];
 
   constructor(private recipeService: RecipeService,
-              private router: Router) {
+              private router: Router,
+              private errorService: ErrorService) {
   }
 
 
@@ -28,9 +30,16 @@ export class TabRecipesByCategoryComponent implements OnInit {
     }
   }
 
-  deleteIngredient(recipe: Recipe){
-    this.recipeService.deleteRecipe(recipe.id!).subscribe((data) => {
-      this.ngOnInit() });
+  deleteRecipe(recipe: Recipe){
+    this.recipeService.deleteRecipe(recipe.id!).subscribe(
+        (data) => {
+          this.ngOnInit()
+        },
+        (error) => {
+          //ne s'affiche pas puisque c'est recipe execution qui est present
+          this.errorService.displayToats("This recipe is present in other recipes as a sub-recipe, you cannot delete it");
+    });
+    this.router.navigate(["/recipes",])
   }
 
   selectRecipe(selectedRecipe: Recipe){
