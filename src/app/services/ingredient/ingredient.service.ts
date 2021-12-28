@@ -11,13 +11,14 @@ export class IngredientService {
 
   constructor(private httpService: HttpClient) { }
 
-  jsonToIngredient(json: any): Ingredient{
+  jsonToIngredient(json: any): Ingredient {
     let ingredient: Ingredient =  new Ingredient(json.name, json.unitaryPrice, json.unit, json.stockQuantity, json.ingredientCategoryId);
     ingredient.id = json.id;
-    if(json.allergenCategory){
-      ingredient.allergenCategory = json.allergenCategory;
+    if (json.allergenCategoryId) {
+      ingredient.allergenCategoryId = json.allergenCategoryId;
     }
-    if(json.ingredientCategory){
+    if (json.ingredientCategory) {
+      ingredient.ingredientCategoryId = json.ingredientCategoryId
       ingredient.ingredientCategoryName = json.ingredientCategory.name;
     }
     return ingredient;
@@ -41,5 +42,16 @@ export class IngredientService {
 
   deleteIngredient(id: number){
     return this.httpService.delete<number>(`http://localhost:3000/ingredient/${id}`);
+  }
+
+  updateIngredient(ingredient: Ingredient){
+    return this.httpService.patch<Ingredient>(`http://localhost:3000/ingredient/${ingredient.id}`, {
+      "name": ingredient.name,
+      "unitaryPrice": ingredient.unitaryPrice,
+      "unit": ingredient.unit,
+      "stockQuantity": ingredient.stockQuantity,
+      "ingredientCategoryId": ingredient.ingredientCategoryId,
+      "allergenCategoryId": ingredient.allergenCategoryId? ingredient.allergenCategoryId : null
+    })
   }
 }

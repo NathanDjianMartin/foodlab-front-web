@@ -1,29 +1,34 @@
-<h2 class="center-align">Add an ingredient</h2>
+
+
+<h2 class="center-align" *ngIf="this.ingredientId === null; else updateTitle">Add an ingredient</h2>
+<ng-template #updateTitle>
+    <h2 class="center-align" >Edit ingredient</h2>
+</ng-template>
 
 <div class="row container">
     <form class="col s12" [formGroup]="ingredientFormGroup">
         <div class="row">
             <div class="input-field col s6">
                 <input id="name" type="text" class="validate" formControlName="name">
-                <label for="name">Name</label>
+                <label for="name" class="active">Name</label>
             </div>
             <div class="input-field col s6">
                 <input id="unit" type="text" class="validate" formControlName="unit">
-                <label for="unit">Unit</label>
+                <label for="unit" class="active">Unit</label>
             </div>
             <div class="input-field col s6">
                 <input id="unitaryPrice" type="number" class="validate" formControlName="unitaryPrice">
-                <label for="unitaryPrice">Unitary price</label>
+                <label for="unitaryPrice" class="active">Unitary price</label>
             </div>
             <div class="input-field col s6">
                 <input id="stockQuantity" type="number" class="validate" formControlName="stockQuantity">
-                <label for="stockQuantity">Stock Quantity</label>
+                <label for="stockQuantity" class="active">Stock Quantity</label>
             </div>
-
         </div>
+
+        <!-- Drop down menus -->
         <div class="row">
             <div class="input col s6">
-
                 <label>Select an ingredient category</label>
                 <select formControlName="ingredientCategory">
                     <option value="" disabled selected>Choose your option</option>
@@ -40,25 +45,40 @@
                 </select>
             </div>
         </div>
+
     </form>
 </div>
 
+
+<!-- ////////////////////// Categories management ////////////////////// -->
+
 <div class="row container center-align">
-    <button class="btn-small waves-effect waves-light" (click)="manageIngredientCategoryAction()">Manage ingredient category</button>
-    <button class="btn-small waves-effect waves-light" (click)="manageAllergenCategoryAction()">Manage allergen category</button>
+    <button class="btn-small waves-effect waves-light" (click)="toggleIngredientCategoryManagement()">Manage ingredient category</button>
+    <button class="btn-small waves-effect waves-light" (click)="toggleAllergenCategoryManagement()">Manage allergen category</button>
 </div>
 <div class="container row">
-<div *ngIf="manageIngredientCategory" class="col s6">
-    <app-ingredient-category-list></app-ingredient-category-list>
-    <app-add-ingredient-category></app-add-ingredient-category>
+    <div *ngIf="manageIngredientCategory" class="col s6">
+        <app-ingredient-category-list></app-ingredient-category-list>
+        <app-add-ingredient-category></app-add-ingredient-category>
+    </div>
+    <div *ngIf="manageAllergenCategory" class="col s6">
+        <app-allergen-category-list></app-allergen-category-list>
+        <app-add-allergen-category></app-add-allergen-category>
+    </div>
 </div>
-<div *ngIf="manageAllergenCategory" class="col s6">
-    <app-allergen-category-list></app-allergen-category-list>
-    <app-add-allergen-category></app-add-allergen-category>
-</div>
-</div>
+
+
+<!-- Update or Submit buttons -->
 <div class="row container right-align">
-    <button class="btn waves-effect waves-light" type="submit" name="action" (click)="createIngredient()">Submit
+
+    <button *ngIf="this.ingredientId === null; else updateButton" class="btn waves-effect waves-light" type="submit" name="action" (click)="createIngredient()">Submit
         <i class="material-icons right">send</i>
     </button>
+
+    <ng-template #updateButton>
+        <button  class="btn waves-effect waves-light" type="submit" name="action" (click)="updateIngredient()">Update
+            <i class="material-icons right">send</i>
+        </button>
+    </ng-template>
+
 </div>

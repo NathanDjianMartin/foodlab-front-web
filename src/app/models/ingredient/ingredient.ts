@@ -1,4 +1,4 @@
-import {Optional} from "@angular/core";
+import {AllergenCategory} from "../allergen-category/allergen-category";
 
 export class Ingredient {
     //attributes in database
@@ -7,7 +7,7 @@ export class Ingredient {
     public unitaryPrice: number;
     public unit: string;
     public stockQuantity: number;
-    public allergenCategory?: number;
+    public allergenCategoryId?: number;
     public ingredientCategoryId: number;
 
     //stored attributes for the front

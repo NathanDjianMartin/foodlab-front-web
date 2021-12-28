@@ -20,6 +20,10 @@ const routes: Routes = [
     component: IngredientFormComponent
   },
   {
+    path: 'ingredients/edit/:id',
+    component: IngredientFormComponent
+  },
+  {
     path: 'recipes',
     component: TabRecipesComponent
   },
