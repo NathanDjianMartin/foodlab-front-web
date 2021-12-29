@@ -9,6 +9,8 @@ import {LoginComponent} from "./components/user/login/login.component";
 import {ProfileComponent} from "./components/user/profile/profile.component";
 import {AuthenticatedGuardGuard} from "./guards/authenticated/authenticated-guard.guard";
 import {UserCreationComponent} from "./components/user/user-creation/user-creation.component";
+import {DisplayIngredientStockComponent} from "./components/ingredient/display-ingredient-stock/display-ingredient-stock.component";
+import {DisplayRecipesComponent} from "./components/recipe/display-recipes/display-recipes.component";
 
 const routes: Routes = [
   {
@@ -25,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'recipes',
-    component: TabRecipesComponent
+    component: DisplayRecipesComponent
   },
   {
     path: 'recipes/add',
@@ -47,6 +49,10 @@ const routes: Routes = [
   {
     path: "recipe/details/:id",
     component: RecipeDetailsComponent
+  },
+  {
+    path: "stock",
+    component: DisplayIngredientStockComponent
   }
 ];
 

@@ -17,7 +17,7 @@ export class RecipeCategoryService {
     return recipeCategory;
   }
 
-  getAllIngredientCategories(): Observable<RecipeCategory[]> {
+  getAllRecipeCategories(): Observable<RecipeCategory[]> {
     return this.httpService.get<RecipeCategory[]>("http://localhost:3000/recipe-category").pipe(
         map(data =>
             data.map( json => this.jsonToRecipeCategory(json))));

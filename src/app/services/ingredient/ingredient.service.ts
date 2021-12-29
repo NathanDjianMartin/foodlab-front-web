@@ -36,8 +36,24 @@ export class IngredientService {
     )
   }
 
+  getManyByCategory(idCategory: number): Observable<Ingredient[]>{
+    return this.httpService.get<Ingredient[]>(`http://localhost:3000/ingredient/category/${idCategory}`).pipe(
+        map(data =>
+            data.map( json => this.jsonToIngredient(json))));
+  }
+
   createIngredient(ingredient: Ingredient): Observable<Ingredient>{
     return this.httpService.post<Ingredient>("http://localhost:3000/ingredient", ingredient);
+  }
+
+  updateIngredient(ingredient: Ingredient){
+    return this.httpService.patch<Ingredient>(`http://localhost:3000/ingredient/${ingredient.id}`, {
+        "name": ingredient.name,
+        "unitaryPrice": ingredient.unitaryPrice,
+        "unit": ingredient.unit,
+        "stockQuantity": ingredient.stockQuantity,
+        "ingredientCategoryId": ingredient.ingredientCategoryId
+    })
   }
 
   deleteIngredient(id: number){

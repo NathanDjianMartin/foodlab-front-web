@@ -40,6 +40,12 @@ export class RecipeService {
             data.map( json => this.jsonToRecipe(json))));
   }
 
+  getManyByCategory(idCategory: number): Observable<Recipe[]>{
+    return this.httpService.get<Recipe[]>(`http://localhost:3000/recipe/category/${idCategory}`).pipe(
+        map(data =>
+            data.map( json => this.jsonToRecipe(json))));
+  }
+
   createRecipe(recipe: Recipe): Observable<Recipe>{
     console.log(recipe);
     return this.httpService.post<Recipe>("http://localhost:3000/recipe", {

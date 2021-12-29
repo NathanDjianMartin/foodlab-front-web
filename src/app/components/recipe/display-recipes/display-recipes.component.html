@@ -1,0 +1,7 @@
+<h2 class="center-align">Recipes list</h2>
+<div *ngFor="let category of categories | async">
+    <app-tab-recipes-by-category [category]="category"></app-tab-recipes-by-category>
+</div>
+<div class="row container right-align">
+    <button class="btn waves-effect waves-light" [routerLink]="['/recipes/add']">Add a recipe</button>
+</div>

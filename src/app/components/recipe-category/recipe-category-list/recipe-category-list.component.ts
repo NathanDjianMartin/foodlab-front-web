@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RecipeCategory} from "../../../models/recipe-category/recipe-category";
 import {RecipeCategoryService} from "../../../services/recipe-category/recipe-category.service";
 import {Observable} from "rxjs";
+import {LoggerService} from "../../../services/logger/logger.service";
 
 @Component({
   selector: 'app-recipe-category-list',
@@ -11,11 +12,12 @@ import {Observable} from "rxjs";
 export class RecipeCategoryListComponent implements OnInit {
   recipeCategories!: Observable<RecipeCategory[]>;
 
-  constructor(private recipeCategoryService: RecipeCategoryService) {
+  constructor(private recipeCategoryService: RecipeCategoryService,
+              private loggerService: LoggerService) {
   }
 
   ngOnInit(): void {
-    this.recipeCategories = this.recipeCategoryService.getAllIngredientCategories();
+    this.recipeCategories = this.recipeCategoryService.getAllRecipeCategories();
   }
 
   deleteRecipeCategory(ingredientCategory: RecipeCategory) {
@@ -24,6 +26,7 @@ export class RecipeCategoryListComponent implements OnInit {
           this.ngOnInit()
         },
         (error) => {
+          this.loggerService.displayError("This category corresponds to several recipes, you cannot delete it")
           console.log("oups")
         }
     );

@@ -27,6 +27,10 @@ import { UserCreationComponent } from './components/user/user-creation/user-crea
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { AddStepWithinRecipeExecutionComponent } from './components/recipe/add-step-within-recipe-execution/add-step-within-recipe-execution.component';
 import { TabIngredientsToAddComponent } from './components/recipe/tab-ingredients-to-add/tab-ingredients-to-add.component';
+import { DisplayIngredientStockComponent } from './components/ingredient/display-ingredient-stock/display-ingredient-stock.component';
+import { IngredientStockByCategoryComponent } from './components/ingredient/ingredient-stock-by-category/ingredient-stock-by-category.component';
+import { DisplayRecipesComponent } from './components/recipe/display-recipes/display-recipes.component';
+import { TabRecipesByCategoryComponent } from './components/recipe/tab-recipes-by-category/tab-recipes-by-category.component';
 
 @NgModule({
     declarations: [
@@ -53,6 +57,10 @@ import { TabIngredientsToAddComponent } from './components/recipe/tab-ingredient
         UserListComponent,
         AddStepWithinRecipeExecutionComponent,
         TabIngredientsToAddComponent,
+        DisplayIngredientStockComponent,
+        IngredientStockByCategoryComponent,
+        DisplayRecipesComponent,
+        TabRecipesByCategoryComponent,
     ],
     imports: [
         BrowserModule,
