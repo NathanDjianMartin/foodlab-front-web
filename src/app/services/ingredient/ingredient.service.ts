@@ -46,16 +46,6 @@ export class IngredientService {
     return this.httpService.post<Ingredient>("http://localhost:3000/ingredient", ingredient);
   }
 
-  updateIngredient(ingredient: Ingredient){
-    return this.httpService.patch<Ingredient>(`http://localhost:3000/ingredient/${ingredient.id}`, {
-        "name": ingredient.name,
-        "unitaryPrice": ingredient.unitaryPrice,
-        "unit": ingredient.unit,
-        "stockQuantity": ingredient.stockQuantity,
-        "ingredientCategoryId": ingredient.ingredientCategoryId
-    })
-  }
-
   deleteIngredient(id: number){
     return this.httpService.delete<number>(`http://localhost:3000/ingredient/${id}`);
   }
