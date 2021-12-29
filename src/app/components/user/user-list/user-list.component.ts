@@ -20,7 +20,18 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  deleteUser(): void {
-    alert('TODO');
+  deleteUser(id: number): void {
+
+    this.userService.delete(id).subscribe({
+      next: (data) => {
+        // removes the user from the users array
+        const deletedUserIndex = this.users.indexOf(this.users.find(user => user.id == id)!);
+        this.users.splice(deletedUserIndex, 1);
+        alert(`User successfully deleted!`);
+      },
+      error: (err) => {
+        alert(`Error while deleting a user: ${err.message}`);
+      }
+    });
   }
 }

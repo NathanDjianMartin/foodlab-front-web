@@ -42,6 +42,7 @@ export class UserService {
   }
 
   findAll(jwt: string) {
+    // TODO stop getting jwt as a parameter (use localStorageService instead)
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`
     });
@@ -49,9 +50,17 @@ export class UserService {
   }
 
   create(user: User, jwt: string) {
+    // TODO stop getting jwt as a parameter (use localStorageService instead)
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${jwt}`
+      'Authorization': `Bearer ${this.localStorageService.get('jwt')}`
     });
     return this.httpClient.post('http://localhost:3000/user', { headers: headers, ...user });
+  }
+
+  delete(id: number) {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.localStorageService.get('jwt')}`
+    });
+    return this.httpClient.delete(`http://localhost:3000/user/${id}`, { headers: headers })
   }
 }
