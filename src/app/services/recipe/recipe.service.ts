@@ -8,8 +8,6 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class RecipeService {
-  currentRecipe?: Recipe;
-
   constructor(private httpService: HttpClient) { }
 
   jsonToRecipe(json: any): Recipe{
@@ -22,10 +20,6 @@ export class RecipeService {
     }
     console.log(recipe.recipeExecutionId)
     return recipe;
-  }
-
-  selectRecipe(selectedRecipe: Recipe){
-    this.currentRecipe = selectedRecipe;
   }
 
   getOneRecipe(id: number): Observable<Recipe>{
@@ -69,5 +63,13 @@ export class RecipeService {
 
   deleteRecipe(id: number){
     return this.httpService.delete<number>(`http://localhost:3000/recipe/${id}`);
+  }
+
+  getIngredientsCost(id: number): Observable<number> {
+    return this.httpService.get<number>(`http://localhost:3000/recipe/ingredient-cost/${id}`)
+  }
+
+  getDuration(id: number): Observable<number> {
+    return this.httpService.get<number>(`http://localhost:3000/recipe/duration/${id}`)
   }
 }

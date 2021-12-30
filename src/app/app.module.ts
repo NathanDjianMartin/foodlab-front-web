@@ -33,6 +33,7 @@ import { DisplayRecipesComponent } from './components/recipe/display-recipes/dis
 import { TabRecipesByCategoryComponent } from './components/recipe/tab-recipes-by-category/tab-recipes-by-category.component';
 import { DisplayIngredientComponent } from './components/ingredient/display-ingredient/display-ingredient.component';
 import { IngredientByCategoryComponent } from './components/ingredient/ingredient-by-category/ingredient-by-category.component';
+import { DisplayCostComponent } from './components/cost-data/display-cost/display-cost.component';
 
 @NgModule({
     declarations: [
@@ -65,6 +66,7 @@ import { IngredientByCategoryComponent } from './components/ingredient/ingredien
         TabRecipesByCategoryComponent,
         DisplayIngredientComponent,
         IngredientByCategoryComponent,
+        DisplayCostComponent,
     ],
     imports: [
         BrowserModule,
