@@ -10,11 +10,15 @@ import {Observable} from "rxjs";
 })
 export class RecipeHeaderComponent implements OnInit {
   @Input() recipe!: Recipe;
+  duration!: number
 
   constructor(private recipeService: RecipeService) {
   }
 
   ngOnInit(): void {
+    this.recipeService.getDuration(this.recipe!.id!).subscribe( (duration) => {
+      this.duration = duration;
+    });
   }
 
 }
