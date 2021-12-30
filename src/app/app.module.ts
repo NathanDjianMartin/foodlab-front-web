@@ -31,6 +31,8 @@ import { DisplayIngredientStockComponent } from './components/ingredient/display
 import { IngredientStockByCategoryComponent } from './components/ingredient/ingredient-stock-by-category/ingredient-stock-by-category.component';
 import { DisplayRecipesComponent } from './components/recipe/display-recipes/display-recipes.component';
 import { TabRecipesByCategoryComponent } from './components/recipe/tab-recipes-by-category/tab-recipes-by-category.component';
+import { DisplayIngredientComponent } from './components/ingredient/display-ingredient/display-ingredient.component';
+import { IngredientByCategoryComponent } from './components/ingredient/ingredient-by-category/ingredient-by-category.component';
 
 @NgModule({
     declarations: [
@@ -61,6 +63,8 @@ import { TabRecipesByCategoryComponent } from './components/recipe/tab-recipes-b
         IngredientStockByCategoryComponent,
         DisplayRecipesComponent,
         TabRecipesByCategoryComponent,
+        DisplayIngredientComponent,
+        IngredientByCategoryComponent,
     ],
     imports: [
         BrowserModule,

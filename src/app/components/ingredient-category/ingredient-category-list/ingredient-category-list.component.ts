@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IngredientCategory} from "../../../models/ingredient-category/ingredient-category";
 import {IngredientCategoryService} from "../../../services/ingredient-category/ingredient-category.service";
 import {Observable} from "rxjs";
+import {LoggerService} from "../../../services/logger/logger.service";
 
 @Component({
     selector: 'app-ingredient-category-list',
@@ -11,7 +12,8 @@ import {Observable} from "rxjs";
 export class IngredientCategoryListComponent implements OnInit {
     ingredientCategories!: Observable<IngredientCategory[]>;
 
-    constructor(private ingredientCategoryService: IngredientCategoryService) {
+    constructor(private ingredientCategoryService: IngredientCategoryService,
+                private loggerService: LoggerService) {
     }
 
     ngOnInit(): void {
@@ -24,7 +26,7 @@ export class IngredientCategoryListComponent implements OnInit {
                 this.ngOnInit()
             },
             (error) => {
-                console.log("oups")
+                this.loggerService.displayError("This category corresponds to several ingredient, you cannot delete it")
             }
         );
     }

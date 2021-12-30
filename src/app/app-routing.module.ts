@@ -11,11 +11,12 @@ import {AuthenticatedGuardGuard} from "./guards/authenticated/authenticated-guar
 import {UserCreationComponent} from "./components/user/user-creation/user-creation.component";
 import {DisplayIngredientStockComponent} from "./components/ingredient/display-ingredient-stock/display-ingredient-stock.component";
 import {DisplayRecipesComponent} from "./components/recipe/display-recipes/display-recipes.component";
+import {DisplayIngredientComponent} from "./components/ingredient/display-ingredient/display-ingredient.component";
 
 const routes: Routes = [
   {
     path: 'ingredients',
-    component: TabIngredientsComponent
+    component: DisplayIngredientComponent
   },
   {
     path: 'ingredients/add',

@@ -1,0 +1,31 @@
+<div class="row container tab-center">
+    <h4>{{this.category.name}}</h4>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Unitary Price</th>
+            <th>Stock Quantity</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngIf="ingredients.length<1">
+            <td>No ingredient registered for this category</td>
+        </tr>
+        <tr *ngFor="let ingredient of ingredients ">
+            <td>{{ingredient.name}}</td>
+            <td>{{ingredient.unitaryPrice + "$/" + ingredient.unit}}</td>
+            <td>{{ingredient.stockQuantity + " " + ingredient.unit}}</td>
+            <td>
+                <!--                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>-->
+                <button class="btn-small waves-effect waves-light action" (click)="editIngredient(ingredient.id)">Edit</button>
+            </td>
+            <td>
+                <button class="btn-small waves-effect waves-light action" (click)="deleteIngredient(ingredient)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
