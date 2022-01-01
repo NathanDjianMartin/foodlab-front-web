@@ -35,23 +35,18 @@ export class UserService {
   }
 
   getProfile(jwt: string) {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${jwt}`
-    });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwt}`);
+    //const headers = new HttpHeaders({'Authorization': `Bearer ${jwt}`});
     return this.httpClient.get('http://localhost:3000/user/profile', { headers: headers });
   }
 
   findAll(jwt: string) {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${jwt}`
-    });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwt}`);
     return this.httpClient.get('http://localhost:3000/user', { headers: headers });
   }
 
   create(user: User, jwt: string) {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${jwt}`
-    });
-    return this.httpClient.post('http://localhost:3000/user', { headers: headers, ...user });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwt}`);
+    return this.httpClient.post('http://localhost:3000/user', { ...user }, { headers: headers });
   }
 }
