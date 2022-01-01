@@ -22,27 +22,8 @@ export class UserCreationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userCreationForm = this.fb.group({
-      name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      isAdmin: [false]
-    });
+    this.initForm();
     this.fetchUserList();
-  }
-
-  fetchUserList(): void {
-    const jwt: string | null = this.localStorageService.get('jwt');
-    if (jwt !== null) {
-      this.userService.findAll(jwt).subscribe({
-        next: (data) => {
-          this.users = JSON.parse(JSON.stringify(data));
-        },
-        error: (err) => {
-          alert(`Error: ${err.error.message}`);
-        }
-      })
-    }
   }
 
   createUser(): void {
@@ -60,6 +41,7 @@ export class UserCreationComponent implements OnInit {
           next: (data) => {
             this.userCreationForm.reset();
             this.users.push(user);
+            this.initForm();
             alert(`User ${name} successfully created!`);
           },
           error: (err) => {
@@ -72,5 +54,28 @@ export class UserCreationComponent implements OnInit {
     } else {
       alert('The form is invalid!')
     }
+  }
+
+  fetchUserList(): void {
+    const jwt: string | null = this.localStorageService.get('jwt');
+    if (jwt !== null) {
+      this.userService.findAll(jwt).subscribe({
+        next: (data) => {
+          this.users = JSON.parse(JSON.stringify(data));
+        },
+        error: (err) => {
+          alert(`Error: ${err.error.message}`);
+        }
+      })
+    }
+  }
+
+  initForm(): void {
+    this.userCreationForm = this.fb.group({
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      isAdmin: [false, []]
+    });
   }
 }
