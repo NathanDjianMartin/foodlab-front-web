@@ -1,0 +1,13 @@
+.container {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.card {
+    padding: 30px;
+    background-color: rgb(221, 229, 229);
+}
