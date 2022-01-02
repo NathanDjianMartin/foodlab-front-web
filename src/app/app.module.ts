@@ -34,6 +34,7 @@ import { TabRecipesByCategoryComponent } from './components/recipe/tab-recipes-b
 import { DisplayIngredientComponent } from './components/ingredient/display-ingredient/display-ingredient.component';
 import { IngredientByCategoryComponent } from './components/ingredient/ingredient-by-category/ingredient-by-category.component';
 import { DisplayCostComponent } from './components/cost-data/display-cost/display-cost.component';
+import { SearchbarComponent } from './components/general/searchbar/searchbar.component';
 
 @NgModule({
     declarations: [
@@ -67,6 +68,7 @@ import { DisplayCostComponent } from './components/cost-data/display-cost/displa
         DisplayIngredientComponent,
         IngredientByCategoryComponent,
         DisplayCostComponent,
+        SearchbarComponent,
     ],
     imports: [
         BrowserModule,
