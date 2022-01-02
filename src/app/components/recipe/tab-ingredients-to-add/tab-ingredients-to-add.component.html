@@ -11,6 +11,7 @@
         <tr *ngFor="let ingredient of ingredientsSelected ">
             <td>{{ingredient.ingredientDetails!.name}}</td>
             <td>{{ingredient.quantity + " " + ingredient!.ingredientDetails!.unit}}</td>
+            <td><button class="btn-floating btn-small waves-effect waves-light right" (click)="deleteIngredient(ingredient)">X</button></td>
         </tr>
         </tbody>
     </table>

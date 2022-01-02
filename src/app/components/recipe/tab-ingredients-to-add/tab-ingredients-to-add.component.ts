@@ -32,4 +32,11 @@ export class TabIngredientsToAddComponent implements OnInit, OnChanges{
     this.ingredientsSelectedEvent.emit(this.ingredientsSelected);
   }
 
+  deleteIngredient(ingredient: IngredientWithinStep){
+    let index: number = this.ingredientsSelected.indexOf(ingredient);
+    if(index != -1) {
+      this.ingredientsSelected.splice(index,1);
+    }
+  }
+
 }
