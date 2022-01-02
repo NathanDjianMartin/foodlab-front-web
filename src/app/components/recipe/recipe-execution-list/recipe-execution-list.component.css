@@ -1,9 +1,12 @@
-.card-panel {
-    background-color: #a19f89 !important;
+.card {
+    background-color: rgba(129, 149, 130, 0.29) !important;
 }
 .marge {
     margin-left: 2em;
 }
-.divider{
-    background-color: black;
+.edit{
+    background-color: #729598 !important;
+}
+.delete{
+    background-color: #903739 !important;
 }

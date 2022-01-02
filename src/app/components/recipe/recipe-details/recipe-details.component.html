@@ -6,7 +6,7 @@
             <div class="col s12">
                 <div class="card-panel teal steps">
                     <app-recipe-execution-list
-                            [recipeExecutionId]="recipe.recipeExecutionId"></app-recipe-execution-list>
+                            [recipeExecutionId]="recipe.recipeExecutionId" [isRecipeExecutionGeneral]="true"></app-recipe-execution-list>
                 </div>
             </div>
         </div>
@@ -35,10 +35,12 @@
         <app-add-step-within-recipe-execution
                 [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-step-within-recipe-execution>
     </div>
-    <div *ngIf="addAProgression">
-        <app-add-progression-within-recipe-execution
-                [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-progression-within-recipe-execution>
+    <div *ngIf="addAProgression" class="col s6">
+        <app-allergen-category-list></app-allergen-category-list>
+        <app-add-allergen-category></app-add-allergen-category>
     </div>
 </div>
 
+<app-add-progression-within-recipe-execution
+        [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-progression-within-recipe-execution>
 <app-display-cost [recipeId]="recipe.id"></app-display-cost>

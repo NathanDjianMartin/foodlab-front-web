@@ -16,8 +16,9 @@ import {LoggerService} from "../../../services/logger/logger.service";
 })
 export class RecipeExecutionListComponent implements OnInit {
   @Input() recipeExecutionId?: number;
+  @Input() isRecipeExecutionGeneral!: boolean;
 
-  stepsWithinRecipe!: Observable<StepWithinRecipeExecution[]>;
+  stepsWithinRecipe!: StepWithinRecipeExecution[];
 
   constructor(private recipeService: RecipeService,
               private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService,
@@ -26,11 +27,31 @@ export class RecipeExecutionListComponent implements OnInit {
 
   ngOnInit(): void {
      if(this.recipeExecutionId != null) {
-       this.stepsWithinRecipe = this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipeExecutionId);
+       this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipeExecutionId).subscribe( (steps) => {
+
+         this.stepsWithinRecipe = steps.sort(function compare(a,b) {
+
+           if(a.number < b.number)
+             return -1;
+           if(a.number > b.number)
+             return 1;
+           return 0;
+         });
+       });
      }
   }
+
   select(){
     this.loggerService.displaySuccess("Selected");
+  }
+
+  delete(step: StepWithinRecipeExecution){
+    this.stepWithinRecipeExecutionService.deleteStepWithinRecipeExecution(step.id!).subscribe( (rowAffected) => {
+      this.loggerService.displaySuccess("Step deleted!");
+      this.ngOnInit();
+    }, (error) => {
+      this.loggerService.displayError("You cannot delete this step!")
+    });
   }
 
 
