@@ -35,12 +35,10 @@
         <app-add-step-within-recipe-execution
                 [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-step-within-recipe-execution>
     </div>
-    <div *ngIf="addAProgression" class="col s6">
-        <app-allergen-category-list></app-allergen-category-list>
-        <app-add-allergen-category></app-add-allergen-category>
+    <div *ngIf="addAProgression">
+        <app-add-progression-within-recipe-execution
+                [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-progression-within-recipe-execution>
+
     </div>
 </div>
-
-<app-add-progression-within-recipe-execution
-        [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-progression-within-recipe-execution>
 <app-display-cost [recipeId]="recipe.id"></app-display-cost>
