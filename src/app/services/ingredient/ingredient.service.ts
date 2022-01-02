@@ -12,7 +12,7 @@ export class IngredientService {
   constructor(private httpService: HttpClient) { }
 
   jsonToIngredient(json: any): Ingredient {
-    let ingredient: Ingredient =  new Ingredient(json.name, json.unitaryPrice, json.unit, json.stockQuantity, json.ingredientCategoryId);
+    let ingredient: Ingredient =  new Ingredient(json.name, Number(json.unitaryPrice), json.unit, Number(json.stockQuantity), json.ingredientCategoryId);
     ingredient.id = json.id;
     if (json.allergenCategoryId) {
       ingredient.allergenCategoryId = json.allergenCategoryId;

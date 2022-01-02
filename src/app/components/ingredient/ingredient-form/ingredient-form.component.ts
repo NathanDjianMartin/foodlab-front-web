@@ -113,7 +113,7 @@ export class IngredientFormComponent implements OnInit {
     if(this.ingredientFormGroup.valid) {
       let formIngredient = new Ingredient(
           this.ingredientFormGroup.get("name")?.value,
-          this.ingredientFormGroup.get("unitaryPrice")?.value,
+          Number(this.ingredientFormGroup.get("unitaryPrice")?.value),
           this.ingredientFormGroup.get("unit")?.value,
           Number(this.ingredientFormGroup.get("stockQuantity")?.value),
           Number(this.ingredientFormGroup.get("ingredientCategory")?.value));
