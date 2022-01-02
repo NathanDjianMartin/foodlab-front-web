@@ -28,7 +28,7 @@ export class IngredientStockByCategoryComponent implements OnInit {
   }
 
   increase(ingredient: Ingredient){
-    ingredient.stockQuantity = ingredient.stockQuantity + 1;
+    ingredient.stockQuantity = Number(ingredient.stockQuantity) + 1;
     this.hasChanged = true;
   }
 
@@ -40,7 +40,7 @@ export class IngredientStockByCategoryComponent implements OnInit {
   updateQuantityInStock(){
     //TODO: pour essayer que les données recharge mieux remettre observable et recharger le tableau
     for(let ingredient of this.ingredients){
-      this.ingredientService.updateIngredient(ingredient).subscribe();
+      this.ingredientService.updateStockQuantityIngredient(ingredient).subscribe();
     }
     this.ngOnInit();
   }

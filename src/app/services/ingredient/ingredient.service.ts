@@ -60,4 +60,10 @@ export class IngredientService {
       "allergenCategoryId": ingredient.allergenCategoryId? ingredient.allergenCategoryId : null
     })
   }
+
+  updateStockQuantityIngredient(ingredient: Ingredient) {
+    return this.httpService.patch(`http://localhost:3000/ingredient/${ingredient.id}`, {
+      "stockQuantity": ingredient.stockQuantity,
+    })
+  }
 }
