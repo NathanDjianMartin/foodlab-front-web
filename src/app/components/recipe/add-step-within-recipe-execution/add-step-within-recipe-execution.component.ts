@@ -68,14 +68,16 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
             //si ça n'est pas le cas, on en créer une
             //on va récupérer les infos de la recette à laquelle on ajoute la progression (on va donner le même nom qu'a la recette
             if(this.route.snapshot.paramMap.get('id') != undefined) {
+                console.log("je dois être là");
                 let id = parseInt(this.route.snapshot.paramMap.get('id')!);
-                this.recipeService.getOneRecipe(id).subscribe( (r) => {
+                this.recipeService.getOneRecipe(id).subscribe(async (r) => {
                     let recipe = r
-                    this.recipeExecutionService.createRecipeExecution(
+                    await this.recipeExecutionService.createRecipeExecution(
                         new RecipeExecution(false, recipe.name)).subscribe( (progression) => {
                             this.recipeExecutionId = progression.id!;
                             recipe.recipeExecutionId = this.recipeExecutionId;
                             this.recipeService.updateRecipe(recipe).subscribe();
+                            console.log(recipe);
                     })
                 });
             }
