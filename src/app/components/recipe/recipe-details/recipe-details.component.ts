@@ -11,6 +11,8 @@ import {ActivatedRoute} from "@angular/router";
 export class RecipeDetailsComponent implements OnInit {
   id!: number;
   recipe!: Recipe;
+  addAStep: boolean = false;
+  addAProgression: boolean = false;
 
   constructor(private route: ActivatedRoute,
       private recipeService: RecipeService) {
@@ -24,5 +26,15 @@ export class RecipeDetailsComponent implements OnInit {
       });
     }
 
+  }
+
+  addAStepAction(){
+    this.addAStep = true;
+    this.addAProgression = false;
+  }
+
+  addAProgressionAction(){
+    this.addAStep = false;
+    this.addAProgression = true;
   }
 }

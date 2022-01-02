@@ -7,3 +7,7 @@ h2{
 .ingredients{
     background-color: #e9dccf !important;
 }
+.btn-small{
+    background-color: #729598 !important;
+    margin: 10px;
+}

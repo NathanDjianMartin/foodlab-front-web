@@ -4,6 +4,8 @@ import {Observable} from "rxjs";
 import {RecipeExecutionService} from "../../../services/recipe-execution/recipe-execution.service";
 import {StepWithinRecipeExecutionService} from "../../../services/step-within-recipe-execution/step-within-recipe-execution.service";
 import {StepWithinRecipeExecution} from "../../../models/step-within-recipe-execution/step-within-recipe-execution";
+import {LoggerService} from "../../../services/logger/logger.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-progression-within-recipe-execution',
@@ -16,7 +18,10 @@ export class AddProgressionWithinRecipeExecutionComponent implements OnInit {
   progression!: RecipeExecution
 
   constructor(private recipeExecutionService: RecipeExecutionService,
-              private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) { }
+              private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService,
+              private loggerService: LoggerService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.progressions = this.recipeExecutionService.getAllProgressions()
@@ -27,7 +32,16 @@ export class AddProgressionWithinRecipeExecutionComponent implements OnInit {
   }
 
   addProgression(){
-    this.stepWithinRecipeExecutionService.createStepWithinRecipeExecution(new StepWithinRecipeExecution(this.progression.id!, this.recipeExecutionId,1)).subscribe();
+    this.stepWithinRecipeExecutionService.createStepWithinRecipeExecution(
+        new StepWithinRecipeExecution(this.progression.id!, this.recipeExecutionId,1)
+    ).subscribe( (data) => {
+      this.router.navigate(["/recipe/details", parseInt(this.route.snapshot.paramMap.get('id')!)]).then()
+      this.loggerService.displaySuccess("Progression added!")
+        }, (error) => {
+      this.loggerService.displayError("Error in add a progression")
+        }
+
+    );
   }
 
 }
