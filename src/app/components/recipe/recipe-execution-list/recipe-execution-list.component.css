@@ -1,3 +1,9 @@
 .card-panel {
     background-color: #a19f89 !important;
 }
+.marge {
+    margin-left: 2em;
+}
+.divider{
+    background-color: black;
+}

@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {RecipeExecution} from "../../../models/recipe-execution/recipe-execution";
 import {StepWithinRecipeExecutionService} from "../../../services/step-within-recipe-execution/step-within-recipe-execution.service";
 import {StepWithinRecipeExecution} from "../../../models/step-within-recipe-execution/step-within-recipe-execution";
+import {LoggerService} from "../../../services/logger/logger.service";
 
 @Component({
   selector: 'app-recipe-execution-list',
@@ -19,13 +20,17 @@ export class RecipeExecutionListComponent implements OnInit {
   stepsWithinRecipe!: Observable<StepWithinRecipeExecution[]>;
 
   constructor(private recipeService: RecipeService,
-              private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) {
+              private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService,
+              private loggerService: LoggerService) {
   }
 
   ngOnInit(): void {
      if(this.recipeExecutionId != null) {
        this.stepsWithinRecipe = this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipeExecutionId);
      }
+  }
+  select(){
+    this.loggerService.displaySuccess("Selected");
   }
 
 

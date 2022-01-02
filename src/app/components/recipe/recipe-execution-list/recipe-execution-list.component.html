@@ -1,19 +1,15 @@
 <p *ngIf="this.recipeExecutionId == null">
     This recipe does not yet contain any step
 </p>
-<table class="row">
-    <tbody>
-    <tr draggable="true" *ngFor="let step of this.stepsWithinRecipe| async">
-        <td *ngIf="step.step!.isStep == true">
-            <li>{{step.step!.stepTitle}}</li>
+    <div (click)="select()" *ngFor="let step of this.stepsWithinRecipe| async">
+        <div *ngIf="step.step!.isStep == true">
             {{step.step!.stepDescription!}}
-        </td>
-
+            <br>
+            <br>
+        </div>
         <div *ngIf="step.step!.isStep == false" class="cols s12">
-            <li class="font-weight">{{step.step!.stepTitle}}</li>
+            <h6>{{step.step!.stepTitle}}</h6>
             <app-recipe-execution-list [recipeExecutionId]="step.step!.id!"></app-recipe-execution-list>
         </div>
-    </tr>
-    </tbody>
-</table>
+    </div>
 
