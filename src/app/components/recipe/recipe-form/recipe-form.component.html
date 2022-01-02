@@ -1,19 +1,22 @@
-<h2 class="center-align">Add a recipe</h2>
+<h2 class="center-align" *ngIf="this.recipeId == null; else updateTitle">Add a recipe</h2>
+<ng-template #updateTitle>
+    <h2 class="center-align" >Edit recipe</h2>
+</ng-template>
 
 <div class="row container">
     <form class="col s12" [formGroup]="recipeFormGroup">
         <div class="row">
             <div class="input-field col s6">
                 <input id="name" type="text" class="validate" formControlName="name">
-                <label for="name">Name</label>
+                <label for="name" class="active">Name</label>
             </div>
             <div class="input-field col s6">
                 <input id="unit" type="text" class="validate" formControlName="author">
-                <label for="unit">Author</label>
+                <label for="unit" class="active">Author</label>
             </div>
             <div class="input-field col s6">
                 <input id="unitaryPrice" type="number" class="validate" formControlName="guestsNumber">
-                <label for="unitaryPrice">Number of guests</label>
+                <label for="unitaryPrice" class="active">Number of guests</label>
             </div>
             <div class="input-field col s6">
                 <select formControlName="recipeCategory">
@@ -21,7 +24,7 @@
                     <option *ngFor="let category of recipeCategories | async"
                             value="{{category.id}}">{{category.name}}</option>
                 </select>
-                <label>Select a recipe category</label>
+                <label class="active">Select a recipe category</label>
             </div>
         </div>
     </form>
@@ -36,8 +39,17 @@
         <app-add-recipe-category></app-add-recipe-category>
     </div>
 </div>
+<!-- Update or Submit buttons -->
 <div class="row container right-align">
-    <button class="btn waves-effect waves-light" type="submit" name="action" (click)="createRecipe()">Submit
+
+    <button *ngIf="this.recipeId == null; else updateButton" class="btn waves-effect waves-light" type="submit" name="action"  (click)="createRecipe()">Submit
         <i class="material-icons right">send</i>
     </button>
+
+    <ng-template #updateButton>
+        <button  class="btn waves-effect waves-light" type="submit" name="action" (click)="updateRecipe()">Update
+            <i class="material-icons right">send</i>
+        </button>
+    </ng-template>
+
 </div>

@@ -19,7 +19,7 @@
             <td (click)="selectRecipe(recipe)">{{recipe.guestsNumber}}</td>
             <td>
                 <!--                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>-->
-                <button class="btn-small waves-effect waves-light action">Update</button>
+                <button class="btn-small waves-effect waves-light action" (click)="editRecipe(recipe.id!)">Update</button>
             </td>
             <td>
                 <button class="btn-small waves-effect waves-light modal-trigger action"  (click)="deleteRecipe(recipe)">Delete</button>

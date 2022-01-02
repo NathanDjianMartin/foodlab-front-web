@@ -62,4 +62,8 @@ export class TabRecipesByCategoryComponent implements OnInit{
     this.router.navigate(["/recipe/details",selectedRecipe.id])
   }
 
+  editRecipe(recipeId: number){
+    this.router.navigate([`/recipe/edit/${recipeId}`]);
+  }
+
 }

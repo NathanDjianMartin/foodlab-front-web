@@ -52,6 +52,10 @@ const routes: Routes = [
     component: RecipeDetailsComponent
   },
   {
+    path: "recipe/edit/:id",
+    component: RecipeFormComponent
+  },
+  {
     path: "stock",
     component: DisplayIngredientStockComponent
   }
