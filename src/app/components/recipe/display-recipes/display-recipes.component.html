@@ -1,7 +1,12 @@
 <h2 class="center-align">Recipes list</h2>
-<div *ngFor="let category of categories | async">
-    <app-tab-recipes-by-category [category]="category"></app-tab-recipes-by-category>
+
+<app-searchbar [title]="'Search a recipe'" (searchEvent)="onSearch($event)"></app-searchbar>
+
+<div *ngFor="let entry of filteredRecipesByCategory.entries()">
+    <app-recipe-list [title]="entry[0].name" [recipeList]="entry[1]"></app-recipe-list>
+    <!-- <app-tab-recipes-by-category [category]="category"></app-tab-recipes-by-category> -->
 </div>
+
 <div class="row container right-align">
     <button class="btn waves-effect waves-light" [routerLink]="['/recipes/add']">Add a recipe</button>
 </div>
