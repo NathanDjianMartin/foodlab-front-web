@@ -47,6 +47,7 @@ export class TabRecipesByCategoryComponent implements OnInit{
 
   deleteRecipe(recipe: Recipe){
     this.recipeService.deleteRecipe(recipe.id!).subscribe(
+        //TODO: correct this function
         (data) => {
           this.ngOnInit()
         },

@@ -34,6 +34,7 @@ import { TabRecipesByCategoryComponent } from './components/recipe/tab-recipes-b
 import { DisplayIngredientComponent } from './components/ingredient/display-ingredient/display-ingredient.component';
 import { IngredientByCategoryComponent } from './components/ingredient/ingredient-by-category/ingredient-by-category.component';
 import { DisplayCostComponent } from './components/cost-data/display-cost/display-cost.component';
+import { AddProgressionWithinRecipeExecutionComponent } from './components/recipe/add-progression-within-recipe-execution/add-progression-within-recipe-execution.component';
 
 @NgModule({
     declarations: [
@@ -67,6 +68,7 @@ import { DisplayCostComponent } from './components/cost-data/display-cost/displa
         DisplayIngredientComponent,
         IngredientByCategoryComponent,
         DisplayCostComponent,
+        AddProgressionWithinRecipeExecutionComponent,
     ],
     imports: [
         BrowserModule,

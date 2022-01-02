@@ -1,0 +1,15 @@
+<h2 class="center-align">Add a progression</h2>
+
+<div class="container row">
+    <ul class="collection">
+        <a *ngFor="let progression of progressions  | async" class="collection-item" (click)="selectProgression(progression)">
+            {{progression.stepTitle}}
+        </a>
+    </ul>
+</div>
+
+<div *ngIf="this.progression" class="row container right-align">
+    <button class="btn waves-effect waves-light" type="submit" name="action" (click)="addProgression()">Add
+        <i class="material-icons right">send</i>
+    </button>
+</div>

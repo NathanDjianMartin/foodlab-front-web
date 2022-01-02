@@ -11,7 +11,6 @@ export class RecipeExecution {
     public stepTitle: string;
     public stepDescription?: string;
     public duration?: number;
-    public recipeExecutionId?: number;
 
     //stored attributes for the front
     public ingredients?: Ingredient[];

@@ -17,14 +17,17 @@ export class RecipeExecutionService {
       recipeExecution.duration = json.duration;
     }
     recipeExecution.id = json.id;
-    if(json.recipeExecutionId != null) {
-      recipeExecution.recipeExecutionId = json.recipeExecutionId
-    }
     return recipeExecution;
   }
 
   getAllRecipesExecution(): Observable<RecipeExecution[]> {
     return this.httpService.get<RecipeExecution[]>("http://localhost:3000/recipe-execution").pipe(
+        map(data =>
+            data.map( json => this.jsonToRecipeExecution(json))));
+  }
+
+  getAllProgressions(): Observable<RecipeExecution[]> {
+    return this.httpService.get<RecipeExecution[]>("http://localhost:3000/recipe-execution/progressions").pipe(
         map(data =>
             data.map( json => this.jsonToRecipeExecution(json))));
   }
