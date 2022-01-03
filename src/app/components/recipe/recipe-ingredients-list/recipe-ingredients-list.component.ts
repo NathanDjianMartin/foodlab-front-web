@@ -31,7 +31,7 @@ export class RecipeIngredientsListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
         //on regarge les valeurs
-        console.log("lll")
+        this.init();
         this.init();
     }
 

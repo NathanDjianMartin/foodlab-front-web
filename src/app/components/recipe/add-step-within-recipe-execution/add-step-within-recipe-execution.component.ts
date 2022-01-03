@@ -84,7 +84,9 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
             newIngredient.ingredientDetails = ingredient
             this.ingredientsSelected.push(newIngredient);
         });
-        this.ngOnInit()
+        this.ingredientWithQuantityFormGroup.controls['ingredient'].setValue(null);
+        this.ingredientWithQuantityFormGroup.controls['quantity'].setValue(null);
+
     }
 
     deleteIngredient(ingredient: IngredientWithinStep){
