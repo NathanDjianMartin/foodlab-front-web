@@ -70,7 +70,13 @@
 </div>
 
 <div class="row container right-align">
-    <button class="btn waves-effect waves-light" type="submit" name="action" (click)="createStep()">Submit
+    <button *ngIf="this.step == null; else updateButton" class="btn waves-effect waves-light" type="submit" name="action" (click)="createStep()">Submit
         <i class="material-icons right">send</i>
     </button>
 </div>
+
+<ng-template #updateButton>
+    <button  class="btn waves-effect waves-light" type="submit" name="action" (click)="updateStep()">Update
+        <i class="material-icons right">send</i>
+    </button>
+</ng-template>

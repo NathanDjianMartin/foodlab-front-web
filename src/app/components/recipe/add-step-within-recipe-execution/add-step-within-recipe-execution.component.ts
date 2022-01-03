@@ -96,6 +96,15 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         }
     }
 
+    getStepFromForm(): RecipeExecution {
+        return new RecipeExecution(
+            true,
+            this.recipeExecutionFormGroup.get("stepTitle")?.value,
+            this.recipeExecutionFormGroup.get("stepDescription")?.value,
+            this.recipeExecutionFormGroup.get("duration")?.value,
+        )
+    }
+
     async createStep() {
         //En premier on vérif que la recipeExecution est déjà créé
         if(this.recipeExecutionId == null){
@@ -118,25 +127,36 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         }
         //TODO: peut être mieux mettre toutes les étapes dans le service
         //création de l'étape
-        let steps = new RecipeExecution(
-            true,
-            this.recipeExecutionFormGroup.get("stepTitle")?.value,
-            this.recipeExecutionFormGroup.get("stepDescription")?.value,
-            this.recipeExecutionFormGroup.get("duration")?.value,
-        )
+        let steps = this.getStepFromForm();
         //Ajout de l'étape dans la recette
         this.recipeExecutionService.createRecipeExecution(steps).subscribe(step => {
             let stepInRecipeExecution = new StepWithinRecipeExecution(step.id!, this.recipeExecutionId, 1);
             this.stepWithinRecipeExecutionService.createStepWithinRecipeExecution(stepInRecipeExecution).subscribe();
 
             if (this.ingredientsSelected != undefined) {
-                for (var ingredientInStep of this.ingredientsSelected!) {
-                    let ing = new IngredientWithinStep(ingredientInStep.ingredientId, ingredientInStep.quantity, step.id!);
-                    this.ingredientWithinStepService.createIngredientWithinStep(ing).subscribe();
-                }
+                this.addAllIngredientsInAStep(step.id!, this.ingredientsSelected);
             }
         });
         //TODO: vérifier que tout est ok
         this.router.navigate([this.router.url]);
+    }
+
+    addAllIngredientsInAStep(stepId: number, ingredients: IngredientWithinStep[]){
+        for (var ingredientInStep of ingredients) {
+            let ing = new IngredientWithinStep(ingredientInStep.ingredientId, ingredientInStep.quantity, stepId);
+            this.ingredientWithinStepService.createIngredientWithinStep(ing).subscribe();
+        }
+    }
+
+    updateStep(){
+        let step = this.getStepFromForm();
+        step.id = this.step!.id;
+        this.recipeExecutionService.updateRecipeExecution(step).subscribe();
+        //on supprimer tout les ingrédients
+        this.ingredientWithinStepService.deleteAllIngredientsInAStep(step.id!).subscribe();
+        //on recréer les ingrédients pour mettre à jour la liste
+        if (this.ingredientsSelected != undefined) {
+            this.addAllIngredientsInAStep(step.id!, this.ingredientsSelected);
+        }
     }
 }

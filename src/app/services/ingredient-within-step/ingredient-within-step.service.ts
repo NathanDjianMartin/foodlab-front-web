@@ -60,4 +60,8 @@ export class IngredientWithinStepService {
       "quantity": ingredientWithinStep.quantity
     });
   }
+
+  deleteAllIngredientsInAStep(stepId: number): Observable<number>{
+    return this.httpService.delete<number>(`http://localhost:3000/ingredient-within-step/delete-all-in-a-step/${stepId}`)
+  }
 }

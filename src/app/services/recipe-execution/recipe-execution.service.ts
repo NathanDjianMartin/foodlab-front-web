@@ -42,6 +42,14 @@ export class RecipeExecutionService {
     return this.httpService.post<RecipeExecution>("http://localhost:3000/recipe-execution", recipeExecution);
   }
 
+  updateRecipeExecution(recipeExecution: RecipeExecution): Observable<RecipeExecution>{
+    return this.httpService.patch<RecipeExecution>(`http://localhost:3000/recipe-execution/${recipeExecution.id}`, {
+      stepTitle: recipeExecution.stepTitle,
+      stepDescription: recipeExecution.stepDescription,
+      duration: recipeExecution.duration
+    });
+  }
+
   deleteRecipeExecution(id: number){
     return this.httpService.delete<number>(`http://localhost:3000/recipe-execution/${id}`);
   }
