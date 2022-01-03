@@ -12,6 +12,7 @@
                 <div *ngIf="isRecipeExecutionGeneral" class="right">
                     <button *ngIf="isRecipeExecutionGeneral"
                             class="btn-floating btn-small waves-effect waves-light edit"
+                            (click)="updateStep(step.step!)"
                     >
                         <i class="material-icons">edit</i>
                     </button>

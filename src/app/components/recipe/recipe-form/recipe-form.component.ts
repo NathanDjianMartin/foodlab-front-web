@@ -52,7 +52,7 @@ export class RecipeFormComponent implements OnInit {
         let guestsNumber = null;
         let recipeCategory = null;
 
-        // retrieves the ingredient if there is an "id" param and it corresponds to an ingredient in the database
+        // retrieves the recipe if there is an "id" param and it corresponds to an recipe in the database
         if (this.recipeId !== undefined) {
             let recipe: Recipe;
             this.recipeService.getOneRecipe(this.recipeId).subscribe((recipe) => {

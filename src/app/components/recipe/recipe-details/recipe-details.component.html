@@ -6,7 +6,8 @@
             <div class="col s12">
                 <div class="card-panel teal steps">
                     <app-recipe-execution-list
-                            [recipeExecutionId]="recipe.recipeExecutionId" [isRecipeExecutionGeneral]="true"></app-recipe-execution-list>
+                            [recipeExecutionId]="recipe.recipeExecutionId" [isRecipeExecutionGeneral]="true"
+                    (isChangeEvent)="changeDetected($event)" (stepToUpdate)="stepToUpdateDetected($event)"></app-recipe-execution-list>
                 </div>
             </div>
         </div>
@@ -17,7 +18,8 @@
             <div class="card-panel teal ingredients">
                 <h5>Ingredients</h5>
                 <app-recipe-ingredients-list [stepId]="this.recipe!.recipeExecutionId!"
-                                             [stepName]="'General'"></app-recipe-ingredients-list>
+                                             [stepName]="'General'" [isChange]="this.isChange"
+                 ></app-recipe-ingredients-list>
             </div>
         </div>
     </div>
@@ -32,8 +34,12 @@
 </div>
 <div class="container">
     <div *ngIf="addAStep">
+    <app-add-step-within-recipe-execution
+            [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-step-within-recipe-execution>
+    </div>
+    <div *ngIf="this.stepToUpdate">
         <app-add-step-within-recipe-execution
-                [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-step-within-recipe-execution>
+                [recipeExecutionId]="recipe.recipeExecutionId!" [step]="this.stepToUpdate"></app-add-step-within-recipe-execution>
     </div>
     <div *ngIf="addAProgression">
         <app-add-progression-within-recipe-execution

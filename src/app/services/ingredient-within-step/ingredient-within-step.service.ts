@@ -13,16 +13,15 @@ export class IngredientWithinStepService {
 
   constructor(private httpService: HttpClient,
               private ingredientService: IngredientService,
-              private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) { }
+              private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) {
+  }
 
-  jsonToIngredientWithinStep(json: any): IngredientWithinStep{
-    console.log(json);
-    let ingredientWithinStep: IngredientWithinStep =  new IngredientWithinStep(json.name, json.quantity, json.recipeExecutionId);
+  jsonToIngredientWithinStep(json: any): IngredientWithinStep {
+    let ingredientWithinStep: IngredientWithinStep = new IngredientWithinStep(json.ingredientId, json.quantity, json.recipeExecutionId);
     ingredientWithinStep.id = json.id;
-    if(json.ingredient){
+    if (json.ingredient) {
       ingredientWithinStep.ingredientDetails = this.ingredientService.jsonToIngredient(json.ingredient);
     }
-    console.log(ingredientWithinStep)
     return ingredientWithinStep;
   }
 
@@ -35,20 +34,21 @@ export class IngredientWithinStepService {
   getAllIngredientsInRecipe(id: number): IngredientWithinStep[] {
     //Objectif: retourner tout les ingrédients contenu dans les etapes d'une recette qui ne sont pas des progressions.
     let ingredientsRes: IngredientWithinStep[] = [];
-    this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(id).subscribe( (steps) => {
+    this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(id).subscribe((steps) => {
       for (let step of steps) {
-        this.getIngredientsInStep(step.stepId).subscribe( (ingredients) => {
-          for (let ingredient of ingredients){
+        this.getIngredientsInStep(step.stepId).subscribe((ingredients) => {
+          for (let ingredient of ingredients) {
             ingredientsRes.push(ingredient);
           }
         })
       }
+      return ingredientsRes;
     })
     return ingredientsRes;
 
   }
 
-  createIngredientWithinStep(ingredientWithinStep: IngredientWithinStep): Observable<IngredientWithinStep>{
+  createIngredientWithinStep(ingredientWithinStep: IngredientWithinStep): Observable<IngredientWithinStep> {
     console.log({
       "ingredientId": ingredientWithinStep.ingredientId,
       "recipeExecutionId": ingredientWithinStep.recipeExecutionId,
@@ -59,4 +59,5 @@ export class IngredientWithinStepService {
       "recipeExecutionId": ingredientWithinStep.recipeExecutionId,
       "quantity": ingredientWithinStep.quantity
     });
-  }}
+  }
+}

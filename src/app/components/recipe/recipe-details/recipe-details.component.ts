@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {ActivatedRoute} from "@angular/router";
+import {IngredientWithinStep} from "../../../models/ingredient-within-step/ingredient-within-step";
+import {RecipeExecution} from "../../../models/recipe-execution/recipe-execution";
 
 @Component({
   selector: 'app-recipe-details',
@@ -13,6 +15,8 @@ export class RecipeDetailsComponent implements OnInit {
   recipe!: Recipe;
   addAStep: boolean = false;
   addAProgression: boolean = false;
+  isChange: number = 0;
+  stepToUpdate!: RecipeExecution;
 
   constructor(private route: ActivatedRoute,
       private recipeService: RecipeService) {
@@ -26,6 +30,15 @@ export class RecipeDetailsComponent implements OnInit {
       });
     }
 
+  }
+
+  changeDetected($event: number) {
+    console.log("change detected ok in parent")
+    this.isChange = this.isChange + $event;
+  }
+
+  stepToUpdateDetected($event: RecipeExecution){
+    this.stepToUpdate = $event;
   }
 
   addAStepAction(){

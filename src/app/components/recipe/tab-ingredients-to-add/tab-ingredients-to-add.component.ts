@@ -11,21 +11,34 @@ export class TabIngredientsToAddComponent implements OnInit, OnChanges{
   @Output() ingredientsSelectedEvent = new EventEmitter<IngredientWithinStep[]>();
   ingredientsSelected: IngredientWithinStep[] = [];
   @Input() newIngredient!: IngredientWithinStep;
+  @Input() ingredientsSelectedInit: IngredientWithinStep[] | undefined;
 
   constructor(private ingredientService: IngredientService) { }
 
   ngOnInit(): void {
+    console.log("ghfdjsk");
+    console.log(this.ingredientsSelectedInit);
+    if(this.ingredientsSelectedInit){
+      for(let ingredient of this.ingredientsSelectedInit) {
+        this.ingredientsSelected.push(ingredient);
+      }
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("j'ai vu le changelent" + changes);
+    //TODO: nettoyer
     for (const changedProp in changes) {
       console.log(changedProp);
-      this.ingredientService.getOne(this.newIngredient.ingredientId).subscribe( (ingredient) => {
-        this.newIngredient.ingredientDetails = ingredient
-        this.ingredientsSelected.push(this.newIngredient);
-      });
-    }
+      if(this.ingredientsSelectedInit){
+        for(let ingredient of this.ingredientsSelectedInit) {
+          this.ingredientsSelected.push(ingredient);
+        }
+      }
+        this.ingredientService.getOne(this.newIngredient.ingredientId).subscribe((ingredient) => {
+          this.newIngredient.ingredientDetails = ingredient
+          this.ingredientsSelected.push(this.newIngredient);
+        });
+      }
   }
 
   validate(){

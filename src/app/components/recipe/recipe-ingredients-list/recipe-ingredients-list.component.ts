@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {Observable} from "rxjs";
@@ -14,9 +14,10 @@ import {StepWithinRecipeExecution} from "../../../models/step-within-recipe-exec
   templateUrl: './recipe-ingredients-list.component.html',
   styleUrls: ['./recipe-ingredients-list.component.css']
 })
-export class RecipeIngredientsListComponent implements OnInit {
+export class RecipeIngredientsListComponent implements OnInit, OnChanges {
   @Input() stepId!: number; //RecipeExecutionId
   @Input() stepName!: string;
+  @Input() isChange: number = 0;
   ingredientsWithinStep!: IngredientWithinStep[];
   step!: RecipeExecution;
   steps!: StepWithinRecipeExecution[];
@@ -28,24 +29,33 @@ export class RecipeIngredientsListComponent implements OnInit {
               private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) {
   }
 
-  ngOnInit(): void {
-    console.log(this.stepId!);
-    if(this.stepId != null) {
-      //Récupérer la liste des ingrédients contenu dans la recette (ne prend pas en compte les ingrédients contenu
-      // dans une sous recette de la recette puisqu'on appel récursivement le composant avec ses sous recettes
-      this.ingredientsWithinStep =this.ingredientWithinStepService.getAllIngredientsInRecipe(this.stepId!);
-
-      /*this.recipeExecutionService.getOne(this.stepId).subscribe( (step) => {
-        this.step = step;
-      })
-      this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.stepId).subscribe( (steps) => {
-        this.steps = steps;
-      })*/
-      //récupérer toutes les progressions contenu dans la recette
-      this.stepWithinRecipeExecutionService.getAllProgressionWithinRecipeExecution(this.stepId).subscribe( (progressions) => {
-        this.progressionWithinStep = progressions;
-      })
+  ngOnChanges(changes: SimpleChanges): void {
+        //on regarge les valeurs
+        console.log("lll")
+        this.init();
     }
+
+    async init() {
+      if (this.stepId != null) {
+        //Récupérer la liste des ingrédients contenu dans la recette (ne prend pas en compte les ingrédients contenu
+        // dans une sous recette de la recette puisqu'on appel récursivement le composant avec ses sous recettes
+        this.ingredientsWithinStep = this.ingredientWithinStepService.getAllIngredientsInRecipe(this.stepId!);
+
+        /*this.recipeExecutionService.getOne(this.stepId).subscribe( (step) => {
+          this.step = step;
+        })
+        this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.stepId).subscribe( (steps) => {
+          this.steps = steps;
+        })*/
+        //récupérer toutes les progressions contenu dans la recette
+        await this.stepWithinRecipeExecutionService.getAllProgressionWithinRecipeExecution(this.stepId).subscribe((progressions) => {
+          this.progressionWithinStep = progressions;
+        })
+      }
+    }
+
+  ngOnInit(): void {
+    this.init();
   }
 
 

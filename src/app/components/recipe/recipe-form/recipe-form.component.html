@@ -8,15 +8,15 @@
         <div class="row">
             <div class="input-field col s6">
                 <input id="name" type="text" class="validate" formControlName="name">
-                <label for="name" class="active">Name</label>
+                <label for="name" [class.active]="this.recipeId">Name</label>
             </div>
             <div class="input-field col s6">
                 <input id="unit" type="text" class="validate" formControlName="author">
-                <label for="unit" class="active">Author</label>
+                <label for="unit" [class.active]="this.recipeId">Author</label>
             </div>
             <div class="input-field col s6">
                 <input id="unitaryPrice" type="number" class="validate" formControlName="guestsNumber">
-                <label for="unitaryPrice" class="active">Number of guests</label>
+                <label for="unitaryPrice" [class.active]="this.recipeId">Number of guests</label>
             </div>
             <div class="input-field col s6">
                 <select formControlName="recipeCategory">
@@ -24,7 +24,7 @@
                     <option *ngFor="let category of recipeCategories | async"
                             value="{{category.id}}">{{category.name}}</option>
                 </select>
-                <label class="active">Select a recipe category</label>
+                <label [class.active]="this.recipeId">Select a recipe category</label>
             </div>
         </div>
     </form>

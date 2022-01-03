@@ -1,27 +1,54 @@
-<h2 class="center-align">Add a step</h2>
+<h2 class="center-align" *ngIf="this.step == null; else updateTitle">Add a step</h2>
+<ng-template #updateTitle>
+    <h2 class="center-align" >Edit step</h2>
+</ng-template>
+
 
 <div class="row container">
+
+
     <form class="col s12" [formGroup]="recipeExecutionFormGroup">
         <div class="row">
             <div class="input-field col s12">
                 <input id="stepTitle" type="text" class="validate" formControlName="stepTitle">
-                <label for="stepTitle">Step title</label>
+                <label for="stepTitle" [class.active]="this.step">Step title</label>
             </div>
             <div class="input-field col s12">
                 <input id="stepDescription" type="text" class="validate" formControlName="stepDescription">
-                <label for="stepDescription">Step description</label>
+                <label for="stepDescription" [class.active]="this.step">Step description</label>
             </div>
             <div class="input-field col s12">
                 <input id="duration" type="number" class="validate" formControlName="duration">
-                <label for="duration">Step duration</label>
+                <label for="duration" [class.active]="this.step">Step duration</label>
             </div>
         </div>
     </form>
 
-    <app-tab-ingredients-to-add *ngIf="newIngredient != null"
-                                [newIngredient]="this.newIngredient"
-                                (ingredientsSelectedEvent)="changeIngredientsSelected($event)"
-    ></app-tab-ingredients-to-add>
+    <h5>Ingredients in step</h5>
+    <div *ngIf="this.ingredientsSelected.length > 0">
+        <table class="highlight">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let ingredient of ingredientsSelected ">
+                <td>{{ingredient.ingredientDetails!.name}}</td>
+                <td>{{ingredient.quantity + " " + ingredient!.ingredientDetails!.unit}}</td>
+                <td><button class="btn-floating btn-small waves-effect waves-light right" (click)="deleteIngredient(ingredient)">X</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!--    <app-tab-ingredients-to-add [newIngredient]="this.newIngredient"-->
+    <!--                                (ingredientsSelectedEvent)="changeIngredientsSelected($event)"-->
+    <!--                                [ingredientsSelectedInit]="this.ingredientsSelected"-->
+    <!--    ></app-tab-ingredients-to-add>-->
 
     <form class="col s12" [formGroup]="ingredientWithQuantityFormGroup">
         <div class="row">

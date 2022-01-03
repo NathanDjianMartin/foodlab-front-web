@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
 import {IngredientWithinStep} from "../../../models/ingredient-within-step/ingredient-within-step";
 import {RecipeService} from "../../../services/recipe/recipe.service";
@@ -17,6 +17,8 @@ import {LoggerService} from "../../../services/logger/logger.service";
 export class RecipeExecutionListComponent implements OnInit {
   @Input() recipeExecutionId?: number;
   @Input() isRecipeExecutionGeneral!: boolean;
+  @Output() isChangeEvent = new EventEmitter<number>();
+  @Output() stepToUpdate = new EventEmitter<RecipeExecution>();
 
   stepsWithinRecipe!: StepWithinRecipeExecution[];
 
@@ -45,6 +47,10 @@ export class RecipeExecutionListComponent implements OnInit {
     this.loggerService.displaySuccess("Selected");
   }
 
+  updateStep(step: RecipeExecution){
+    this.stepToUpdate.emit(step);
+  }
+
   delete(step: StepWithinRecipeExecution){
     this.stepWithinRecipeExecutionService.deleteStepWithinRecipeExecution(step.id!).subscribe( (rowAffected) => {
       this.loggerService.displaySuccess("Step deleted!");
@@ -52,6 +58,9 @@ export class RecipeExecutionListComponent implements OnInit {
     }, (error) => {
       this.loggerService.displayError("You cannot delete this step!")
     });
+    //prévenir du changement
+    this.isChangeEvent.emit(1);
+
   }
 
 

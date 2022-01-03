@@ -11,6 +11,7 @@ import {StepWithinRecipeExecution} from "../../../models/step-within-recipe-exec
 import {StepWithinRecipeExecutionService} from "../../../services/step-within-recipe-execution/step-within-recipe-execution.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RecipeService} from "../../../services/recipe/recipe.service";
+import {Recipe} from "../../../models/recipe/recipe";
 
 @Component({
     selector: 'app-add-step-within-recipe-execution',
@@ -21,9 +22,11 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
     @Input() recipeExecutionId!: number;
     recipeExecutionFormGroup!: FormGroup;
     ingredientWithQuantityFormGroup!: FormGroup;
-    ingredientsSelected!: IngredientWithinStep[];
+    ingredientsSelected: IngredientWithinStep[] = [];
     ingredients!: Observable<Ingredient[]>
     newIngredient!: IngredientWithinStep;
+    @Input() step?: RecipeExecution;
+
 
     constructor(
         private router: Router,
@@ -36,8 +39,9 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) {
     }
 
-    ngOnInit(): void {
+    async ngOnInit() {
         this.ingredients = this.ingredientService.getAllIngredients()
+
         this.recipeExecutionFormGroup = this.fb.group({
             stepTitle: [null, [Validators.required]],
             stepDescription: [null, [Validators.required]],
@@ -47,19 +51,47 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
             ingredient: [null, [Validators.required]],
             quantity: [null, [Validators.required]]
         })
+
+        await this.initStepForm();
+    }
+
+    async initStepForm(){
+
+        if(this.step !== undefined){
+                this.recipeExecutionFormGroup = this.fb.group({
+                    stepTitle: [this.step.stepTitle, [Validators.required]],
+                    stepDescription: [this.step.stepDescription, [Validators.required]],
+                    duration: [this.step.duration, [Validators.required]]
+                })
+
+                await this.ingredientWithinStepService.getIngredientsInStep(this.step!.id!).subscribe( (ingredients) => {
+                    console.log(ingredients);
+                    for(let ingredient of ingredients){
+                        this.ingredientsSelected.push(ingredient);
+                    }
+                });
+
+        }
     }
 
     addIngredient() {
-        this.newIngredient = new IngredientWithinStep(
+        let newIngredient = new IngredientWithinStep(
             Number(this.ingredientWithQuantityFormGroup.get("ingredient")?.value),
             this.ingredientWithQuantityFormGroup.get("quantity")?.value,
             this.recipeExecutionId!
         );
+        this.ingredientService.getOne(newIngredient.ingredientId).subscribe((ingredient) => {
+            newIngredient.ingredientDetails = ingredient
+            this.ingredientsSelected.push(newIngredient);
+        });
         this.ngOnInit()
     }
 
-    changeIngredientsSelected($event: IngredientWithinStep[]) {
-        this.ingredientsSelected = $event;
+    deleteIngredient(ingredient: IngredientWithinStep){
+        let index: number = this.ingredientsSelected.indexOf(ingredient);
+        if(index != -1) {
+            this.ingredientsSelected.splice(index,1);
+        }
     }
 
     async createStep() {
