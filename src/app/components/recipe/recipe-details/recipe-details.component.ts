@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
 import {RecipeService} from "../../../services/recipe/recipe.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {IngredientWithinStep} from "../../../models/ingredient-within-step/ingredient-within-step";
 import {RecipeExecution} from "../../../models/recipe-execution/recipe-execution";
 
@@ -19,7 +19,8 @@ export class RecipeDetailsComponent implements OnInit {
   stepToUpdate: RecipeExecution | undefined;
 
   constructor(private route: ActivatedRoute,
-      private recipeService: RecipeService) {
+      private recipeService: RecipeService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -42,6 +43,12 @@ export class RecipeDetailsComponent implements OnInit {
 
   stepToUpdateDetected($event: RecipeExecution){
     this.stepToUpdate = $event;
+    console.log("jj")
+    this.router.navigate(["recipe/details/" + this.recipe!.id!], { fragment: 'editstep'}).then( (data) => {
+      console.log("recipe/details/" + this.recipe!.id! + "#editstep");
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   addAStepAction(){

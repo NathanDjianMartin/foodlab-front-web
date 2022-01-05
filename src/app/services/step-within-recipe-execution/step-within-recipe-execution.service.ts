@@ -55,6 +55,15 @@ export class StepWithinRecipeExecutionService {
         );
     }
 
+    updateStepWithinRecipeExecution(stepWithinRecipeExecution: StepWithinRecipeExecution): Observable<StepWithinRecipeExecution> {
+        return this.httpService.patch<StepWithinRecipeExecution>(`http://localhost:3000/step-within-recipe-execution/${stepWithinRecipeExecution.id}`,
+            {
+                "number": stepWithinRecipeExecution.number
+            }).pipe(
+            map( json => this.jsonToStepWithinRecipeExecution(json))
+        );
+    }
+
     deleteStepWithinRecipeExecution(id: number) {
         return this.httpService.delete<number>(`http://localhost:3000/step-within-recipe-execution/${id}`);
     }

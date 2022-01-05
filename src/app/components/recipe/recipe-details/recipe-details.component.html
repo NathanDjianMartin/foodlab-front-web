@@ -37,6 +37,8 @@
     <app-add-step-within-recipe-execution
             [recipeExecutionId]="recipe.recipeExecutionId!" (isChangeEvent)="changeDetected($event)"></app-add-step-within-recipe-execution>
     </div>
+    <div id="editstep" class="divider">
+    </div>
     <div *ngIf="this.stepToUpdate">
         <app-add-step-within-recipe-execution
                 [recipeExecutionId]="recipe.recipeExecutionId!" [step]="this.stepToUpdate" (isChangeEvent)="changeDetected($event)"></app-add-step-within-recipe-execution>
@@ -48,5 +50,6 @@
     </div>
     <div class="divider"></div>
 </div>
+<app-update-order-steps [recipeExecutionId]="recipe.recipeExecutionId!" ></app-update-order-steps>
 
 <app-display-cost [recipeId]="recipe.id" [isChange]="this.isChange"></app-display-cost>

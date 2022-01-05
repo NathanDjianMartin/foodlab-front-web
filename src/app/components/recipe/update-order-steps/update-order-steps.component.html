@@ -1,0 +1,26 @@
+<div class="row container tab-center">
+    <h4>Update order of the steps</h4>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Order</th>
+            <th>Steps</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngIf="steps.length<1">
+            <td>No steps registered for this category</td>
+        </tr>
+        <tr *ngFor="let step of steps">
+            <td class="col s2">
+                <div class="input-field  ">
+                    <input id="number+{{step.step!.id}}" type="number" min="1" class="validate" [ngModel]="step.number" (ngModelChange)="numberChange(step,$event)" >
+                </div>
+            </td>
+            <td>{{step.step!.stepTitle}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn-small waves-effect waves-light modal-trigger action"  (click)="validate()">Validate</button>
+</div>
