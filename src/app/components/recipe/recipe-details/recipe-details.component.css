@@ -13,3 +13,12 @@ h2{
 .col{
     padding: 7px;
 }
+
+@media print {
+    .print-exclude {
+        display: none;
+    }
+    button {
+        display: none;
+    }
+}

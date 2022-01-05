@@ -43,24 +43,26 @@
         </tbody>
     </table>
 
-    <h5>Update cost for this recipe</h5>
-    <div class="col s12">
-        <div class="row">
-            <div class="input-field col s6">
-                <input id="averageHourlyCost" type="number" step="0.01" min="0" class="validate" [(ngModel)]="averageHourlyCost" (ngModelChange)="calculateCosts()">
-                <label for="averageHourlyCost" class="active">Average hourly cost</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="flatrateHourlyCost" type="number" step="0.01" min="0" class="validate" [(ngModel)]="flatrateHourlyCost" (ngModelChange)="calculateCosts()">
-                <label for="flatrateHourlyCost" class="active">Flatrate Hourly Cost</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="coefWithCharges" type="number" step="0.01" min="0" class="validate" [(ngModel)]="coefWithCharges" (ngModelChange)="calculateCosts()">
-                <label for="coefWithCharges" class="active">Coefficient With Charges</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="coefWithoutCharges" type="number" step="0.01" min="0" class="validate" [(ngModel)]="coefWithoutCharges" (ngModelChange)="calculateCosts()">
-                <label for="coefWithoutCharges" class="active">Coefficient Without Charges</label>
+    <div class="print-exclude">
+        <h5>Update cost for this recipe</h5>
+        <div class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="averageHourlyCost" type="number" step="0.01" min="0" class="validate" [(ngModel)]="averageHourlyCost" (ngModelChange)="calculateCosts()">
+                    <label for="averageHourlyCost" class="active">Average hourly cost</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="flatrateHourlyCost" type="number" step="0.01" min="0" class="validate" [(ngModel)]="flatrateHourlyCost" (ngModelChange)="calculateCosts()">
+                    <label for="flatrateHourlyCost" class="active">Flatrate Hourly Cost</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="coefWithCharges" type="number" step="0.01" min="0" class="validate" [(ngModel)]="coefWithCharges" (ngModelChange)="calculateCosts()">
+                    <label for="coefWithCharges" class="active">Coefficient With Charges</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="coefWithoutCharges" type="number" step="0.01" min="0" class="validate" [(ngModel)]="coefWithoutCharges" (ngModelChange)="calculateCosts()">
+                    <label for="coefWithoutCharges" class="active">Coefficient Without Charges</label>
+                </div>
             </div>
         </div>
     </div>

@@ -18,8 +18,9 @@ export class RecipeDetailsComponent implements OnInit {
   isChange: number = 0;
   stepToUpdate: RecipeExecution | undefined;
 
+
   constructor(private route: ActivatedRoute,
-      private recipeService: RecipeService,
+              private recipeService: RecipeService,
               private router: Router) {
   }
 
@@ -59,5 +60,20 @@ export class RecipeDetailsComponent implements OnInit {
   addAProgressionAction(){
     this.addAStep = false;
     this.addAProgression = true;
+  }
+
+  printAction() {
+    window.print();
+  }
+
+  printWithoutCostsAction() {
+    let displayCostElement = document.getElementById('display-cost');
+    if (displayCostElement != null) {
+      displayCostElement.classList.add('print-exclude');
+    }
+    window.print();
+    if (displayCostElement != null) {
+      displayCostElement.classList.remove('print-exclude');
+    }
   }
 }

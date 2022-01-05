@@ -29,8 +29,10 @@
 <!-- ////////////////////// Recipe management ////////////////////// -->
 
 <div class="row container center-align">
-    <button class="btn-small waves-effect waves-light" (click)="addAStepAction()">Add a step</button>
-    <button class="btn-small waves-effect waves-light" (click)="addAProgressionAction()">Add a progression</button>
+    <button class="btn-small waves-effect waves-light print-exclude" (click)="addAStepAction()">Add a step</button>
+    <button class="btn-small waves-effect waves-light print-exclude" (click)="addAProgressionAction()">Add a progression</button>
+    <button class="btn-small waves-effect waves-light print-exclude" (click)="printAction()">Print</button>
+    <button class="btn-small waves-effect waves-light print-exclude" (click)="printWithoutCostsAction()">Print without costs</button>
 </div>
 <div class="container">
     <div *ngIf="addAStep">
@@ -50,6 +52,6 @@
     </div>
     <div class="divider"></div>
 </div>
-<app-update-order-steps [recipeExecutionId]="recipe.recipeExecutionId!" ></app-update-order-steps>
+<app-update-order-steps class="print-exclude" [recipeExecutionId]="recipe.recipeExecutionId!" ></app-update-order-steps>
 
-<app-display-cost [recipeId]="recipe.id" [isChange]="this.isChange"></app-display-cost>
+<app-display-cost id="display-cost" [recipeId]="recipe.id" [isChange]="this.isChange"></app-display-cost>

@@ -11,3 +11,12 @@
 .delete{
     background-color: #903739 !important;
 }
+
+@media print {
+    .print-exclude {
+        display: none;
+    }
+    button {
+        display: none;
+    }
+}

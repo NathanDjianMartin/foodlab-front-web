@@ -12,3 +12,9 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+@media print {
+    .print-exclude {
+        display: none;
+    }
+}
