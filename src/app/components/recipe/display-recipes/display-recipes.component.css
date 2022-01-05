@@ -2,3 +2,9 @@
     margin-top: 50px;
     margin-bottom: 30px;
 }
+
+.bar {
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 10px;
+}

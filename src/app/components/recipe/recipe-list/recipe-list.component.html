@@ -1,0 +1,34 @@
+
+<div *ngIf="recipeList.length > 0">
+    <h4>{{title}}</h4>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Number of guests</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngIf="recipeList.length < 1">
+            <td>No recipes</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr *ngFor="let recipe of recipeList">
+            <td (click)="selectRecipe(recipe)">{{recipe.name}}</td>
+            <td (click)="selectRecipe(recipe)">{{recipe.author}}</td>
+            <td (click)="selectRecipe(recipe)">{{recipe.guestsNumber}}</td>
+            <td>
+                <!--                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>-->
+                <button class="btn-small waves-effect waves-light action">Update</button>
+            </td>
+            <td>
+                <button class="btn-small waves-effect waves-light modal-trigger action"  (click)="deleteRecipe(recipe)">Delete</button>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
