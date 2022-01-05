@@ -4,10 +4,10 @@
         <app-recipe-header [recipe]="this.recipe"></app-recipe-header>
         <div class="row">
             <div class="col s12">
-                <div class="card-panel teal steps">
+                <div class="card-panel teal steps z-depth-0">
                     <app-recipe-execution-list
                             [recipeExecutionId]="recipe.recipeExecutionId" [isRecipeExecutionGeneral]="true"
-                    (isChangeEvent)="changeDetected($event)" (stepToUpdate)="stepToUpdateDetected($event)"></app-recipe-execution-list>
+                    (isChangeEvent)="changeDetected($event)" (stepToUpdate)="stepToUpdateDetected($event)"  [isChange]="this.isChange"></app-recipe-execution-list>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
 
 </div>
 
-<!-- ////////////////////// Categories management ////////////////////// -->
+<!-- ////////////////////// Recipe management ////////////////////// -->
 
 <div class="row container center-align">
     <button class="btn-small waves-effect waves-light" (click)="addAStepAction()">Add a step</button>
@@ -35,16 +35,18 @@
 <div class="container">
     <div *ngIf="addAStep">
     <app-add-step-within-recipe-execution
-            [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-step-within-recipe-execution>
+            [recipeExecutionId]="recipe.recipeExecutionId!" (isChangeEvent)="changeDetected($event)"></app-add-step-within-recipe-execution>
     </div>
     <div *ngIf="this.stepToUpdate">
         <app-add-step-within-recipe-execution
-                [recipeExecutionId]="recipe.recipeExecutionId!" [step]="this.stepToUpdate"></app-add-step-within-recipe-execution>
+                [recipeExecutionId]="recipe.recipeExecutionId!" [step]="this.stepToUpdate" (isChangeEvent)="changeDetected($event)"></app-add-step-within-recipe-execution>
     </div>
     <div *ngIf="addAProgression">
         <app-add-progression-within-recipe-execution
-                [recipeExecutionId]="recipe.recipeExecutionId!"></app-add-progression-within-recipe-execution>
+                [recipeExecutionId]="recipe.recipeExecutionId!" (isChangeEvent)="changeDetected($event)"></app-add-progression-within-recipe-execution>
 
     </div>
+    <div class="divider"></div>
 </div>
+
 <app-display-cost [recipeId]="recipe.id" [isChange]="this.isChange"></app-display-cost>

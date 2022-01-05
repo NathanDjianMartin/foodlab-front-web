@@ -1,6 +1,8 @@
+
 <div class="row container tab-center">
-    <h4>Cost</h4>
-    <table class="highlight">
+    <h4 class="center-align">Cost</h4>
+    <h5>Cost calculated with charges</h5>
+    <table>
         <thead>
         <tr>
             <th>Material cost</th>
@@ -21,4 +23,47 @@
         </tr>
         </tbody>
     </table>
+
+    <h5>Cost calculated without charges</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Material cost</th>
+            <th>Sales prices</th>
+            <th>Profits</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>{{this.materialCost}}</td>
+            <td>{{this.salesPricesWithoutCharges}}</td>
+            <td>{{this.portionProfit}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h5>Update cost for this recipe</h5>
+    <div class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="averageHourlyCost" type="number" step="0.01" min="0" class="validate" [(ngModel)]="averageHourlyCost" (ngModelChange)="calculateCosts()">
+                <label for="averageHourlyCost" class="active">Average hourly cost</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="flatrateHourlyCost" type="number" step="0.01" min="0" class="validate" [(ngModel)]="flatrateHourlyCost" (ngModelChange)="calculateCosts()">
+                <label for="flatrateHourlyCost" class="active">Flatrate Hourly Cost</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="coefWithCharges" type="number" step="0.01" min="0" class="validate" [(ngModel)]="coefWithCharges" (ngModelChange)="calculateCosts()">
+                <label for="coefWithCharges" class="active">Coefficient With Charges</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="coefWithoutCharges" type="number" step="0.01" min="0" class="validate" [(ngModel)]="coefWithoutCharges" (ngModelChange)="calculateCosts()">
+                <label for="coefWithoutCharges" class="active">Coefficient Without Charges</label>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-small waves-effect waves-light right-align">Saved as default cost</button>
 </div>

@@ -2,9 +2,14 @@ h2{
     color: #4f5e62;
 }
 .steps{
-    background-color: #c2c9c9 !important;
+    background-color: rgba(79, 94, 98, 0.15) !important;
 }
 .ingredients{
     background-color: #e9dccf !important;
 }
-
+.card-panel{
+    margin: 1px !important;
+}
+.col{
+    padding: 7px;
+}

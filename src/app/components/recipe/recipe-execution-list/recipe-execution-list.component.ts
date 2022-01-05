@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
 import {IngredientWithinStep} from "../../../models/ingredient-within-step/ingredient-within-step";
 import {RecipeService} from "../../../services/recipe/recipe.service";
@@ -14,9 +14,10 @@ import {LoggerService} from "../../../services/logger/logger.service";
   templateUrl: './recipe-execution-list.component.html',
   styleUrls: ['./recipe-execution-list.component.css']
 })
-export class RecipeExecutionListComponent implements OnInit {
+export class RecipeExecutionListComponent implements OnInit, OnChanges {
   @Input() recipeExecutionId?: number;
   @Input() isRecipeExecutionGeneral!: boolean;
+  @Input() isChange: number = 0;
   @Output() isChangeEvent = new EventEmitter<number>();
   @Output() stepToUpdate = new EventEmitter<RecipeExecution>();
 
@@ -28,19 +29,23 @@ export class RecipeExecutionListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-     if(this.recipeExecutionId != null) {
-       this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipeExecutionId).subscribe( (steps) => {
+     this.init();
+  }
 
-         this.stepsWithinRecipe = steps.sort(function compare(a,b) {
+  init() {
+    if(this.recipeExecutionId != null) {
+      this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipeExecutionId).subscribe( (steps) => {
 
-           if(a.number < b.number)
-             return -1;
-           if(a.number > b.number)
-             return 1;
-           return 0;
-         });
-       });
-     }
+        this.stepsWithinRecipe = steps.sort(function compare(a,b) {
+
+          if(a.number < b.number)
+            return -1;
+          if(a.number > b.number)
+            return 1;
+          return 0;
+        });
+      });
+    }
   }
 
   select(){
@@ -61,6 +66,11 @@ export class RecipeExecutionListComponent implements OnInit {
     //prévenir du changement
     this.isChangeEvent.emit(1);
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.init();
+    this.init();
   }
 
 

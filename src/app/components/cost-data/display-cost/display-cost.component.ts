@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CostDataService} from "../../../services/cost-data/cost-data.service";
 import {RecipeService} from "../../../services/recipe/recipe.service";
-import {CostData} from "../../../models/cost-data/cost-data";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-display-cost',
@@ -19,43 +19,63 @@ export class DisplayCostComponent implements OnInit, OnChanges {
   salesPricesWithoutCharges!: number;
   productionCost!: number;
   portionProfit!: number;
-  breakEvenPoint!: number;
+  breakEvenPoint!: number;//TODO
+
+  averageHourlyCost!: number
+  flatrateHourlyCost!: number
+  coefWithCharges!: number
+  coefWithoutCharges!: number
+
 
   constructor(private costDataService: CostDataService,
               private recipeService: RecipeService
               ) { }
 
   ngOnInit(): void {
+
     this.init();
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //on regarge les valeurs
+    //on recharge les valeurs
     this.init();
     this.init();
   }
 
   init(){
-  this.costDataService.getCostData(1).subscribe( (cost) => {
-    let costData: CostData = cost;
+    this.costDataService.getCostData(1).subscribe( (cost) => {
+      this.averageHourlyCost = cost.averageHourlyCost;
+      this.flatrateHourlyCost = cost.flatrateHourlyCost;
+      this.coefWithCharges = cost.coefWithCharges;
+      this.coefWithoutCharges = cost.coefWithoutCharges;
+    });
+
+    this.calculateCosts();
+  }
+
+  calculateCosts(){
     this.recipeService.getIngredientsCost(this.recipeId!).subscribe( (cost) => {
-      let ingredientsCost = cost;
-      this.materialCost = ingredientsCost + ingredientsCost*0.05; //TODO: def assaisonnement autrement
-      this.salesPricesWithoutCharges = this.materialCost * costData.coefWithoutCharges;
+        let ingredientsCost = cost;
+        this.materialCost = ingredientsCost + ingredientsCost*0.05; //TODO: def assaisonnement autrement
+        this.salesPricesWithoutCharges = this.round(this.materialCost * this.coefWithoutCharges);
 
-      this.recipeService.getDuration(this.recipeId!).subscribe( (duration) => {
-        this.staffCost = duration/60 * costData.averageHourlyCost;
-        this.fluidsCost = duration/60 * costData.flatrateHourlyCost;
-        this.chargesCost = this.staffCost + this.fluidsCost;
+        this.recipeService.getDuration(this.recipeId!).subscribe( (duration) => {
+          this.staffCost = duration/60 * this.averageHourlyCost;
+          this.fluidsCost = duration/60 * this.flatrateHourlyCost;
+          this.chargesCost = this.staffCost + this.fluidsCost;
 
-        this.productionCost = this.materialCost + this.chargesCost;
+          this.productionCost = this.materialCost + this.chargesCost;
 
-        this.salesPricesWithCharges = this.productionCost * costData.coefWithCharges;
+          this.salesPricesWithCharges = this.round(this.productionCost * this.coefWithCharges);
 
-        this.portionProfit = this.salesPricesWithCharges - this.productionCost;
-      });
-    })
-  });
+          this.portionProfit = this.round(this.salesPricesWithCharges - this.productionCost);
+        });
+      })
+  }
+
+  round(num : number) : number{
+    return Math.round(num * 100) / 100
   }
 
 }

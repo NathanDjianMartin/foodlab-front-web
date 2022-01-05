@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RecipeExecution} from "../../../models/recipe-execution/recipe-execution";
 import {Observable} from "rxjs";
 import {RecipeExecutionService} from "../../../services/recipe-execution/recipe-execution.service";
@@ -16,6 +16,7 @@ export class AddProgressionWithinRecipeExecutionComponent implements OnInit {
   @Input() recipeExecutionId!: number;
   progressions!: Observable<RecipeExecution[]>
   progression!: RecipeExecution
+  @Output() isChangeEvent = new EventEmitter<number>();
 
   constructor(private recipeExecutionService: RecipeExecutionService,
               private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService,
@@ -42,6 +43,7 @@ export class AddProgressionWithinRecipeExecutionComponent implements OnInit {
         }
 
     );
+    this.isChangeEvent.emit(1);
   }
 
 }

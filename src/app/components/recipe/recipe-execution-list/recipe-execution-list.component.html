@@ -3,9 +3,9 @@
 </p>
 <div (click)="select()" *ngFor="let step of this.stepsWithinRecipe">
 
-    <div class="card blue-grey darken-1">
+    <div class="card blue-grey darken-1 z-depth-0">
 
-        <div class="card-content white-text">
+        <div class="card-content">
             <div *ngIf="step.step!.isStep == true">
                 <span class="card-title">{{step.number}}- {{step.step!.stepTitle}}</span>
                 {{step.step!.stepDescription!}}

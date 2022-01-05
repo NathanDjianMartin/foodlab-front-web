@@ -16,7 +16,7 @@ export class RecipeDetailsComponent implements OnInit {
   addAStep: boolean = false;
   addAProgression: boolean = false;
   isChange: number = 0;
-  stepToUpdate!: RecipeExecution;
+  stepToUpdate: RecipeExecution | undefined;
 
   constructor(private route: ActivatedRoute,
       private recipeService: RecipeService) {
@@ -35,6 +35,9 @@ export class RecipeDetailsComponent implements OnInit {
   changeDetected($event: number) {
     console.log("change detected ok in parent")
     this.isChange = this.isChange + $event;
+    this.addAProgression = false;
+    this.addAStep = false;
+    this.stepToUpdate = undefined;
   }
 
   stepToUpdateDetected($event: RecipeExecution){

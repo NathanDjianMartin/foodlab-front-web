@@ -26,6 +26,7 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
     ingredients!: Observable<Ingredient[]>
     newIngredient!: IngredientWithinStep;
     @Input() step?: RecipeExecution;
+    @Output() isChangeEvent = new EventEmitter<number>();
 
 
     constructor(
@@ -129,7 +130,7 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         //création de l'étape
         let steps = this.getStepFromForm();
         //Ajout de l'étape dans la recette
-        this.recipeExecutionService.createRecipeExecution(steps).subscribe(step => {
+        await this.recipeExecutionService.createRecipeExecution(steps).subscribe(step => {
             let stepInRecipeExecution = new StepWithinRecipeExecution(step.id!, this.recipeExecutionId, 1);
             this.stepWithinRecipeExecutionService.createStepWithinRecipeExecution(stepInRecipeExecution).subscribe();
 
@@ -138,13 +139,13 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
             }
         });
         //TODO: vérifier que tout est ok
-        this.router.navigate([this.router.url]);
+        this.isChangeEvent.emit(1);
     }
 
-    addAllIngredientsInAStep(stepId: number, ingredients: IngredientWithinStep[]){
+    async addAllIngredientsInAStep(stepId: number, ingredients: IngredientWithinStep[]){
         for (var ingredientInStep of ingredients) {
             let ing = new IngredientWithinStep(ingredientInStep.ingredientId, ingredientInStep.quantity, stepId);
-            this.ingredientWithinStepService.createIngredientWithinStep(ing).subscribe();
+            await this.ingredientWithinStepService.createIngredientWithinStep(ing).subscribe();
         }
     }
 
@@ -158,5 +159,6 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         if (this.ingredientsSelected != undefined) {
             this.addAllIngredientsInAStep(step.id!, this.ingredientsSelected);
         }
+        this.isChangeEvent.emit(1);
     }
 }
