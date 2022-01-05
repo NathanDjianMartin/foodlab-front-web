@@ -1,6 +1,8 @@
 import {RecipeExecution} from "../recipe-execution/recipe-execution";
+import {Ingredient} from "../ingredient/ingredient";
 
 export class Recipe {
+
     //attributes in database:
     public id?: number;
     public name: string;
@@ -12,6 +14,7 @@ export class Recipe {
     //stored attributes for the front
     public recipeCategoryName?: string;
     public steps?: RecipeExecution[];
+    public ingredient?: Ingredient[];
 
     //TODO: ajouter attribut recipeExecution et costData
 

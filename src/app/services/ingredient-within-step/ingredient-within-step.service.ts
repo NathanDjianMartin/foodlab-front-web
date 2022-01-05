@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {IngredientWithinStep} from "../../models/ingredient-within-step/ingredient-within-step";
 import {IngredientService} from "../ingredient/ingredient.service";
 import {StepWithinRecipeExecutionService} from "../step-within-recipe-execution/step-within-recipe-execution.service";
+import {Ingredient} from "../../models/ingredient/ingredient";
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class IngredientWithinStepService {
             data.map(json => this.jsonToIngredientWithinStep(json))));
   }
 
-  getAllIngredientsInRecipe(id: number): IngredientWithinStep[] {
+  getAllIngredientsWithinAStepInRecipe(id: number): IngredientWithinStep[] {
     //Objectif: retourner tout les ingrédients contenu dans les etapes d'une recette qui ne sont pas des progressions.
     let ingredientsRes: IngredientWithinStep[] = [];
     this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(id).subscribe( (steps) => {
@@ -45,7 +46,10 @@ export class IngredientWithinStepService {
       }
     })
     return ingredientsRes;
+  }
 
+  getAllIngredientsInRecipe(id: number): Observable<Ingredient[]> {
+    return this.httpService.get<Ingredient[]>(`http://localhost:3000/ingredient-within-step/ingredients-in-recipe/${id}`);
   }
 
   createIngredientWithinStep(ingredientWithinStep: IngredientWithinStep): Observable<IngredientWithinStep>{

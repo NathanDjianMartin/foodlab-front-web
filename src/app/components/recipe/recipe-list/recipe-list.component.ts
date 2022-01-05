@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
+import {RecipeService} from "../../../services/recipe/recipe.service";
+import {LoggerService} from "../../../services/logger/logger.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-recipe-list',
@@ -11,16 +14,28 @@ export class RecipeListComponent implements OnInit {
   @Input() title: string = 'Recipe list';
   @Input() recipeList: Recipe[] = [];
 
-  constructor() { }
+  constructor(
+      private recipeService: RecipeService,
+      private loggerService: LoggerService,
+      private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
-  selectRecipe(recipe: Recipe): void {
-
+  deleteRecipe(recipe: Recipe){
+    this.recipeService.deleteRecipe(recipe.id!).subscribe(
+        (data) => {
+          this.ngOnInit()
+        },
+        (error) => {
+          //ne s'affiche pas puisque c'est recipe execution qui est present
+          this.loggerService.displayError("This recipe is present in other recipes as a sub-recipe, you cannot delete it");
+        });
+    this.router.navigate(["/recipes",])
   }
 
-  deleteRecipe(recipe: Recipe): void {
-
+  selectRecipe(selectedRecipe: Recipe){
+    this.router.navigate(["/recipe/details",selectedRecipe.id])
   }
 }

@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {TabIngredientsComponent} from './components/ingredient/tab-ingredients/tab-ingredients.component';
 import {HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { IngredientFormComponent } from './components/ingredient/ingredient-form/ingredient-form.component';
 import { NavbarComponent } from './components/general/navbar/navbar.component';
 import { AddIngredientCategoryComponent } from './components/ingredient-category/add-ingredient-category/add-ingredient-category.component';
@@ -76,7 +76,8 @@ import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

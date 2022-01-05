@@ -1,12 +1,31 @@
-<h2 class="center-align">Recipes list</h2>
+<div class="container">
 
-<app-searchbar [title]="'Search a recipe'" (searchEvent)="onSearch($event)"></app-searchbar>
+    <h2 class="center-align">Recipes list</h2>
 
-<div *ngFor="let entry of filteredRecipesByCategory.entries()">
-    <app-recipe-list [title]="entry[0].name" [recipeList]="entry[1]"></app-recipe-list>
-    <!-- <app-tab-recipes-by-category [category]="category"></app-tab-recipes-by-category> -->
+    <div class="row bar">
+        <div class="col s5">
+            <app-searchbar [title]="'Search a recipe'" (searchEvent)="onSearch($event)"></app-searchbar>
+        </div>
+        <div class="input-field col s3">
+            <select [(ngModel)]="filterSelect">
+                <option value="" disabled selected>Choose your filter</option>
+                <option value="1">Name</option>
+                <option value="2">Ingredient</option>
+                <option value="3">Author</option>
+            </select>
+            <label>Filter by</label>
+        </div>
+    </div>
+
+
+    <div *ngFor="let entry of filteredRecipesByCategory.entries()">
+        <app-recipe-list [title]="entry[0].name" [recipeList]="entry[1]"></app-recipe-list>
+        <!-- <app-tab-recipes-by-category [category]="category"></app-tab-recipes-by-category> -->
+    </div>
+
+    <div class="row right-align">
+        <button class="btn waves-effect waves-light" [routerLink]="['/recipes/add']">Add a recipe</button>
+    </div>
 </div>
 
-<div class="row container right-align">
-    <button class="btn waves-effect waves-light" [routerLink]="['/recipes/add']">Add a recipe</button>
-</div>
+
