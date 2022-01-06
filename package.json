@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
     "@mdi/font": "^6.5.95",
+    "@types/bcryptjs": "^2.4.2",
     "@types/materialize-css": "^1.0.11",
     "bcryptjs": "^2.4.3",
     "materialize-css": "^1.0.0-rc.2",
@@ -34,7 +35,6 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.10.0",
