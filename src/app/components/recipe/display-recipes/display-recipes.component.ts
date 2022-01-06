@@ -32,7 +32,7 @@ export class DisplayRecipesComponent implements OnInit {
     // loads the select element
     document.addEventListener('DOMContentLoaded', function() {
       let elems = document.querySelectorAll('select');
-      let instances = M.FormSelect.init(elems);
+      M.FormSelect.init(elems);
     });
 
     this.categories = this.recipeCategoryService.getAllRecipeCategories();
