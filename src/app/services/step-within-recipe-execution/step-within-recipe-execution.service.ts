@@ -64,6 +64,23 @@ export class StepWithinRecipeExecutionService {
         );
     }
 
+    //Update all steps within recipe execution
+    updateAllStepsWithinRecipeExecution(stepsWithinRecipeExecution: StepWithinRecipeExecution[]): Observable<StepWithinRecipeExecution[]> {
+        let dto = [];
+        for(let stepWithinRecipeExecution of stepsWithinRecipeExecution){
+            dto.push({
+                "id": stepWithinRecipeExecution.id,
+                "number": stepWithinRecipeExecution.number
+            })
+        }
+        let res = this.httpService.patch<StepWithinRecipeExecution[]>(
+            `http://localhost:3000/step-within-recipe-execution/update-all`, dto).pipe(
+                map(data =>
+                    data.map(json => this.jsonToStepWithinRecipeExecution(json)))
+        );
+        return res;
+    }
+
     deleteStepWithinRecipeExecution(id: number) {
         return this.httpService.delete<number>(`http://localhost:3000/step-within-recipe-execution/${id}`);
     }

@@ -26,13 +26,12 @@ export class UpdateOrderStepsComponent implements OnInit {
   }
 
   validate(){
-    for(let step of this.steps){
-      console.log(step);
-      this.stepWithinRecipeExecutionService.updateStepWithinRecipeExecution(step).subscribe( (step) => {
-        console.log("ok");
-      })
+    this.stepWithinRecipeExecutionService.updateAllStepsWithinRecipeExecution(this.steps).subscribe( (steps) => {
+      this.loggerService.displaySuccess("changement ordre ok")
+    }, (error) => {
+      this.loggerService.displayError(error.error.error);
     }
-    this.loggerService.displaySuccess("changement ordre ok");
+  );
   }
 
 }
