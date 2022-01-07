@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Ingredient} from "../../models/ingredient/ingredient";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -25,33 +26,33 @@ export class IngredientService {
   }
 
   getAllIngredients(): Observable<Ingredient[]> {
-    return this.httpService.get<Ingredient[]>("http://localhost:3000/ingredient").pipe(
+    return this.httpService.get<Ingredient[]>(`${environment.apiUrl}/ingredient`).pipe(
         map(data =>
             data.map( json => this.jsonToIngredient(json))));
   }
 
   getOne(id: number): Observable<Ingredient> {
-    return this.httpService.get<Ingredient>(`http://localhost:3000/ingredient/${id}`).pipe(
+    return this.httpService.get<Ingredient>(`${environment.apiUrl}/ingredient/${id}`).pipe(
         map( json => this.jsonToIngredient(json))
     )
   }
 
   getManyByCategory(idCategory: number): Observable<Ingredient[]>{
-    return this.httpService.get<Ingredient[]>(`http://localhost:3000/ingredient/category/${idCategory}`).pipe(
+    return this.httpService.get<Ingredient[]>(`${environment.apiUrl}/ingredient/category/${idCategory}`).pipe(
         map(data =>
             data.map( json => this.jsonToIngredient(json))));
   }
 
   createIngredient(ingredient: Ingredient): Observable<Ingredient>{
-    return this.httpService.post<Ingredient>("http://localhost:3000/ingredient", ingredient);
+    return this.httpService.post<Ingredient>(`${environment.apiUrl}/ingredient`, ingredient);
   }
 
   deleteIngredient(id: number){
-    return this.httpService.delete<number>(`http://localhost:3000/ingredient/${id}`);
+    return this.httpService.delete<number>(`${environment.apiUrl}/ingredient/${id}`);
   }
 
   updateIngredient(ingredient: Ingredient){
-    return this.httpService.patch(`http://localhost:3000/ingredient/${ingredient.id}`, {
+    return this.httpService.patch(`${environment.apiUrl}/ingredient/${ingredient.id}`, {
       "name": ingredient.name,
       "unitaryPrice": ingredient.unitaryPrice,
       "unit": ingredient.unit,
@@ -62,7 +63,7 @@ export class IngredientService {
   }
 
   updateStockQuantityIngredient(ingredient: Ingredient) {
-    return this.httpService.patch(`http://localhost:3000/ingredient/${ingredient.id}`, {
+    return this.httpService.patch(`${environment.apiUrl}/ingredient/${ingredient.id}`, {
       "stockQuantity": ingredient.stockQuantity,
     })
   }

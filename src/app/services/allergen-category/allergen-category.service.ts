@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AllergenCategory} from "../../models/allergen-category/allergen-category";
 import {map} from "rxjs/operators";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +20,16 @@ export class AllergenCategoryService {
   }
 
   getAllAllergenCategories(): Observable<AllergenCategory[]> {
-    return this.httpService.get<AllergenCategory[]>("http://localhost:3000/allergen-category").pipe(
+    return this.httpService.get<AllergenCategory[]>(`${environment.apiUrl}/allergen-category`).pipe(
         map(data =>
             data.map( json => this.jsonToAllergenCategory(json))));
   };
 
   createAllergenCategory(allergenCategory: AllergenCategory): Observable<AllergenCategory> {
-    return this.httpService.post<AllergenCategory>("http://localhost:3000/allergen-category", allergenCategory);
+    return this.httpService.post<AllergenCategory>(`${environment.apiUrl}/allergen-category`, allergenCategory);
   }
 
   deleteAllergenCategory(id: number) {
-    return this.httpService.delete<number>(`http://localhost:3000/allergen-category/${id}`);
+    return this.httpService.delete<number>(`${environment.apiUrl}/allergen-category/${id}`);
   }
 }

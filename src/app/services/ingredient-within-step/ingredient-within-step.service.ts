@@ -6,6 +6,7 @@ import {IngredientWithinStep} from "../../models/ingredient-within-step/ingredie
 import {IngredientService} from "../ingredient/ingredient.service";
 import {StepWithinRecipeExecutionService} from "../step-within-recipe-execution/step-within-recipe-execution.service";
 import {Ingredient} from "../../models/ingredient/ingredient";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class IngredientWithinStepService {
   }
 
   getIngredientsInStep(id: number): Observable<IngredientWithinStep[]> {
-    return this.httpService.get<IngredientWithinStep[]>(`http://localhost:3000/ingredient-within-step/ingredients/${id}`).pipe(
+    return this.httpService.get<IngredientWithinStep[]>(`${environment.apiUrl}/ingredient-within-step/ingredients/${id}`).pipe(
         map(data =>
             data.map(json => this.jsonToIngredientWithinStep(json))));
   }
@@ -49,7 +50,7 @@ export class IngredientWithinStepService {
   }
 
   getAllIngredientsInRecipe(id: number): Observable<Ingredient[]> {
-    return this.httpService.get<Ingredient[]>(`http://localhost:3000/ingredient-within-step/ingredients-in-recipe/${id}`);
+    return this.httpService.get<Ingredient[]>(`${environment.apiUrl}/ingredient-within-step/ingredients-in-recipe/${id}`);
   }
 
   createIngredientWithinStep(ingredientWithinStep: IngredientWithinStep): Observable<IngredientWithinStep> {
@@ -58,7 +59,7 @@ export class IngredientWithinStepService {
       "recipeExecutionId": ingredientWithinStep.recipeExecutionId,
       "quantity": ingredientWithinStep.quantity
     })
-    return this.httpService.post<IngredientWithinStep>("http://localhost:3000/ingredient-within-step", {
+    return this.httpService.post<IngredientWithinStep>(`${environment.apiUrl}/ingredient-within-step`, {
       "ingredientId": ingredientWithinStep.ingredientId,
       "recipeExecutionId": ingredientWithinStep.recipeExecutionId,
       "quantity": ingredientWithinStep.quantity
@@ -66,6 +67,6 @@ export class IngredientWithinStepService {
   }
 
   deleteAllIngredientsInAStep(stepId: number): Observable<number>{
-    return this.httpService.delete<number>(`http://localhost:3000/ingredient-within-step/delete-all-in-a-step/${stepId}`)
+    return this.httpService.delete<number>(`${environment.apiUrl}/ingredient-within-step/delete-all-in-a-step/${stepId}`)
   }
 }

@@ -3,8 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {StepWithinRecipeExecution} from "../../models/step-within-recipe-execution/step-within-recipe-execution";
-import {RecipeExecution} from "../../models/recipe-execution/recipe-execution";
 import {RecipeExecutionService} from "../recipe-execution/recipe-execution.service";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -28,13 +28,13 @@ export class StepWithinRecipeExecutionService {
     }
 
     getAllStepWithinRecipeExecution(id: number): Observable<StepWithinRecipeExecution[]> {
-        return this.httpService.get<StepWithinRecipeExecution[]>(`http://localhost:3000/step-within-recipe-execution/steps/${id}`).pipe(
+        return this.httpService.get<StepWithinRecipeExecution[]>(`${environment.apiUrl}/step-within-recipe-execution/steps/${id}`).pipe(
             map(data =>
                 data.map(json => this.jsonToStepWithinRecipeExecution(json))));
     }
 
     getAllProgressionWithinRecipeExecution(id: number): Observable<StepWithinRecipeExecution[]> {
-        return this.httpService.get<StepWithinRecipeExecution[]>(`http://localhost:3000/step-within-recipe-execution/progressions/${id}`).pipe(
+        return this.httpService.get<StepWithinRecipeExecution[]>(`${environment.apiUrl}/step-within-recipe-execution/progressions/${id}`).pipe(
             map(data =>
                 data.map(json => this.jsonToStepWithinRecipeExecution(json))));
     }
@@ -45,7 +45,7 @@ export class StepWithinRecipeExecutionService {
             "recipeExecutionId": stepWithinRecipeExecution.recipeExecutionId,
             "number": stepWithinRecipeExecution.number
         });
-        return this.httpService.post<StepWithinRecipeExecution>("http://localhost:3000/step-within-recipe-execution",
+        return this.httpService.post<StepWithinRecipeExecution>(`${environment.apiUrl}/step-within-recipe-execution`,
             {
             "stepId": stepWithinRecipeExecution.stepId,
             "recipeExecutionId": stepWithinRecipeExecution.recipeExecutionId,
@@ -56,7 +56,7 @@ export class StepWithinRecipeExecutionService {
     }
 
     updateStepWithinRecipeExecution(stepWithinRecipeExecution: StepWithinRecipeExecution): Observable<StepWithinRecipeExecution> {
-        return this.httpService.patch<StepWithinRecipeExecution>(`http://localhost:3000/step-within-recipe-execution/${stepWithinRecipeExecution.id}`,
+        return this.httpService.patch<StepWithinRecipeExecution>(`${environment.apiUrl}/step-within-recipe-execution/${stepWithinRecipeExecution.id}`,
             {
                 "number": stepWithinRecipeExecution.number
             }).pipe(
@@ -65,6 +65,6 @@ export class StepWithinRecipeExecutionService {
     }
 
     deleteStepWithinRecipeExecution(id: number) {
-        return this.httpService.delete<number>(`http://localhost:3000/step-within-recipe-execution/${id}`);
+        return this.httpService.delete<number>(`${environment.apiUrl}/step-within-recipe-execution/${id}`);
     }
 }

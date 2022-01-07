@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {Recipe} from "../../models/recipe/recipe";
 import {Observable} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -23,26 +24,26 @@ export class RecipeService {
   }
 
   getOneRecipe(id: number): Observable<Recipe>{
-    return this.httpService.get<Recipe>(`http://localhost:3000/recipe/${id}`).pipe(
+    return this.httpService.get<Recipe>(`${environment.apiUrl}/recipe/${id}`).pipe(
         map( json => this.jsonToRecipe(json))
     )
   }
 
   getAllRecipes(): Observable<Recipe[]> {
-    return this.httpService.get<Recipe[]>("http://localhost:3000/recipe").pipe(
+    return this.httpService.get<Recipe[]>(`${environment.apiUrl}/recipe`).pipe(
         map(data =>
             data.map( json => this.jsonToRecipe(json))));
   }
 
   getManyByCategory(idCategory: number): Observable<Recipe[]>{
-    return this.httpService.get<Recipe[]>(`http://localhost:3000/recipe/category/${idCategory}`).pipe(
+    return this.httpService.get<Recipe[]>(`${environment.apiUrl}/recipe/category/${idCategory}`).pipe(
         map(data =>
             data.map( json => this.jsonToRecipe(json))));
   }
 
   createRecipe(recipe: Recipe): Observable<Recipe>{
     console.log(recipe);
-    return this.httpService.post<Recipe>("http://localhost:3000/recipe", {
+    return this.httpService.post<Recipe>(`${environment.apiUrl}/recipe`, {
       name: recipe.name,
       author: recipe.author,
       guestsNumber: recipe.guestsNumber,
@@ -52,7 +53,7 @@ export class RecipeService {
 
   updateRecipe(recipe: Recipe): Observable<Recipe>{
     //TODO: vérifier id not null ou undifined
-    return this.httpService.patch<Recipe>(`http://localhost:3000/recipe/${recipe.id!}`, {
+    return this.httpService.patch<Recipe>(`${environment.apiUrl}/recipe/${recipe.id!}`, {
       name: recipe.name,
       author: recipe.author,
       guestsNumber: recipe.guestsNumber,
@@ -62,14 +63,14 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number){
-    return this.httpService.delete<number>(`http://localhost:3000/recipe/${id}`);
+    return this.httpService.delete<number>(`${environment.apiUrl}/recipe/${id}`);
   }
 
   getIngredientsCost(id: number): Observable<number> {
-    return this.httpService.get<number>(`http://localhost:3000/recipe/ingredient-cost/${id}`)
+    return this.httpService.get<number>(`${environment.apiUrl}/recipe/ingredient-cost/${id}`)
   }
 
   getDuration(id: number): Observable<number> {
-    return this.httpService.get<number>(`http://localhost:3000/recipe/duration/${id}`)
+    return this.httpService.get<number>(`${environment.apiUrl}/recipe/duration/${id}`)
   }
 }

@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {RecipeCategory} from "../../models/recipe-category/recipe-category";
 import {Observable} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +19,16 @@ export class RecipeCategoryService {
   }
 
   getAllRecipeCategories(): Observable<RecipeCategory[]> {
-    return this.httpService.get<RecipeCategory[]>("http://localhost:3000/recipe-category").pipe(
+    return this.httpService.get<RecipeCategory[]>(`${environment.apiUrl}/recipe-category`).pipe(
         map(data =>
             data.map( json => this.jsonToRecipeCategory(json))));
   };
 
   createRecipeCategory(recipeCategory: RecipeCategory): Observable<RecipeCategory> {
-    return this.httpService.post<RecipeCategory>("http://localhost:3000/recipe-category", recipeCategory);
+    return this.httpService.post<RecipeCategory>(`${environment.apiUrl}/recipe-category`, recipeCategory);
   }
 
   deleteRecipeCategory(id: number) {
-    return this.httpService.delete<number>(`http://localhost:3000/recipe-category/${id}`);
+    return this.httpService.delete<number>(`${environment.apiUrl}/recipe-category/${id}`);
   }
 }
