@@ -16,13 +16,16 @@ export class StepWithinRecipeExecutionService {
     }
 
     jsonToStepWithinRecipeExecution(json: any): StepWithinRecipeExecution {
-        let stepWithinRecipeExecution: StepWithinRecipeExecution = new StepWithinRecipeExecution(json.stepId, json.recipeExecutionId, json.number);
+        let stepWithinRecipeExecution: StepWithinRecipeExecution = new StepWithinRecipeExecution(json.stepId, json.recipeExecutionId);
         stepWithinRecipeExecution.id = json.id;
         if (json.step) {
             //je stock la recipeExecution
             stepWithinRecipeExecution.step = this.recipeExecutionService.jsonToRecipeExecution(json.step);
             //new RecipeExecution(json.isStep, json.stepTitle, json.stepDescription, json.duration)
             //stepWithinRecipeExecution.recipeExecution.id = json.step.id;
+        }
+        if( json.number){
+            stepWithinRecipeExecution.number =  json.number;
         }
         return stepWithinRecipeExecution;
     }
@@ -40,16 +43,10 @@ export class StepWithinRecipeExecutionService {
     }
 
     createStepWithinRecipeExecution(stepWithinRecipeExecution: StepWithinRecipeExecution): Observable<StepWithinRecipeExecution> {
-        console.log( {
-            "stepId": stepWithinRecipeExecution.stepId,
-            "recipeExecutionId": stepWithinRecipeExecution.recipeExecutionId,
-            "number": stepWithinRecipeExecution.number
-        });
         return this.httpService.post<StepWithinRecipeExecution>("http://localhost:3000/step-within-recipe-execution",
             {
             "stepId": stepWithinRecipeExecution.stepId,
-            "recipeExecutionId": stepWithinRecipeExecution.recipeExecutionId,
-            "number": stepWithinRecipeExecution.number
+            "recipeExecutionId": stepWithinRecipeExecution.recipeExecutionId
         }).pipe(
             map( json => this.jsonToStepWithinRecipeExecution(json))
         );
