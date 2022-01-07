@@ -4,6 +4,7 @@ import {Credentials} from "../../models/user/credentials";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../local-storage/local-storage.service";
 import {User} from "../../models/user/user";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class UserService {
   ) { }
 
   login(credentials: Credentials) {
-    this.httpClient.post('http://localhost:3000/auth/login', credentials).subscribe({
+    this.httpClient.post(`${environment.apiUrl}/auth/login`, credentials).subscribe({
       next: (data) => {
         const token: string = JSON.parse(JSON.stringify(data)).access_token;
         this.localStorageService.set('jwt', token);
@@ -38,7 +39,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`
     });
-    return this.httpClient.get('http://localhost:3000/user/profile', { headers: headers });
+    return this.httpClient.get(`${environment.apiUrl}/user/profile`, { headers: headers });
   }
 
   findAll(jwt: string) {
@@ -46,7 +47,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`
     });
-    return this.httpClient.get('http://localhost:3000/user', { headers: headers });
+    return this.httpClient.get(`${environment.apiUrl}/user`, { headers: headers });
   }
 
   create(user: User, jwt: string) {
@@ -54,13 +55,13 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.localStorageService.get('jwt')}`
     });
-    return this.httpClient.post('http://localhost:3000/user', { headers: headers, ...user });
+    return this.httpClient.post(`${environment.apiUrl}/user`, { headers: headers, ...user });
   }
 
   delete(id: number) {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.localStorageService.get('jwt')}`
     });
-    return this.httpClient.delete(`http://localhost:3000/user/${id}`, { headers: headers })
+    return this.httpClient.delete(`${environment.apiUrl}/user/${id}`, { headers: headers })
   }
 }
