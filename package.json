@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -20,6 +20,7 @@
     "@angular/router": "~13.0.0",
     "@mdi/font": "^6.5.95",
     "bcryptjs": "^2.4.3",
+    "express": "^4.17.2",
     "materialize-css": "^1.0.0-rc.2",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
