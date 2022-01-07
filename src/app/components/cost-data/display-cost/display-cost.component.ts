@@ -26,6 +26,7 @@ export class DisplayCostComponent implements OnInit, OnChanges {
   coefWithCharges!: number
   coefWithoutCharges!: number
 
+  manageCost: boolean = false;
 
   constructor(private costDataService: CostDataService,
               private recipeService: RecipeService
@@ -76,6 +77,10 @@ export class DisplayCostComponent implements OnInit, OnChanges {
 
   round(val : number) : number{
     return Math.round(val * 100) / 100
+  }
+
+  manageCostEvent(){
+    this.manageCost = !this.manageCost;
   }
 
 }

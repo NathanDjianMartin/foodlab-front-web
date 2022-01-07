@@ -15,6 +15,7 @@ export class RecipeDetailsComponent implements OnInit {
   recipe!: Recipe;
   addAStep: boolean = false;
   addAProgression: boolean = false;
+  manageOrderSteps: boolean = false;
   isChange: number = 0;
   stepToUpdate: RecipeExecution | undefined;
 
@@ -53,13 +54,20 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   addAStepAction(){
-    this.addAStep = true;
+    this.addAStep = !this.addAStep;
     this.addAProgression = false;
   }
 
   addAProgressionAction(){
     this.addAStep = false;
-    this.addAProgression = true;
+    this.addAProgression = !this.addAProgression;
+    this.manageOrderSteps = false;
+  }
+
+  manageOrderStepsAction(){
+    this.manageOrderSteps =!this.manageOrderSteps;
+    this.addAStep = false;
+    this.addAProgression = false;
   }
 
   printAction() {
