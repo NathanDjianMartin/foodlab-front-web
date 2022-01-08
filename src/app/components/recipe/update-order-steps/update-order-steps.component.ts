@@ -16,7 +16,7 @@ export class UpdateOrderStepsComponent implements OnInit {
               private loggerService: LoggerService) { }
 
   ngOnInit(): void {
-    this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipeExecutionId).subscribe( (steps) => {
+    this.stepWithinRecipeExecutionService.getAllStepsWithinRecipeExecution(this.recipeExecutionId).subscribe( (steps) => {
       this.steps = steps;
     })
   }

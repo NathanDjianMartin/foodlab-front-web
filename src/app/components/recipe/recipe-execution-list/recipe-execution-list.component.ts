@@ -34,7 +34,7 @@ export class RecipeExecutionListComponent implements OnInit, OnChanges {
 
   init() {
     if(this.recipeExecutionId != null) {
-      this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.recipeExecutionId).subscribe( (steps) => {
+      this.stepWithinRecipeExecutionService.getAllStepsWithinRecipeExecution(this.recipeExecutionId).subscribe( (steps) => {
 
         this.stepsWithinRecipe = steps.sort(function compare(a,b) {
 

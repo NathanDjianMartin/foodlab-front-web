@@ -30,8 +30,14 @@ export class StepWithinRecipeExecutionService {
         return stepWithinRecipeExecution;
     }
 
-    getAllStepWithinRecipeExecution(id: number): Observable<StepWithinRecipeExecution[]> {
+    getAllSimpleStepsWithinRecipeExecution(id: number): Observable<StepWithinRecipeExecution[]> {
         return this.httpService.get<StepWithinRecipeExecution[]>(`http://localhost:3000/recipe-execution/all-simple-steps/${id}`).pipe(
+            map(data =>
+                data.map(json => this.jsonToStepWithinRecipeExecution(json))));
+    }
+
+    getAllStepsWithinRecipeExecution(id: number): Observable<StepWithinRecipeExecution[]> {
+        return this.httpService.get<StepWithinRecipeExecution[]>(`http://localhost:3000/recipe-execution/all-steps/${id}`).pipe(
             map(data =>
                 data.map(json => this.jsonToStepWithinRecipeExecution(json))));
     }
