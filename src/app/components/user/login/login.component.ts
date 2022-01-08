@@ -3,6 +3,7 @@ import {UserService} from "../../../services/user/user.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Credentials} from "../../../models/user/credentials";
 import * as bcrypt from "bcryptjs";
+import {LoggerService} from "../../../services/logger/logger.service";
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
       private userService: UserService,
+      private loggerService: LoggerService,
       private fb: FormBuilder
   ) { }
 
@@ -26,13 +28,16 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    const email = this.loginFormGroup.get('email')?.value;
-    const password = this.loginFormGroup.get('password')?.value;
-    //bcrypt.hashSync(this.loginFormGroup.get('password')?.value, 8);
-    let credentials = new Credentials(
-        email,
-        password
-    )
-    this.userService.login(credentials);
+    if (this.loginFormGroup.valid) {
+      const email = this.loginFormGroup.get('email')?.value;
+      const password = this.loginFormGroup.get('password')?.value;
+      let credentials = new Credentials(
+          email,
+          password
+      )
+      this.userService.login(credentials);
+    } else {
+      this.loggerService.displayError('Please fill in the login form correctly.');
+    }
   }
 }

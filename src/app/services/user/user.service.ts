@@ -4,6 +4,7 @@ import {Credentials} from "../../models/user/credentials";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../local-storage/local-storage.service";
 import {User} from "../../models/user/user";
+import {LoggerService} from "../logger/logger.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class UserService {
   constructor(
       private httpClient: HttpClient,
       private localStorageService: LocalStorageService,
+      private loggerService: LoggerService,
       private router: Router
   ) { }
 
@@ -21,10 +23,14 @@ export class UserService {
       next: (data) => {
         const token: string = JSON.parse(JSON.stringify(data)).access_token;
         this.localStorageService.set('jwt', token);
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/profile']).then((successful) => {
+          this.loggerService.displaySuccess(`Successfully logged in!`);
+        }).catch((err) => {
+          this.loggerService.displayError(`Error while navigating to profile page: ${err.error.message}`);
+        });
       },
       error: (err) => {
-        alert(`Error during login request: ${err.error.message}`);
+        this.loggerService.displayError(`Could not log in: ${err.error.message}`);
       }
     });
   }
@@ -54,7 +60,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.localStorageService.get('jwt')}`
     });
-    return this.httpClient.post('http://localhost:3000/user', { headers: headers, ...user });
+    return this.httpClient.post('http://localhost:3000/user', { ...user }, { headers: headers });
   }
 
   delete(id: number) {

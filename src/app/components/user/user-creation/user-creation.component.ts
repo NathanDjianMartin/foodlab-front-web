@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../../models/user/user";
 import {LocalStorageService} from "../../../services/local-storage/local-storage.service";
 import * as bcrypt from 'bcryptjs';
+import {LoggerService} from "../../../services/logger/logger.service";
 
 @Component({
   selector: 'app-user-creation',
@@ -13,12 +14,15 @@ import * as bcrypt from 'bcryptjs';
 export class UserCreationComponent implements OnInit {
 
   userCreationForm!: FormGroup;
-  users: User[] = []
+  users: User[] = [];
+  isPasswordVisible: boolean = false;
+  isUserCreationFormVisible: boolean = false;
 
   constructor(
       private userService: UserService,
-      private fb: FormBuilder,
-      private localStorageService: LocalStorageService
+      private localStorageService: LocalStorageService,
+      private loggerService: LoggerService,
+      private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -42,17 +46,17 @@ export class UserCreationComponent implements OnInit {
             this.userCreationForm.reset();
             this.users.push(user);
             this.initForm();
-            alert(`User ${name} successfully created!`);
+            this.loggerService.displaySuccess(`User ${name} successfully created!`);
           },
           error: (err) => {
-            alert(err.error.message);
+            this.loggerService.displayError(`Error while creating user: ${err.error.message}`);
           }
         });
       } else {
-        alert('You must be logged in to create a user!');
+        this.loggerService.displayError('You must be logged in to create a user!');
       }
     } else {
-      alert('The form is invalid!')
+      this.loggerService.displayError('Please fill in the user creation form correctly.');
     }
   }
 
@@ -64,7 +68,7 @@ export class UserCreationComponent implements OnInit {
           this.users = JSON.parse(JSON.stringify(data));
         },
         error: (err) => {
-          alert(`Error: ${err.error.message}`);
+          this.loggerService.displayError(`Error while fetching users list: ${err.error.message}`);
         }
       })
     }
@@ -77,5 +81,13 @@ export class UserCreationComponent implements OnInit {
       password: ['', [Validators.required]],
       isAdmin: [false, []]
     });
+  }
+
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  toggleUserCreationForm(): void {
+    this.isUserCreationFormVisible = !this.isUserCreationFormVisible;
   }
 }

@@ -1,35 +1,41 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import {User} from "../../models/user/user";
-import {UserService} from "../../services/user/user.service";
 import {LocalStorageService} from "../../services/local-storage/local-storage.service";
 import {LoggerService} from "../../services/logger/logger.service";
+import {UserService} from "../../services/user/user.service";
+import {User} from "../../models/user/user";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticatedGuardGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
   constructor(
       private userService: UserService,
       private localStorageService: LocalStorageService,
-      private loggerService: LoggerService,
-      private router: Router
+      private loggerService: LoggerService
   ) {}
 
+
   canActivate(
-      route: ActivatedRouteSnapshot,
-      state: RouterStateSnapshot): Observable<boolean> {
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> {
     return new Observable<boolean>(observable => {
       const jwt = this.localStorageService.get('jwt');
       if (jwt !== null) {
         this.userService.getProfile(jwt).subscribe({
           next: (data) => {
-            observable.next(true);
+            const user: User = JSON.parse(JSON.stringify(data));
+            if (user.isAdmin) {
+              observable.next(true);
+            } else {
+              this.loggerService.displayError('You must be an admin to access this page!');
+              observable.next(false);
+            }
           },
           error: (err) => {
-            this.loggerService.displayError(`Error while loading profile: ${err.error.message}`);
+            this.loggerService.displayError(`Error while loading your profile : ${err.error.message}`);
             observable.next(false);
           }
         });
@@ -39,5 +45,4 @@ export class AuthenticatedGuardGuard implements CanActivate {
       }
     });
   }
-
 }

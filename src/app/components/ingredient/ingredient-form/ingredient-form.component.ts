@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import {ActivatedRoute, Router} from '@angular/router';
 import {AllergenCategory} from "../../../models/allergen-category/allergen-category";
 import {AllergenCategoryService} from "../../../services/allergen-category/allergen-category.service";
+import {LoggerService} from "../../../services/logger/logger.service";
 
 @Component({
   selector: 'app-ingredient-form',
@@ -29,6 +30,7 @@ export class IngredientFormComponent implements OnInit {
       private ingredientService: IngredientService,
       private ingredientCategoryService: IngredientCategoryService,
       private allergenCategoryService: AllergenCategoryService,
+      private loggerService: LoggerService,
       private fb: FormBuilder
   ) { }
 
@@ -129,29 +131,37 @@ export class IngredientFormComponent implements OnInit {
   // called by Submit button
   createIngredient() {
     const ingredient: Ingredient | null = this.getIngredientFromForm();
-    if (ingredient !== null) {
-      this.ingredientService.createIngredient(ingredient).subscribe({
-            next: (ingredient) => {
-              alert(`Ingredient ${ingredient.name} created!`);
-            }, error: (err) => {
-              alert(`Error while creating ingredient ${ingredient.name}: ${err.message}`);
-            }
-          });
-      this.router.navigate(['ingredients']);
+    if (this.ingredientFormGroup.valid) {
+      if (ingredient !== null) {
+        this.ingredientService.createIngredient(ingredient).subscribe({
+          next: (ingredient) => {
+            this.loggerService.displaySuccess(`Ingredient ${ingredient.name} created!`);
+          }, error: (err) => {
+            this.loggerService.displayError(`Error while creating ingredient ${ingredient.name}: ${err.message}`);
+          }
+        });
+        this.router.navigate(['ingredients']);
+      }
+    } else {
+      this.loggerService.displayError('Please fill in the ingredient form correctly.')
     }
   }
 
   // called by Update button
   updateIngredient(): void {
     const ingredient: Ingredient | null = this.getIngredientFromForm();
-    if (ingredient !== null) {
-      this.ingredientService.updateIngredient(ingredient).subscribe({
-        next: (data) => {
-          alert(`Ingredient \"${ingredient.name}\" updated!`);
-        }, error: (err) => {
-          alert(`Error while updating ingredient \"${ingredient.name}\": ${err.message}`);
+    if (this.ingredientFormGroup.valid) {
+      if (ingredient !== null) {
+        this.ingredientService.updateIngredient(ingredient).subscribe({
+          next: (data) => {
+            this.loggerService.displaySuccess(`Ingredient \"${ingredient.name}\" updated!`);
+          }, error: (err) => {
+            this.loggerService.displayError(`Error while updating ingredient \"${ingredient.name}\": ${err.message}`);
+          }
+        });
       }
-      });
+    } else {
+      this.loggerService.displayError('Please fill in the ingredient form correctly.')
     }
   }
 
