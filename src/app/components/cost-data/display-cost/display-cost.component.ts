@@ -57,6 +57,7 @@ export class DisplayCostComponent implements OnInit, OnChanges {
 
   calculateCosts(){
     this.recipeService.getIngredientsCost(this.recipeId!).subscribe( (cost) => {
+      console.log(cost);
         let ingredientsCost = cost;
         this.materialCost = this.round(ingredientsCost + ingredientsCost*0.05); //TODO: def assaisonnement autrement
         this.salesPricesWithoutCharges = this.round(this.materialCost * this.coefWithoutCharges);
@@ -64,9 +65,9 @@ export class DisplayCostComponent implements OnInit, OnChanges {
         this.recipeService.getDuration(this.recipeId!).subscribe( (duration) => {
           this.staffCost = duration/60 * this.averageHourlyCost;
           this.fluidsCost = duration/60 * this.flatrateHourlyCost;
-          this.chargesCost = this.staffCost + this.fluidsCost;
+          this.chargesCost = this.round(this.staffCost + this.fluidsCost);
 
-          this.productionCost = this.materialCost + this.chargesCost;
+          this.productionCost = this.round(this.materialCost + this.chargesCost);
 
           this.salesPricesWithCharges = this.round(this.productionCost * this.coefWithCharges);
 
