@@ -120,11 +120,18 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
                             this.recipeExecutionId = progression.id!;
                             recipe.recipeExecutionId = this.recipeExecutionId;
                             this.recipeService.updateRecipe(recipe).subscribe();
+                            this.createSimpleStep();
                     })
                 });
             }
+        }else{
+            await this.createSimpleStep();
         }
         //TODO: peut être mieux mettre toutes les étapes dans le service
+
+    }
+
+    async createSimpleStep(){
         //création de l'étape
         let steps = this.getStepFromForm();
         //Ajout de l'étape dans la recette
