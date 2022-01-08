@@ -10,53 +10,46 @@ import {StepWithinRecipeExecutionService} from "../../../services/step-within-re
 import {StepWithinRecipeExecution} from "../../../models/step-within-recipe-execution/step-within-recipe-execution";
 
 @Component({
-  selector: 'app-recipe-ingredients-list',
-  templateUrl: './recipe-ingredients-list.component.html',
-  styleUrls: ['./recipe-ingredients-list.component.css']
+    selector: 'app-recipe-ingredients-list',
+    templateUrl: './recipe-ingredients-list.component.html',
+    styleUrls: ['./recipe-ingredients-list.component.css']
 })
-export class RecipeIngredientsListComponent implements OnInit, OnChanges {
-  @Input() stepId!: number; //RecipeExecutionId
-  @Input() stepName!: string;
-  @Input() isChange: number = 0;
-  ingredientsWithinStep!: IngredientWithinStep[];
-  step!: RecipeExecution;
-  steps!: StepWithinRecipeExecution[];
-  progressionWithinStep!: StepWithinRecipeExecution[];
+export class RecipeIngredientsListComponent implements OnChanges {
+    @Input() stepId!: number; //RecipeExecutionId
+    @Input() stepName!: string;
+    @Input() isChange: number = 0;
+    ingredientsWithinStep: IngredientWithinStep[] = [];
+    step!: RecipeExecution;
+    steps!: StepWithinRecipeExecution[];
+    progressionWithinStep!: StepWithinRecipeExecution[];
 
-  constructor(private recipeService: RecipeService,
-              private ingredientWithinStepService: IngredientWithinStepService,
-              private recipeExecutionService: RecipeExecutionService,
-              private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) {
-  }
+    constructor(private recipeService: RecipeService,
+                private ingredientWithinStepService: IngredientWithinStepService,
+                private recipeExecutionService: RecipeExecutionService,
+                private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) {
+    }
 
-  ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges): void {
         //on regarge les valeurs
         this.init();
         this.init();
     }
 
-    async init() {
-      if (this.stepId != null) {
-        //Récupérer la liste des ingrédients contenu dans la recette (ne prend pas en compte les ingrédients contenu
-        // dans une sous recette de la recette puisqu'on appel récursivement le composant avec ses sous recettes
-        this.ingredientsWithinStep = this.ingredientWithinStepService.getAllIngredientsWithinAStepInRecipe(this.stepId!);
+    init() {
+        if (this.stepId != null) {
+            //Récupérer la liste des ingrédients contenu dans la recette (ne prend pas en compte les ingrédients contenu
+            // dans une sous recette de la recette puisqu'on appel récursivement le composant avec ses sous recettes
+            this.ingredientWithinStepService.getAllIngredientsWithinAStepInSimpleStepsInRecipeExecution(this.stepId!).subscribe((ingredients) => {
+                this.ingredientsWithinStep = ingredients;
+            });
 
-        /*this.recipeExecutionService.getOne(this.stepId).subscribe( (step) => {
-          this.step = step;
-        })
-        this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(this.stepId).subscribe( (steps) => {
-          this.steps = steps;
-        })*/
-        //récupérer toutes les progressions contenu dans la recette
-        await this.stepWithinRecipeExecutionService.getAllProgressionWithinRecipeExecution(this.stepId).subscribe((progressions) => {
-          this.progressionWithinStep = progressions;
-        })
-      }
+            //récupérer toutes les progressions contenu dans la recette
+            this.stepWithinRecipeExecutionService.getAllProgressionWithinRecipeExecution(this.stepId).subscribe((progressions) => {
+                this.progressionWithinStep = progressions;
+            })
+        }
     }
 
-  ngOnInit(): void {
-    this.init();
-  }
 
 
 }

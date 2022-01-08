@@ -65,7 +65,7 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
                     duration: [this.step.duration, [Validators.required]]
                 })
 
-                await this.ingredientWithinStepService.getIngredientsInStep(this.step!.id!).subscribe( (ingredients) => {
+                await this.ingredientWithinStepService.getAllIngredientsInSimpleStep(this.step!.id!).subscribe( (ingredients) => {
                     console.log(ingredients);
                     for(let ingredient of ingredients){
                         this.ingredientsSelected.push(ingredient);

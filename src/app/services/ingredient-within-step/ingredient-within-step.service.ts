@@ -26,26 +26,17 @@ export class IngredientWithinStepService {
     return ingredientWithinStep;
   }
 
-  getIngredientsInStep(id: number): Observable<IngredientWithinStep[]> {
-    return this.httpService.get<IngredientWithinStep[]>(`http://localhost:3000/ingredient-within-step/ingredients/${id}`).pipe(
+  getAllIngredientsInSimpleStep(id: number): Observable<IngredientWithinStep[]> {
+    return this.httpService.get<IngredientWithinStep[]>(`http://localhost:3000/recipe-execution/all-ingredients-within-a-step-in-simple-step/${id}`).pipe(
         map(data =>
             data.map(json => this.jsonToIngredientWithinStep(json))));
   }
 
-  getAllIngredientsWithinAStepInRecipe(id: number): IngredientWithinStep[] {
+  getAllIngredientsWithinAStepInSimpleStepsInRecipeExecution(id: number): Observable<IngredientWithinStep[]> {
     //Objectif: retourner tout les ingrédients contenu dans les etapes d'une recette qui ne sont pas des progressions.
-    let ingredientsRes: IngredientWithinStep[] = [];
-    this.stepWithinRecipeExecutionService.getAllStepWithinRecipeExecution(id).subscribe((steps) => {
-      for (let step of steps) {
-        this.getIngredientsInStep(step.stepId).subscribe((ingredients) => {
-          for (let ingredient of ingredients) {
-            ingredientsRes.push(ingredient);
-          }
-        })
-      }
-      return ingredientsRes;
-    })
-    return ingredientsRes;
+    return this.httpService.get<IngredientWithinStep[]>(`http://localhost:3000/recipe-execution/all-ingredients-within-a-step-in-simple-steps-in-recipe-execution/${id}`).pipe(
+        map(data =>
+            data.map(json => this.jsonToIngredientWithinStep(json))));
   }
 
   getAllIngredientsInRecipe(id: number): Observable<Ingredient[]> {

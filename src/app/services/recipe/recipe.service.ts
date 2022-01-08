@@ -42,11 +42,11 @@ export class RecipeService {
             data.map( json => this.jsonToRecipe(json))));
   }
 
-  getAllIngredientsWithinStepInRecipe(idRecipe: number): Observable<IngredientWithinStep[]>{
-    return this.httpService.get<Recipe[]>(`http://localhost:3000/recipe/category/${idCategory}`).pipe(
-        map(data =>
-            data.map( json => this(json))));
-  }
+  // getAllIngredientsWithinStepInRecipe(idRecipe: number): Observable<IngredientWithinStep[]>{
+  //   return this.httpService.get<Recipe[]>(`http://localhost:3000/recipe/category/${idCategory}`).pipe(
+  //       map(data =>
+  //           data.map( json => this(json))));
+  // }
 
   createRecipe(recipe: Recipe): Observable<Recipe>{
     console.log(recipe);

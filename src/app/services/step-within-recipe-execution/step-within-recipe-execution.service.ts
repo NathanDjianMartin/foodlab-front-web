@@ -31,13 +31,13 @@ export class StepWithinRecipeExecutionService {
     }
 
     getAllStepWithinRecipeExecution(id: number): Observable<StepWithinRecipeExecution[]> {
-        return this.httpService.get<StepWithinRecipeExecution[]>(`http://localhost:3000/step-within-recipe-execution/steps/${id}`).pipe(
+        return this.httpService.get<StepWithinRecipeExecution[]>(`http://localhost:3000/recipe-execution/all-simple-steps/${id}`).pipe(
             map(data =>
                 data.map(json => this.jsonToStepWithinRecipeExecution(json))));
     }
 
     getAllProgressionWithinRecipeExecution(id: number): Observable<StepWithinRecipeExecution[]> {
-        return this.httpService.get<StepWithinRecipeExecution[]>(`http://localhost:3000/step-within-recipe-execution/progressions/${id}`).pipe(
+        return this.httpService.get<StepWithinRecipeExecution[]>(`http://localhost:3000/recipe-execution/all-recipe-executions/${id}`).pipe(
             map(data =>
                 data.map(json => this.jsonToStepWithinRecipeExecution(json))));
     }
@@ -62,7 +62,8 @@ export class StepWithinRecipeExecutionService {
     }
 
     //Update all steps within recipe execution
-    updateAllStepsWithinRecipeExecution(stepsWithinRecipeExecution: StepWithinRecipeExecution[]): Observable<StepWithinRecipeExecution[]> {
+    //TODO : renommer voir nom back
+    updateStepsOrderOfRecipeExecution(stepsWithinRecipeExecution: StepWithinRecipeExecution[]): Observable<StepWithinRecipeExecution[]> {
         let dto = [];
         for(let stepWithinRecipeExecution of stepsWithinRecipeExecution){
             dto.push({
@@ -71,7 +72,7 @@ export class StepWithinRecipeExecutionService {
             })
         }
         let res = this.httpService.patch<StepWithinRecipeExecution[]>(
-            `http://localhost:3000/step-within-recipe-execution/update-all`, dto).pipe(
+            `http://localhost:3000/recipe-execution/update-steps-order`, dto).pipe(
                 map(data =>
                     data.map(json => this.jsonToStepWithinRecipeExecution(json)))
         );

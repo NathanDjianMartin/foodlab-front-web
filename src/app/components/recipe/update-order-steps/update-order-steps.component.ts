@@ -26,7 +26,7 @@ export class UpdateOrderStepsComponent implements OnInit {
   }
 
   validate(){
-    this.stepWithinRecipeExecutionService.updateAllStepsWithinRecipeExecution(this.steps).subscribe( (steps) => {
+    this.stepWithinRecipeExecutionService.updateStepsOrderOfRecipeExecution(this.steps).subscribe( (steps) => {
       this.loggerService.displaySuccess("changement ordre ok")
     }, (error) => {
       this.loggerService.displayError(error.error.error);
