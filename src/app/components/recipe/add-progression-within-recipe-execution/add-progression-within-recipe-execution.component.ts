@@ -39,7 +39,7 @@ export class AddProgressionWithinRecipeExecutionComponent implements OnInit {
       this.router.navigate(["/recipe/details", parseInt(this.route.snapshot.paramMap.get('id')!)]).then()
       this.loggerService.displaySuccess("Progression added!")
         }, (error) => {
-      this.loggerService.displayError("Error in add a progression")
+      this.loggerService.displayError(error.error.error);
         }
 
     );

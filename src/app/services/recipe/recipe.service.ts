@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {Recipe} from "../../models/recipe/recipe";
 import {Observable} from "rxjs";
+import {Ingredient} from "../../models/ingredient/ingredient";
+import {IngredientWithinStep} from "../../models/ingredient-within-step/ingredient-within-step";
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +40,12 @@ export class RecipeService {
     return this.httpService.get<Recipe[]>(`http://localhost:3000/recipe/category/${idCategory}`).pipe(
         map(data =>
             data.map( json => this.jsonToRecipe(json))));
+  }
+
+  getAllIngredientsWithinStepInRecipe(idRecipe: number): Observable<IngredientWithinStep[]>{
+    return this.httpService.get<Recipe[]>(`http://localhost:3000/recipe/category/${idCategory}`).pipe(
+        map(data =>
+            data.map( json => this(json))));
   }
 
   createRecipe(recipe: Recipe): Observable<Recipe>{

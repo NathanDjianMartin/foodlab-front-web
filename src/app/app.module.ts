@@ -38,6 +38,7 @@ import { AddProgressionWithinRecipeExecutionComponent } from './components/recip
 import { UpdateOrderStepsComponent } from './components/recipe/update-order-steps/update-order-steps.component';
 import { SearchbarComponent } from './components/general/searchbar/searchbar.component';
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
+import { LabelComponent } from './components/recipe/label/label.component';
 
 @NgModule({
     declarations: [
@@ -75,6 +76,7 @@ import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list
         RecipeListComponent,
         AddProgressionWithinRecipeExecutionComponent,
         UpdateOrderStepsComponent,
+        LabelComponent,
     ],
     imports: [
         BrowserModule,
