@@ -40,12 +40,13 @@ export class RecipeDetailsComponent implements OnInit {
     this.isChange = this.isChange + $event;
     this.addAProgression = false;
     this.addAStep = false;
+    this.manageOrderSteps = false;
     this.stepToUpdate = undefined;
   }
 
   stepToUpdateDetected($event: RecipeExecution){
     this.stepToUpdate = $event;
-    console.log("jj")
+    console.log(this.stepToUpdate);
     this.router.navigate(["recipe/details/" + this.recipe!.id!], { fragment: 'editstep'}).then( (data) => {
       console.log("recipe/details/" + this.recipe!.id! + "#editstep");
     }, (error) => {

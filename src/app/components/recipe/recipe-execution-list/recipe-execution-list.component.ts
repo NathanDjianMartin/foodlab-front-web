@@ -53,6 +53,7 @@ export class RecipeExecutionListComponent implements OnInit, OnChanges {
   }
 
   updateStep(step: RecipeExecution){
+    console.log(step);
     this.stepToUpdate.emit(step);
   }
 

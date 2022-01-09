@@ -53,6 +53,6 @@
     </div>
     <div class="divider"></div>
 </div>
-<app-update-order-steps *ngIf="manageOrderSteps" class="print-exclude" [recipeExecutionId]="recipe.recipeExecutionId!" ></app-update-order-steps>
+<app-update-order-steps *ngIf="manageOrderSteps" class="print-exclude" [recipeExecutionId]="recipe.recipeExecutionId!" (isChangeEvent)="changeDetected($event)" ></app-update-order-steps>
 
 <app-display-cost id="display-cost" [recipeId]="recipe.id" [isChange]="this.isChange"></app-display-cost>

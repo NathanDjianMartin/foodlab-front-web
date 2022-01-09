@@ -3,6 +3,7 @@ import {IngredientCategory} from "../../../models/ingredient-category/ingredient
 import {Ingredient} from "../../../models/ingredient/ingredient";
 import {IngredientService} from "../../../services/ingredient/ingredient.service";
 import {Router} from "@angular/router";
+import {LoggerService} from "../../../services/logger/logger.service";
 
 @Component({
   selector: 'app-ingredient-by-category',
@@ -15,7 +16,8 @@ export class IngredientByCategoryComponent implements OnInit {
   hasChanged!: boolean;
 
   constructor(private ingredientService: IngredientService,
-              private router: Router) {
+              private router: Router,
+              private loggerService: LoggerService) {
   }
 
 
@@ -30,8 +32,14 @@ export class IngredientByCategoryComponent implements OnInit {
 
 
   deleteIngredient(ingredient: Ingredient){
-    this.ingredientService.deleteIngredient(ingredient.id!).subscribe((data) => {
-      this.ngOnInit() });
+    this.ingredientService.deleteIngredient(ingredient.id!).subscribe({
+      next: (data) => {
+        this.loggerService.displaySuccess(`Ingredient \"${ingredient.name}\" delated!`);
+        this.ngOnInit();
+      }, error: (err) => {
+        this.loggerService.displayError(`Error while deleting ingredient \"${ingredient.name}\": this ingredient is used in different recipes`);
+      }
+    });
   }
 
   editIngredient(ingredientId: number | undefined) {

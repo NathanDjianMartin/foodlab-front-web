@@ -54,16 +54,17 @@
         <div class="row">
             <div class="input col s12">
                 <label>Select an ingredient</label>
-                <select formControlName="ingredient">
+                <select formControlName="ingredient" (change)="ingredientSelected()">
                     <option value="" selected disabled>Choose an ingredient</option>
-                    <option *ngFor="let ingredient of ingredients | async"
+                    <option *ngFor="let ingredient of ingredients | async" (isChangeEvent)="ingredientSelected()"
                             value={{ingredient.id}}>{{ingredient.name}}</option>
                 </select>
             </div>
-            <div class="input-field col s12">
-                <input id="quantity" type="number" class="validate" formControlName="quantity">
+            <div class="input-field col s9">
+                <input id="quantity" type="number" step="0.01" min="0" class="validate" formControlName="quantity">
                 <label for="quantity">Quantity</label>
             </div>
+            <div *ngIf="unitOfCurrentIngredientSelected" class="col s3 unit">{{unitOfCurrentIngredientSelected}}</div>
             <button class="btn-small waves-effect waves-light" (click)="addIngredient()">Add ingredient</button>
         </div>
     </form>

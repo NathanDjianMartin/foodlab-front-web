@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RecipeExecutionService} from "../../../services/recipe-execution/recipe-execution.service";
 import {Ingredient} from "../../../models/ingredient/ingredient";
@@ -12,19 +12,21 @@ import {StepWithinRecipeExecutionService} from "../../../services/step-within-re
 import {ActivatedRoute, Router} from "@angular/router";
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {Recipe} from "../../../models/recipe/recipe";
+import {LoggerService} from "../../../services/logger/logger.service";
 
 @Component({
     selector: 'app-add-step-within-recipe-execution',
     templateUrl: './add-step-within-recipe-execution.component.html',
     styleUrls: ['./add-step-within-recipe-execution.component.css']
 })
-export class AddStepWithinRecipeExecutionComponent implements OnInit {
+export class AddStepWithinRecipeExecutionComponent implements OnInit, OnChanges {
     @Input() recipeExecutionId!: number;
     recipeExecutionFormGroup!: FormGroup;
     ingredientWithQuantityFormGroup!: FormGroup;
     ingredientsSelected: IngredientWithinStep[] = [];
     ingredients!: Observable<Ingredient[]>
     newIngredient!: IngredientWithinStep;
+    unitOfCurrentIngredientSelected: string | undefined;
     @Input() step?: RecipeExecution;
     @Output() isChangeEvent = new EventEmitter<number>();
 
@@ -37,7 +39,8 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         private recipeService: RecipeService,
         private ingredientService: IngredientService,
         private ingredientWithinStepService: IngredientWithinStepService,
-        private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService) {
+        private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService,
+        private loggerService: LoggerService) {
     }
 
     async ngOnInit() {
@@ -54,6 +57,11 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         })
 
         await this.initStepForm();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        this.initStepForm();
+
     }
 
     async initStepForm(){
@@ -75,19 +83,32 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         }
     }
 
-    addIngredient() {
-        let newIngredient = new IngredientWithinStep(
-            Number(this.ingredientWithQuantityFormGroup.get("ingredient")?.value),
-            this.ingredientWithQuantityFormGroup.get("quantity")?.value,
-            this.recipeExecutionId!
-        );
-        this.ingredientService.getOne(newIngredient.ingredientId).subscribe((ingredient) => {
-            newIngredient.ingredientDetails = ingredient
-            this.ingredientsSelected.push(newIngredient);
+    ingredientSelected(){
+        let ingredientId = Number(this.ingredientWithQuantityFormGroup.get("ingredient")?.value)
+        this.ingredientService.getOne(ingredientId).subscribe({
+            next: ingredient => {
+                this.unitOfCurrentIngredientSelected = ingredient.unit;
+            }
         });
-        this.ingredientWithQuantityFormGroup.controls['ingredient'].setValue(null);
-        this.ingredientWithQuantityFormGroup.controls['quantity'].setValue(null);
+    }
 
+    addIngredient() {
+        if (this.ingredientWithQuantityFormGroup.valid) {
+            let newIngredient = new IngredientWithinStep(
+                Number(this.ingredientWithQuantityFormGroup.get("ingredient")?.value),
+                this.ingredientWithQuantityFormGroup.get("quantity")?.value,
+                this.recipeExecutionId!
+            );
+            this.ingredientService.getOne(newIngredient.ingredientId).subscribe((ingredient) => {
+                newIngredient.ingredientDetails = ingredient
+                this.ingredientsSelected.push(newIngredient);
+            });
+            this.ingredientWithQuantityFormGroup.controls['ingredient'].setValue(null);
+            this.ingredientWithQuantityFormGroup.controls['quantity'].setValue(null);
+            this.unitOfCurrentIngredientSelected = undefined;
+        } else {
+            this.loggerService.displayError('Please fill in the ingredient with quantity form correctly.')
+        }
     }
 
     deleteIngredient(ingredient: IngredientWithinStep){
@@ -107,28 +128,32 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
     }
 
     async createStep() {
-        //En premier on vérif que la recipeExecution est déjà créé
-        if(this.recipeExecutionId == null){
-            //si ça n'est pas le cas, on en créer une
-            //on va récupérer les infos de la recette à laquelle on ajoute la progression (on va donner le même nom qu'a la recette
-            if(this.route.snapshot.paramMap.get('id') != undefined) {
-                let id = parseInt(this.route.snapshot.paramMap.get('id')!);
-                this.recipeService.getOneRecipe(id).subscribe(async (r) => {
-                    let recipe = r
-                    await this.recipeExecutionService.createRecipeExecution(
-                        new RecipeExecution(false, recipe.name)).subscribe( (progression) => {
+
+        if (this.recipeExecutionFormGroup.valid) {
+            //En premier on vérif que la recipeExecution est déjà créé
+            if (this.recipeExecutionId == null) {
+                //si ça n'est pas le cas, on en créer une
+                //on va récupérer les infos de la recette à laquelle on ajoute la progression (on va donner le même nom qu'a la recette
+                if (this.route.snapshot.paramMap.get('id') != undefined) {
+                    let id = parseInt(this.route.snapshot.paramMap.get('id')!);
+                    this.recipeService.getOneRecipe(id).subscribe(async (r) => {
+                        let recipe = r
+                        await this.recipeExecutionService.createRecipeExecution(
+                            new RecipeExecution(false, recipe.name)).subscribe((progression) => {
                             this.recipeExecutionId = progression.id!;
                             recipe.recipeExecutionId = this.recipeExecutionId;
                             this.recipeService.updateRecipe(recipe).subscribe();
                             this.createSimpleStep();
-                    })
-                });
+                        })
+                    });
+                }
+            } else {
+                await this.createSimpleStep();
             }
-        }else{
-            await this.createSimpleStep();
+            //TODO: peut être mieux mettre toutes les étapes dans le service
+        } else {
+            this.loggerService.displayError('Please fill in the step form correctly.')
         }
-        //TODO: peut être mieux mettre toutes les étapes dans le service
-
     }
 
     async createSimpleStep(){
