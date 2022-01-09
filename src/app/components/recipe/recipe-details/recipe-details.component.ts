@@ -40,6 +40,7 @@ export class RecipeDetailsComponent implements OnInit {
     this.isChange = this.isChange + $event;
     this.addAProgression = false;
     this.addAStep = false;
+    this.manageOrderSteps = false;
     this.stepToUpdate = undefined;
   }
 

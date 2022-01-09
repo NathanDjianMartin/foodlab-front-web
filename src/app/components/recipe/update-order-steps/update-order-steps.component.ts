@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RecipeExecution} from "../../../models/recipe-execution/recipe-execution";
 import {StepWithinRecipeExecutionService} from "../../../services/step-within-recipe-execution/step-within-recipe-execution.service";
 import {StepWithinRecipeExecution} from "../../../models/step-within-recipe-execution/step-within-recipe-execution";
@@ -12,6 +12,8 @@ import {LoggerService} from "../../../services/logger/logger.service";
 export class UpdateOrderStepsComponent implements OnInit {
   @Input() recipeExecutionId!: number;
   steps!: StepWithinRecipeExecution[]
+  @Output() isChangeEvent = new EventEmitter<number>();
+
   constructor(private stepWithinRecipeExecutionService: StepWithinRecipeExecutionService,
               private loggerService: LoggerService) { }
 
@@ -27,7 +29,8 @@ export class UpdateOrderStepsComponent implements OnInit {
 
   validate(){
     this.stepWithinRecipeExecutionService.updateStepsOrderOfRecipeExecution(this.steps).subscribe( (steps) => {
-      this.loggerService.displaySuccess("changement ordre ok")
+      this.loggerService.displaySuccess("changement ordre ok");
+      this.isChangeEvent.emit(1);
     }, (error) => {
       this.loggerService.displayError(error.error.error);
     }
