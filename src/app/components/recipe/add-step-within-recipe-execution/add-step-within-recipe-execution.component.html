@@ -18,7 +18,7 @@
                 <label for="stepDescription" [class.active]="this.step">Step description</label>
             </div>
             <div class="input-field col s12">
-                <input id="duration" type="number" class="validate" formControlName="duration">
+                <input id="duration" type="number" min="0" class="validate" formControlName="duration">
                 <label for="duration" [class.active]="this.step">Step duration</label>
             </div>
         </div>

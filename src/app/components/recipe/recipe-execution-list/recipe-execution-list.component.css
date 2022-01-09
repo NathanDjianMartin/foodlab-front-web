@@ -20,3 +20,35 @@
         display: none;
     }
 }
+.btn-small{
+    width: 30px;
+    height: 30px;
+}
+.title{
+    font-weight: bold;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+.circle{
+    margin:10px;
+    width:30px;
+    background:#903739;
+    height:30px;
+    text-align:center;
+    color: white;
+    /*border-radius:100px;*/
+    /*<strong>line-height: 90px; !* 100 - 10 *!</strong>*/
+}
+.numberCircle {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    padding: 4px;
+
+    background: #903739;
+    /*border: 2px solid #4f5e62;*/
+    color: white;
+    text-align: center;
+
+    font: 16px Arial, sans-serif;
+}
