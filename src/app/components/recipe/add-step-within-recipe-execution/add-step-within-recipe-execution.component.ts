@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RecipeExecutionService} from "../../../services/recipe-execution/recipe-execution.service";
 import {Ingredient} from "../../../models/ingredient/ingredient";
@@ -19,7 +19,7 @@ import {LoggerService} from "../../../services/logger/logger.service";
     templateUrl: './add-step-within-recipe-execution.component.html',
     styleUrls: ['./add-step-within-recipe-execution.component.css']
 })
-export class AddStepWithinRecipeExecutionComponent implements OnInit {
+export class AddStepWithinRecipeExecutionComponent implements OnInit, OnChanges {
     @Input() recipeExecutionId!: number;
     recipeExecutionFormGroup!: FormGroup;
     ingredientWithQuantityFormGroup!: FormGroup;
@@ -57,6 +57,11 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         })
 
         await this.initStepForm();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        this.initStepForm();
+
     }
 
     async initStepForm(){
@@ -124,7 +129,7 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
 
     async createStep() {
 
-        if (this.ingredientWithQuantityFormGroup.valid) {
+        if (this.recipeExecutionFormGroup.valid) {
             //En premier on vérif que la recipeExecution est déjà créé
             if (this.recipeExecutionId == null) {
                 //si ça n'est pas le cas, on en créer une
