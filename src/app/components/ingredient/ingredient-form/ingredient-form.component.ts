@@ -159,6 +159,7 @@ export class IngredientFormComponent implements OnInit {
             this.loggerService.displayError(`Error while updating ingredient \"${ingredient.name}\": ${err.message}`);
           }
         });
+        this.router.navigate(['ingredients']);
       }
     } else {
       this.loggerService.displayError('Please fill in the ingredient form correctly.')

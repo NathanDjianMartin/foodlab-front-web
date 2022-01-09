@@ -25,6 +25,7 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
     ingredientsSelected: IngredientWithinStep[] = [];
     ingredients!: Observable<Ingredient[]>
     newIngredient!: IngredientWithinStep;
+    unitOfCurrentIngredientSelected: string | undefined;
     @Input() step?: RecipeExecution;
     @Output() isChangeEvent = new EventEmitter<number>();
 
@@ -75,6 +76,15 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         }
     }
 
+    ingredientSelected(){
+        let ingredientId = Number(this.ingredientWithQuantityFormGroup.get("ingredient")?.value)
+        this.ingredientService.getOne(ingredientId).subscribe({
+            next: ingredient => {
+                this.unitOfCurrentIngredientSelected = ingredient.unit;
+            }
+        });
+    }
+
     addIngredient() {
         let newIngredient = new IngredientWithinStep(
             Number(this.ingredientWithQuantityFormGroup.get("ingredient")?.value),
@@ -87,6 +97,7 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit {
         });
         this.ingredientWithQuantityFormGroup.controls['ingredient'].setValue(null);
         this.ingredientWithQuantityFormGroup.controls['quantity'].setValue(null);
+        this.unitOfCurrentIngredientSelected = undefined;
 
     }
 

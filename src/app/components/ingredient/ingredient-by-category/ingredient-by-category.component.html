@@ -16,7 +16,9 @@
             <td>No ingredient registered for this category</td>
         </tr>
         <tr *ngFor="let ingredient of ingredients ">
-            <td>{{ingredient.name}}</td>
+            <td>{{ingredient.name}}
+                <span *ngIf="ingredient.allergenCategoryId" class="new badge" data-badge-caption="Allergen"></span>
+            </td>
             <td>{{ingredient.unitaryPrice + "$/" + ingredient.unit}}</td>
             <td>{{ingredient.stockQuantity + " " + ingredient.unit}}</td>
             <td>
