@@ -1,16 +1,15 @@
 <h2 class="center-align">{{this.recipe.name}}</h2>
 <div class="container row">
-    <div class="col s8">
+    <div class="col s8 test">
         <app-recipe-header [recipe]="this.recipe"></app-recipe-header>
-        <div class="row">
-            <div class="col s12">
-                <div class="card-panel teal steps z-depth-0">
-                    <app-recipe-execution-list
-                            [recipeExecutionId]="recipe.recipeExecutionId" [isRecipeExecutionGeneral]="true"
-                    (isChangeEvent)="changeDetected($event)" (stepToUpdate)="stepToUpdateDetected($event)"  [isChange]="this.isChange"></app-recipe-execution-list>
-                </div>
-            </div>
+
+        <div class="steps z-depth-1">
+            <app-recipe-execution-list
+                    [recipeExecutionId]="recipe.recipeExecutionId" [isRecipeExecutionGeneral]="true"
+                    (isChangeEvent)="changeDetected($event)" (stepToUpdate)="stepToUpdateDetected($event)"
+                    [isChange]="this.isChange"></app-recipe-execution-list>
         </div>
+
 
     </div>
     <div class="row col s4">
@@ -19,7 +18,7 @@
                 <h5>Ingredients</h5>
                 <app-recipe-ingredients-list [stepId]="this.recipe!.recipeExecutionId!"
                                              [stepName]="'General'" [isChange]="this.isChange"
-                 ></app-recipe-ingredients-list>
+                ></app-recipe-ingredients-list>
             </div>
         </div>
     </div>
@@ -30,29 +29,39 @@
 
 <div class="row container center-align">
     <button class="btn-small waves-effect waves-light print-exclude" (click)="addAStepAction()">Add a step</button>
-    <button class="btn-small waves-effect waves-light print-exclude" (click)="addAProgressionAction()">Add a progression</button>
-    <button class="btn-small waves-effect waves-light print-exclude" (click)="manageOrderStepsAction()">Manage order of steps</button>
+    <button class="btn-small waves-effect waves-light print-exclude" (click)="addAProgressionAction()">Add a
+        progression
+    </button>
+    <button class="btn-small waves-effect waves-light print-exclude" (click)="manageOrderStepsAction()">Manage order of
+        steps
+    </button>
     <button class="btn-small waves-effect waves-light print-exclude" (click)="printAction()">Print</button>
-    <button class="btn-small waves-effect waves-light print-exclude" (click)="printWithoutCostsAction()">Print without costs</button>
+    <button class="btn-small waves-effect waves-light print-exclude" (click)="printWithoutCostsAction()">Print without
+        costs
+    </button>
 </div>
 <div class="container">
     <div *ngIf="addAStep">
-    <app-add-step-within-recipe-execution
-            [recipeExecutionId]="recipe.recipeExecutionId!" (isChangeEvent)="changeDetected($event)"></app-add-step-within-recipe-execution>
+        <app-add-step-within-recipe-execution
+                [recipeExecutionId]="recipe.recipeExecutionId!"
+                (isChangeEvent)="changeDetected($event)"></app-add-step-within-recipe-execution>
     </div>
     <div id="editstep" class="divider">
     </div>
     <div *ngIf="this.stepToUpdate">
         <app-add-step-within-recipe-execution
-                [recipeExecutionId]="recipe.recipeExecutionId!" [step]="this.stepToUpdate" (isChangeEvent)="changeDetected($event)"></app-add-step-within-recipe-execution>
+                [recipeExecutionId]="recipe.recipeExecutionId!" [step]="this.stepToUpdate"
+                (isChangeEvent)="changeDetected($event)"></app-add-step-within-recipe-execution>
     </div>
     <div *ngIf="addAProgression">
         <app-add-progression-within-recipe-execution
-                [recipeExecutionId]="recipe.recipeExecutionId!" (isChangeEvent)="changeDetected($event)"></app-add-progression-within-recipe-execution>
+                [recipeExecutionId]="recipe.recipeExecutionId!"
+                (isChangeEvent)="changeDetected($event)"></app-add-progression-within-recipe-execution>
 
     </div>
     <div class="divider"></div>
 </div>
-<app-update-order-steps *ngIf="manageOrderSteps" class="print-exclude" [recipeExecutionId]="recipe.recipeExecutionId!" (isChangeEvent)="changeDetected($event)" ></app-update-order-steps>
+<app-update-order-steps *ngIf="manageOrderSteps" class="print-exclude" [recipeExecutionId]="recipe.recipeExecutionId!"
+                        (isChangeEvent)="changeDetected($event)"></app-update-order-steps>
 
 <app-display-cost id="display-cost" [recipeId]="recipe.id" [isChange]="this.isChange"></app-display-cost>

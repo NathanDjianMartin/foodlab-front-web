@@ -2,9 +2,6 @@
     background-color: rgba(79, 94, 98, 0.34) !important;
     padding: 3px;
 }
-.marge {
-    margin-left: 2em;
-}
 .edit{
     background-color: #729598 !important;
 }
@@ -28,6 +25,16 @@
     font-weight: bold;
     font-size: 16px;
     font-family: Arial, sans-serif;
+}
+.subtitle{
+    font-weight: bold;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+.padding{
+    padding-bottom: 0px !important;
+    padding-top: 0px;
+    margin-bottom: 0px !important;
 }
 .circle{
     margin:10px;

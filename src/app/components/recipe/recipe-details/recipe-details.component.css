@@ -10,8 +10,11 @@ h2{
 .card-panel{
     margin: 1px !important;
 }
+.test{
+    padding: 6px;
+}
 .col{
-    padding: 7px;
+    padding: 6px;
 }
 
 @media print {

@@ -1,35 +1,71 @@
-<p *ngIf="this.recipeExecutionId == null">
+<p *ngIf="this.recipeExecutionId == null || this.stepsWithinRecipe.length <=0 ">
     This recipe does not yet contain any step
 </p>
-<div (click)="select()" *ngFor="let step of this.stepsWithinRecipe">
+<div *ngFor="let step of this.stepsWithinRecipe">
 
-    <div class="">
+    <div *ngIf="isRecipeExecutionGeneral" class="">
 
         <div class="row">
-            <div *ngIf="step.step!.isStep == true">
-                <div class="col s1" > <p  class="numberCircle"> {{step.number}}</p></div>
-                <p class="col s11 title"> {{step.step!.stepTitle}}</p>
-                <p>{{step.step!.stepDescription!}}</p>
+            <div *ngIf="step.step!.isStep == true" class="marge">
+                <div class="col s12 valign-wrapper">
+                    <div class="col s1"><p class="numberCircle"> {{step.number}}</p></div>
+                    <div class=" col s8 title"> {{step.step!.stepTitle}}</div>
+                    <div class="col s3">
+                        <button
+                                class="btn-floating btn-small waves-effect waves-light delete right"
+                                (click)="delete(step)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                        <button *ngIf="isRecipeExecutionGeneral"
+                                class="btn-floating btn-small waves-effect waves-light edit right"
+                                (click)="updateStep(step.step!)">
+                            <i class="material-icons">edit</i>
+                        </button>
+                    </div>
+
+
+                </div>
+                <div class="col s1"></div>
+                <div class="col s11 ">{{step.step!.stepDescription!}}</div>
+
                 <div *ngIf="isRecipeExecutionGeneral" class="right">
-                    <button *ngIf="isRecipeExecutionGeneral"
-                            class="btn-floating btn-small waves-effect waves-light edit"
-                            (click)="updateStep(step.step!)"
-                    >
-                        <i class="material-icons">edit</i>
-                    </button>
-                    <button
-                            class="btn-floating btn-small waves-effect waves-light delete"
-                            (click)="delete(step)">
-                        <i class="material-icons">delete</i>
-                    </button>
+
+                </div>
+            </div>
+            <div *ngIf="step.step!.isStep == false" class="cols s12 ">
+                <div class="col s12 valign-wrapper">
+                    <div class="col s1"><p class="numberCircle"> {{step.number}}</p></div>
+                    <div class=" col s8 title"> {{step.step!.stepTitle}}</div>
+                    <div class="col s3">
+                        <button
+                                class="btn-floating btn-small waves-effect waves-light delete right"
+                                (click)="delete(step)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </div>
+                </div>
+                <app-recipe-execution-list [recipeExecutionId]="step.step!.id!"
+                                           [isRecipeExecutionGeneral]="false"></app-recipe-execution-list>
+
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!isRecipeExecutionGeneral">
+        <div class="list">
+            <div *ngIf="step.step!.isStep == true">
+                <div class="col s1"></div>
+                <div class="col s11">
+                    <p class="subtitle"> {{step.number}} -  {{step.step!.stepTitle}}</p>
+                    <p>{{step.step!.stepDescription!}}</p>
                 </div>
             </div>
             <div *ngIf="step.step!.isStep == false" class="cols s12">
-                <div class="col s1" > <p  class="numberCircle"> {{step.number}}</p></div>
+                <div class="col s1"><p class="numberCircle"> {{step.number}}</p></div>
                 <p class="col s11 title"> {{step.step!.stepTitle}}</p>
                 <app-recipe-execution-list [recipeExecutionId]="step.step!.id!"
                                            [isRecipeExecutionGeneral]="false"></app-recipe-execution-list>
-                <button *ngIf="isRecipeExecutionGeneral"  class="btn-floating btn-small waves-effect waves-light delete right"
+                <button *ngIf="isRecipeExecutionGeneral"
+                        class="btn-floating btn-small waves-effect waves-light delete right"
                         (click)="delete(step)"><i class="material-icons">delete</i>
                 </button>
             </div>
