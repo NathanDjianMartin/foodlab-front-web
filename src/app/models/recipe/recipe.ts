@@ -10,6 +10,7 @@ export class Recipe {
     public guestsNumber: number;
     public recipeCategory: number;
     public recipeExecutionId?: number;
+    public costDataId!: number;
 
     //stored attributes for the front
     public recipeCategoryName?: string;

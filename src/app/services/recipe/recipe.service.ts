@@ -5,6 +5,7 @@ import {Recipe} from "../../models/recipe/recipe";
 import {Observable} from "rxjs";
 import {Ingredient} from "../../models/ingredient/ingredient";
 import {IngredientWithinStep} from "../../models/ingredient-within-step/ingredient-within-step";
+import {CostData} from "../../models/cost-data/cost-data";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class RecipeService {
     console.log(json);
     let recipe: Recipe =  new Recipe(json.name, json.author, json.guestsNumber, json.recipeCategory.id);
     recipe.id = json.id;
+    recipe.costDataId = json.costDataId;
     recipe.recipeCategoryName = json.recipeCategory.name;
     if(json.recipeExecutionId != null) {
       recipe.recipeExecutionId = json.recipeExecutionId
@@ -66,6 +68,15 @@ export class RecipeService {
       guestsNumber: recipe.guestsNumber,
       recipeCategoryId: recipe.recipeCategory,
       recipeExecutionId: recipe.recipeExecutionId
+    });
+  }
+
+  updateCostData(recipeId: number, costData: CostData){
+    return this.httpService.patch<Recipe>(`http://localhost:3000/recipe/update-cost-data/${recipeId}`, {
+      averageHourlyCost: Number(costData.averageHourlyCost),
+      flatrateHourlyCost: Number(costData.flatrateHourlyCost),
+      coefWithCharges: Number(costData.coefWithCharges),
+      coefWithoutCharges: Number(costData.coefWithoutCharges),
     });
   }
 
