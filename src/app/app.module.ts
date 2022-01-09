@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {TabIngredientsComponent} from './components/ingredient/tab-ingredients/tab-ingredients.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { IngredientFormComponent } from './components/ingredient/ingredient-form/ingredient-form.component';
 import { NavbarComponent } from './components/general/navbar/navbar.component';
@@ -39,6 +39,7 @@ import { UpdateOrderStepsComponent } from './components/recipe/update-order-step
 import { SearchbarComponent } from './components/general/searchbar/searchbar.component';
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 import { LabelComponent } from './components/recipe/label/label.component';
+import {TokenInterceptorService} from "./services/interceptors/token-interceptor.service";
 
 @NgModule({
     declarations: [
@@ -85,7 +86,9 @@ import { LabelComponent } from './components/recipe/label/label.component';
         ReactiveFormsModule,
         FormsModule
     ],
-    providers: [],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
