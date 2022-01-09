@@ -38,40 +38,31 @@ export class UserCreationComponent implements OnInit {
       const isAdmin = this.userCreationForm.get('isAdmin')?.value;
       const user = new User(name, email, password, isAdmin);
 
-      const jwt: string | null = this.localStorageService.get('jwt');
-
-      if (jwt !== null) {
-        this.userService.create(user, jwt).subscribe({
-          next: (data) => {
-            this.userCreationForm.reset();
-            this.users.push(user);
-            this.initForm();
-            this.loggerService.displaySuccess(`User ${name} successfully created!`);
-          },
-          error: (err) => {
-            this.loggerService.displayError(`Error while creating user: ${err.error.message}`);
-          }
-        });
-      } else {
-        this.loggerService.displayError('You must be logged in to create a user!');
-      }
+      this.userService.create(user).subscribe({
+        next: (data) => {
+          this.userCreationForm.reset();
+          this.users.push(user);
+          this.initForm();
+          this.loggerService.displaySuccess(`User ${name} successfully created!`);
+        },
+        error: (err) => {
+          this.loggerService.displayError(`Error while creating user: ${err.error.message}`);
+        }
+      });
     } else {
-      this.loggerService.displayError('Please fill in the user creation form correctly.');
+      this.loggerService.displayError('You must be logged in to create a user!');
     }
   }
 
   fetchUserList(): void {
-    const jwt: string | null = this.localStorageService.get('jwt');
-    if (jwt !== null) {
-      this.userService.findAll(jwt).subscribe({
-        next: (data) => {
-          this.users = JSON.parse(JSON.stringify(data));
-        },
-        error: (err) => {
-          this.loggerService.displayError(`Error while fetching users list: ${err.error.message}`);
-        }
-      })
-    }
+    this.userService.findAll().subscribe({
+      next: (data) => {
+        this.users = JSON.parse(JSON.stringify(data));
+      },
+      error: (err) => {
+        this.loggerService.displayError(`Error while fetching users list: ${err.error.message}`);
+      }
+    });
   }
 
   initForm(): void {

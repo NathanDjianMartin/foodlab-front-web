@@ -89,7 +89,7 @@ export class IngredientFormComponent implements OnInit {
           })
         },
         error: (err) => {
-          alert(`Error while initializing the ingredient form: ${err.message}`)
+          this.loggerService.displayError(`Error while initializing the ingredient form: ${err.message}`)
         }
       })
     }

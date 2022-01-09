@@ -40,33 +40,22 @@ export class UserService {
     this.router.navigate(['login']);
   }
 
-  getProfile(jwt: string) {
+  getProfile() {
 /*    const headers = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`
     });*/
     return this.httpClient.get('http://localhost:3000/user/profile');
   }
 
-  findAll(jwt: string) {
-    // TODO stop getting jwt as a parameter (use localStorageService instead)
-/*    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${jwt}`
-    });*/
+  findAll() {
     return this.httpClient.get('http://localhost:3000/user');
   }
 
-  create(user: User, jwt: string) {
-    // TODO stop getting jwt as a parameter (use localStorageService instead)
-/*    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.localStorageService.get('jwt')}`
-    });*/
+  create(user: User) {
     return this.httpClient.post('http://localhost:3000/user', { ...user });
   }
 
   delete(id: number) {
-   /* const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.localStorageService.get('jwt')}`
-    });*/
     return this.httpClient.delete(`http://localhost:3000/user/${id}`)
   }
 }

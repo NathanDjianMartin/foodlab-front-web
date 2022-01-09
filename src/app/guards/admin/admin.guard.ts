@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs';
 import {LocalStorageService} from "../../services/local-storage/local-storage.service";
 import {LoggerService} from "../../services/logger/logger.service";
 import {UserService} from "../../services/user/user.service";
@@ -15,34 +15,29 @@ export class AdminGuard implements CanActivate {
       private userService: UserService,
       private localStorageService: LocalStorageService,
       private loggerService: LoggerService
-  ) {}
+  ) {
+  }
 
 
   canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> {
+      route: ActivatedRouteSnapshot,
+      state: RouterStateSnapshot): Observable<boolean> {
     return new Observable<boolean>(observable => {
-      const jwt = this.localStorageService.get('jwt');
-      if (jwt !== null) {
-        this.userService.getProfile(jwt).subscribe({
-          next: (data) => {
-            const user: User = JSON.parse(JSON.stringify(data));
-            if (user.isAdmin) {
-              observable.next(true);
-            } else {
-              this.loggerService.displayError('You must be an admin to access this page!');
-              observable.next(false);
-            }
-          },
-          error: (err) => {
-            this.loggerService.displayError(`Error while loading your profile : ${err.error.message}`);
+      this.userService.getProfile().subscribe({
+        next: (data) => {
+          const user: User = JSON.parse(JSON.stringify(data));
+          if (user.isAdmin) {
+            observable.next(true);
+          } else {
+            this.loggerService.displayError('You must be an admin to access this page!');
             observable.next(false);
           }
-        });
-      } else {
-        this.loggerService.displayError('You must be logged in to access this page!');
-        observable.next(false);
-      }
+        },
+        error: (err) => {
+          this.loggerService.displayError(`Error while loading your profile : ${err.error.message}`);
+          observable.next(false);
+        }
+      });
     });
   }
 }

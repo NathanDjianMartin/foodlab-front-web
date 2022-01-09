@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../../../models/user/user";
 import {UserService} from "../../../services/user/user.service";
 import {LocalStorageService} from "../../../services/local-storage/local-storage.service";
+import {LoggerService} from "../../../services/logger/logger.service";
 
 @Component({
   selector: 'app-user-list',
@@ -14,7 +15,8 @@ export class UserListComponent implements OnInit {
 
   constructor(
       private userService: UserService,
-      private localStorageService: LocalStorageService
+      private localStorageService: LocalStorageService,
+      private loggerService: LoggerService
   ) { }
 
   ngOnInit(): void {
@@ -27,10 +29,10 @@ export class UserListComponent implements OnInit {
         // removes the user from the users array
         const deletedUserIndex = this.users.indexOf(this.users.find(user => user.id == id)!);
         this.users.splice(deletedUserIndex, 1);
-        alert(`User successfully deleted!`);
+        this.loggerService.displaySuccess(`User successfully deleted!`);
       },
       error: (err) => {
-        alert(`Error while deleting a user: ${err.message}`);
+        this.loggerService.displayError(`Error while deleting a user: ${err.message}`);
       }
     });
   }

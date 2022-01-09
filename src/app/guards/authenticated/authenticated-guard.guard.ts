@@ -22,9 +22,7 @@ export class AuthenticatedGuardGuard implements CanActivate {
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<boolean> {
     return new Observable<boolean>(observable => {
-      const jwt = this.localStorageService.get('jwt');
-      if (jwt !== null) {
-        this.userService.getProfile(jwt).subscribe({
+        this.userService.getProfile().subscribe({
           next: (data) => {
             observable.next(true);
           },
@@ -33,10 +31,6 @@ export class AuthenticatedGuardGuard implements CanActivate {
             observable.next(false);
           }
         });
-      } else {
-        this.loggerService.displayError('You must be logged in to access this page!');
-        observable.next(false);
-      }
     });
   }
 
