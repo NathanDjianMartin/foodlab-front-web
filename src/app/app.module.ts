@@ -38,8 +38,6 @@ import { AddProgressionWithinRecipeExecutionComponent } from './components/recip
 import { UpdateOrderStepsComponent } from './components/recipe/update-order-steps/update-order-steps.component';
 import { SearchbarComponent } from './components/general/searchbar/searchbar.component';
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
-import { LabelComponent } from './components/recipe/label/label.component';
-import {TokenInterceptorService} from "./services/interceptors/token-interceptor.service";
 import { RecipeSaleComponent } from './components/recipe/recipe-sale/recipe-sale.component';
 
 @NgModule({
@@ -78,7 +76,6 @@ import { RecipeSaleComponent } from './components/recipe/recipe-sale/recipe-sale
         RecipeListComponent,
         AddProgressionWithinRecipeExecutionComponent,
         UpdateOrderStepsComponent,
-        LabelComponent,
         RecipeSaleComponent,
     ],
     imports: [
@@ -87,9 +84,6 @@ import { RecipeSaleComponent } from './components/recipe/recipe-sale/recipe-sale
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule
-    ],
-    providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }
     ],
     bootstrap: [AppComponent]
 })
