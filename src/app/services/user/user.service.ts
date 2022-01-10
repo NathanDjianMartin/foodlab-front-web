@@ -37,7 +37,7 @@ export class UserService {
 
   logout() {
     this.localStorageService.remove('jwt');
-    this.router.navigate(['login']);
+    this.router.navigate(['']);
   }
 
   getProfile() {
@@ -45,6 +45,10 @@ export class UserService {
       'Authorization': `Bearer ${jwt}`
     });*/
     return this.httpClient.get('http://localhost:3000/user/profile');
+  }
+
+  isLoggedIn() {
+    return this.localStorageService.get('jwt') !== null;
   }
 
   findAll() {
