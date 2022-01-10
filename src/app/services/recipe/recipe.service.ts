@@ -61,7 +61,6 @@ export class RecipeService {
   }
 
   updateRecipe(recipe: Recipe): Observable<Recipe>{
-    //TODO: vérifier id not null ou undifined
     return this.httpService.patch<Recipe>(`http://localhost:3000/recipe/${recipe.id!}`, {
       name: recipe.name,
       author: recipe.author,

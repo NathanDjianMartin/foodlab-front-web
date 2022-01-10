@@ -44,16 +44,22 @@ export class IngredientStockByCategoryComponent implements OnInit {
   }
 
   updateQuantityInStock(){
-    //TODO: pour essayer que les données recharge mieux remettre observable et recharger le tableau
+    let isUpdated = true;
     for(let ingredient of this.ingredients){
       this.ingredientService.updateStockQuantityIngredient(ingredient).subscribe({
         next: (data) => {
-          this.loggerService.displaySuccess("Stock updated");
-          this.init();
+
         }, error: (error) => {
-          this.loggerService.displayError("Error in updating stock!")
+          isUpdated = false;
       }
       });
+    }
+    if(isUpdated){
+      this.loggerService.displaySuccess("Stock updated!");
+      this.init();
+      this.init();
+    }else{
+      this.loggerService.displayError("Error in updating stock!");
     }
   }
 

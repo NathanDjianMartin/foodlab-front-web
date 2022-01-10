@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {TabIngredientsComponent} from "./components/ingredient/tab-ingredients/tab-ingredients.component";
 import {IngredientFormComponent} from "./components/ingredient/ingredient-form/ingredient-form.component";
-import {TabRecipesComponent} from "./components/recipe/tab-recipes/tab-recipes.component";
 import {RecipeFormComponent} from "./components/recipe/recipe-form/recipe-form.component";
 import {RecipeDetailsComponent} from "./components/recipe/recipe-details/recipe-details.component";
 import {LoginComponent} from "./components/user/login/login.component";
@@ -24,11 +22,13 @@ const routes: Routes = [
   },
   {
     path: 'ingredients/add',
-    component: IngredientFormComponent
+    component: IngredientFormComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'ingredients/edit/:id',
-    component: IngredientFormComponent
+    component: IngredientFormComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'recipes',
@@ -36,7 +36,8 @@ const routes: Routes = [
   },
   {
     path: 'recipes/add',
-    component: RecipeFormComponent
+    component: RecipeFormComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'login',
@@ -58,15 +59,18 @@ const routes: Routes = [
   },
   {
     path: "recipe/edit/:id",
-    component: RecipeFormComponent
+    component: RecipeFormComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: "stock",
-    component: DisplayIngredientStockComponent
+    component: DisplayIngredientStockComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: "settings",
-    component: SettingsPageComponent
+    component: SettingsPageComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: '',

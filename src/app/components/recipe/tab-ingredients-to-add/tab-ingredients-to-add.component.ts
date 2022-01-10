@@ -26,9 +26,7 @@ export class TabIngredientsToAddComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //TODO: nettoyer
     for (const changedProp in changes) {
-      console.log(changedProp);
       if(this.ingredientsSelectedInit){
         for(let ingredient of this.ingredientsSelectedInit) {
           this.ingredientsSelected.push(ingredient);
