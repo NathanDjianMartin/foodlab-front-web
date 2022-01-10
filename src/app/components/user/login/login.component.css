@@ -7,8 +7,17 @@
     transform: translate(-50%, -50%);
 }
 
-.login-form {
-    border: 1px solid #dcdcdc;
+.input-field {
     border-radius: 10px;
-    padding: 10px;
+    opacity: 90%;
+}
+
+.login-form {
+    border-radius: 10px;
+    padding: 60px 10px 10px;
+    backdrop-filter: blur(10px) drop-shadow(10px 10px 10px black) brightness(70%);
+}
+
+.glow {
+    box-shadow: 0px 0px 15px 4px #ffffff;
 }

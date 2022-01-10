@@ -1,15 +1,17 @@
-<nav>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo marged"> <i class="material-icons">room_service  </i>FoodLab</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a [routerLink]="['/ingredients']">Ingredients</a></li>
-            <li><a [routerLink]="['/recipes']">Recettes</a></li>
-            <li><a [routerLink]="['/stock']">Stock</a></li>
-            <!-- TODO : mettre guards pour admin -->
-            <li><a [routerLink]="['/user-creation']">Users</a></li>
-            <li><a [routerLink]="['/settings']">Settings</a></li>
-            <li><a [routerLink]="['/profile']">My account</a></li>
-            <li><a [routerLink]="['/login']">Login</a></li>
-        </ul>
-    </div>
-</nav>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="" class="brand-logo marged"> <i class="material-icons">room_service</i>FoodLab</a>
+            <div *ngIf="this.userService.isLoggedIn()">
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a [routerLink]="['/ingredients']">Ingredients</a></li>
+                    <li><a [routerLink]="['/recipes']">Recipes</a></li>
+                    <li><a [routerLink]="['/stock']">Stock</a></li>
+                    <li><a [routerLink]="['/settings']">Settings</a></li>
+                    <li><a [routerLink]="['/user-creation']">Users</a></li>
+                    <li><a [routerLink]="['/profile']">My account</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

@@ -1,18 +1,15 @@
+<img class="responsive-img" src="assets/profile-bg.jpg">
 <div class="container">
     <div class="row">
-        <h4 class="col push-s3">Your profile</h4>
-    </div>
-    <div class="row">
-        <div class="col s6 push-s3">
-            <div class="profile-info z-depth-1">
-                <p>Name: {{this.user?.name}}</p>
-                <p>Email: {{this.user?.email}}</p>
+        <div class="col s5 profile-info glow">
+            <h4 class="white-text">Your profile</h4>
+            <p class="white-text">Name: {{this.user?.name}}</p>
+            <p class="white-text">Email: {{this.user?.email}}</p>
+            <div class="row">
+                <div class="col">
+                    <button class="btn waves-effect waves-light" type="submit" name="action" (click)="logout()">Logout</button>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s3 push-s7">
-            <button class="btn waves-effect waves-light" type="submit" name="action" (click)="logout()">Logout</button>
         </div>
     </div>
 </div>
