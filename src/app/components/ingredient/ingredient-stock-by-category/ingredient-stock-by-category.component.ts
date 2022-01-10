@@ -3,6 +3,7 @@ import {Ingredient} from "../../../models/ingredient/ingredient";
 import {IngredientService} from "../../../services/ingredient/ingredient.service";
 import {Observable} from "rxjs";
 import {IngredientCategory} from "../../../models/ingredient-category/ingredient-category";
+import {LoggerService} from "../../../services/logger/logger.service";
 
 @Component({
   selector: 'app-ingredient-stock-by-category',
@@ -14,11 +15,16 @@ export class IngredientStockByCategoryComponent implements OnInit {
   ingredients!: Ingredient[];
   hasChanged!: boolean;
 
-  constructor(private ingredientService: IngredientService) {
+  constructor(private ingredientService: IngredientService,
+              private loggerService: LoggerService) {
   }
 
 
   ngOnInit(): void {
+    this.init();
+  }
+
+  init(){
     this.hasChanged = false;
     if(this.category && this.category.id) {
       this.ingredientService.getManyByCategory(this.category.id!).subscribe( (ingredients) => {
@@ -40,9 +46,15 @@ export class IngredientStockByCategoryComponent implements OnInit {
   updateQuantityInStock(){
     //TODO: pour essayer que les données recharge mieux remettre observable et recharger le tableau
     for(let ingredient of this.ingredients){
-      this.ingredientService.updateStockQuantityIngredient(ingredient).subscribe();
+      this.ingredientService.updateStockQuantityIngredient(ingredient).subscribe({
+        next: (data) => {
+          this.loggerService.displaySuccess("Stock updated");
+          this.init();
+        }, error: (error) => {
+          this.loggerService.displayError("Error in updating stock!")
+      }
+      });
     }
-    this.ngOnInit();
   }
 
 }

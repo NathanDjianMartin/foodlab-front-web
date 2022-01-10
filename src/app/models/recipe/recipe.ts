@@ -17,7 +17,6 @@ export class Recipe {
     public steps?: RecipeExecution[];
     public ingredient?: Ingredient[];
 
-    //TODO: ajouter attribut recipeExecution et costData
 
     constructor(name: string, author: string, guestsNumber: number, recipeCategory: number) {
         this.name = name;
