@@ -11,12 +11,18 @@ import {LoggerService} from "../../../services/logger/logger.service";
 })
 export class SettingsPageComponent implements OnInit {
   costDataFormGroup!: FormGroup;
+  managingType! : string;
+  manageRecipeCategory: boolean = false;
+  manageAllergenCategory: boolean = false;
+  manageIngredientCategory: boolean = false;
+  manageDefaultCostData: boolean = false;
 
   constructor(private costDataService: CostDataService,
               private fb: FormBuilder,
               private loggerService: LoggerService) { }
 
   ngOnInit(): void {
+    this.managingType = "ingredient-category"
     this.costDataService.getCostData(1).subscribe({
       next: (defaultCostData) => {
         this.costDataFormGroup = this.fb.group({
@@ -27,7 +33,7 @@ export class SettingsPageComponent implements OnInit {
         });
       }
     })
-
+    this.toggleRecipeCategoryManagement();
   }
 
   updateDefaultCostData(){
@@ -45,4 +51,31 @@ export class SettingsPageComponent implements OnInit {
     });
   }
 
+  toggleRecipeCategoryManagement() {
+    this.manageRecipeCategory = true;
+    this.manageAllergenCategory = false;
+    this.manageDefaultCostData = false;
+    this.manageIngredientCategory = false;
+  }
+
+  toggleAllergenCategoryManagement() {
+    this.manageRecipeCategory = false;
+    this.manageAllergenCategory = true;
+    this.manageDefaultCostData = false;
+    this.manageIngredientCategory = false;
+  }
+
+  toggleIngredientCategoryManagement() {
+    this.manageRecipeCategory = false;
+    this.manageAllergenCategory = false;
+    this.manageDefaultCostData = false;
+    this.manageIngredientCategory = true;
+  }
+
+  toggleDefaultCostDataManagement() {
+    this.manageRecipeCategory = false;
+    this.manageAllergenCategory = false;
+    this.manageDefaultCostData = true;
+    this.manageIngredientCategory = false;
+  }
 }

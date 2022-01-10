@@ -1,6 +1,9 @@
 .delete{
-    background-color: #903739;
+    background-color: #903739 !important;
 }
 .add{
     margin-top: 25px ;
+}
+li{
+    height: 50px;
 }

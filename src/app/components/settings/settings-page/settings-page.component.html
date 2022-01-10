@@ -1,43 +1,80 @@
-<div class="container">
+<div class="container row">
+    <div class="card-panel col s3">
+        <div class="col s12  title-div">
+            <h4 class="center-align">Settings</h4>
+            <p class="comment">Choose a management option</p>
+        </div>
+        <div class="col s12">
+            <table class="highlight centered">
 
-    <h2>Settings</h2>
+                <tbody>
+                <tr class="center-align centered" (click)="toggleIngredientCategoryManagement()">Ingredient categories
+                </tr>
+                <tr class="center-align" (click)="toggleAllergenCategoryManagement()">Allergen categories</tr>
+                <tr class="center-align" (click)="toggleRecipeCategoryManagement()">Recipe categories</tr>
+                <tr class="center-align" (click)="toggleDefaultCostDataManagement()">Default cost data</tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- ////////////////////// Categories management ////////////////////// -->
-    <div class="container">
-        <h4>Manage ingredient categories</h4>
-        <app-ingredient-category-list></app-ingredient-category-list>
 
-        <h4>Manage allergen categories</h4>
-        <app-allergen-category-list></app-allergen-category-list>
-
-        <h4>Manage recipe categories</h4>
-        <app-recipe-category-list></app-recipe-category-list>
-
-        <h4>Manage cost data</h4>
-        <h6>Update the default cost data</h6>
-
-        <form [formGroup]="costDataFormGroup">
-            <div class="col s12">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="averageHourlyCost" type="number" step="0.01" min="0" class="validate" formControlName="averageHourlyCost">
-                        <label for="averageHourlyCost" class="active">Average hourly cost</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="flatrateHourlyCost" type="number" step="0.01" min="0" class="validate" formControlName="flatrateHourlyCost">
-                        <label for="flatrateHourlyCost" class="active">Flatrate Hourly Cost</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="coefWithCharges" type="number" step="0.01" min="0" class="validate" formControlName="coefWithCharges">
-                        <label for="coefWithCharges" class="active">Coefficient With Charges</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="coefWithoutCharges" type="number" step="0.01" min="0" class="validate" formControlName="coefWithoutCharges">
-                        <label for="coefWithoutCharges" class="active">Coefficient Without Charges</label>
-                    </div>
-                </div>
-            </div>
-            <button class="btn-small waves-effect waves-light right-align" (click)="updateDefaultCostData()">Saved cost</button>
-        </form>
     </div>
+    <div class=" col s9">
+
+        <!-- ////////////////////// Categories management ////////////////////// -->
+        <div class="container">
+            <div *ngIf="manageIngredientCategory">
+                <h4>Manage ingredient categories</h4>
+                <app-ingredient-category-list></app-ingredient-category-list>
+            </div>
+
+            <div *ngIf="manageAllergenCategory">
+                <h4>Manage allergen categories</h4>
+                <app-allergen-category-list></app-allergen-category-list>
+            </div>
+
+            <div *ngIf="manageRecipeCategory">
+                <h4>Manage recipe categories</h4>
+                <app-recipe-category-list></app-recipe-category-list>
+
+            </div>
+            <div *ngIf="manageDefaultCostData">
+                <h4>Manage cost data</h4>
+                <h6>Update the default cost data</h6>
+
+                <form [formGroup]="costDataFormGroup">
+                    <div class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="averageHourlyCost" type="number" step="0.01" min="0" class="validate"
+                                       formControlName="averageHourlyCost">
+                                <label for="averageHourlyCost" class="active">Average hourly cost</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="flatrateHourlyCost" type="number" step="0.01" min="0" class="validate"
+                                       formControlName="flatrateHourlyCost">
+                                <label for="flatrateHourlyCost" class="active">Flatrate Hourly Cost</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="coefWithCharges" type="number" step="0.01" min="0" class="validate"
+                                       formControlName="coefWithCharges">
+                                <label for="coefWithCharges" class="active">Coefficient With Charges</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="coefWithoutCharges" type="number" step="0.01" min="0" class="validate"
+                                       formControlName="coefWithoutCharges">
+                                <label for="coefWithoutCharges" class="active">Coefficient Without Charges</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-small waves-effect waves-light right-align"
+                            (click)="updateDefaultCostData()">
+                        Saved cost
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
+

@@ -1,7 +1,11 @@
 <div class="row">
     <ul class="collection col s10">
         <li *ngFor="let category of recipeCategories  | async" class="collection-item">
-            <button class="btn-floating btn-small waves-effect waves-light right delete">x</button>
+            <button
+                    class="btn-floating btn-small waves-effect waves-light delete right"
+                    (click)="deleteRecipeCategory(category)">
+                <i class="material-icons">delete</i>
+            </button>
             {{category.name}}
         </li>
     </ul>
