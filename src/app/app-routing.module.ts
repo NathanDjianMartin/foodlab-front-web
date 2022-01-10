@@ -12,6 +12,7 @@ import {UserCreationComponent} from "./components/user/user-creation/user-creati
 import {DisplayIngredientStockComponent} from "./components/ingredient/display-ingredient-stock/display-ingredient-stock.component";
 import {DisplayRecipesComponent} from "./components/recipe/display-recipes/display-recipes.component";
 import {DisplayIngredientComponent} from "./components/ingredient/display-ingredient/display-ingredient.component";
+import {AdminGuard} from "./guards/admin/admin.guard";
 
 const routes: Routes = [
   {
@@ -45,7 +46,8 @@ const routes: Routes = [
   },
   {
     path: 'user-creation',
-    component: UserCreationComponent
+    component: UserCreationComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: "recipe/details/:id",

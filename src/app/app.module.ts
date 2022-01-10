@@ -39,6 +39,7 @@ import { UpdateOrderStepsComponent } from './components/recipe/update-order-step
 import { SearchbarComponent } from './components/general/searchbar/searchbar.component';
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 import { RecipeSaleComponent } from './components/recipe/recipe-sale/recipe-sale.component';
+import {TokenInterceptorService} from "./services/interceptors/token-interceptor.service";
 
 @NgModule({
     declarations: [
@@ -84,6 +85,9 @@ import { RecipeSaleComponent } from './components/recipe/recipe-sale/recipe-sale
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }
     ],
     bootstrap: [AppComponent]
 })
