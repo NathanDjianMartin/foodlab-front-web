@@ -109,4 +109,5 @@ export class RecipeDetailsComponent implements OnInit {
       displayCostElement.classList.remove('print-exclude');
     }
   }
+
 }
