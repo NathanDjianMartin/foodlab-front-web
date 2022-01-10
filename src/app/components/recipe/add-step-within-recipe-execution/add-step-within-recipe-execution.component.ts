@@ -74,7 +74,8 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit, OnChanges 
                 })
 
                 await this.ingredientWithinStepService.getAllIngredientsInSimpleStep(this.step!.id!).subscribe( (ingredients) => {
-                    console.log(ingredients);
+
+                    this.ingredientsSelected = [];
                     for(let ingredient of ingredients){
                         this.ingredientsSelected.push(ingredient);
                     }
