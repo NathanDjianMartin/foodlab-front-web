@@ -10,12 +10,8 @@
     padding: 5px;
 }
 
-@media print {
-    * {
-        opacity: 0%;
-    }
-
-    app-recipe-sale {
-        opacity: 100%;
-    }
-}
+/*@media print {*/
+/*    app-recipe-sale {*/
+/*        opacity: 100%;*/
+/*    }*/
+/*}*/

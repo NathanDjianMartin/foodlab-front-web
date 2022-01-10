@@ -42,6 +42,8 @@ import { RecipeSaleComponent } from './components/recipe/recipe-sale/recipe-sale
 import {TokenInterceptorService} from "./services/interceptors/token-interceptor.service";
 import { SettingsPageComponent } from './components/settings/settings-page/settings-page.component';
 
+import {NgxPrintModule} from 'ngx-print';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -86,7 +88,8 @@ import { SettingsPageComponent } from './components/settings/settings-page/setti
         AppRoutingModule,
         HttpClientModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        NgxPrintModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }

@@ -42,7 +42,30 @@ export class RecipeSaleComponent implements OnInit {
     });
   }
 
-  printLabel(): void {
+
+  printLabel() {
+    let displayCostElement = document.getElementById('display-cost');
+    if (displayCostElement != null) {
+      displayCostElement.classList.add('print-exclude');
+    }
+    let details = document.getElementById('details');
+    if(details != null) {
+      details.classList.add('print-exclude');
+    }
+    let label = document.getElementById('label');
+    if(label != null) {
+      label.classList.remove('print-exclude');
+    }
+    let label2 = document.getElementById('label2');
+    if(label2 != null) {
+      label2.classList.remove('print-exclude');
+    }
     window.print();
+    if (displayCostElement != null) {
+      displayCostElement.classList.remove('print-exclude');
+    }
+    if (details != null) {
+      details.classList.remove('print-exclude');
+    }
   }
 }
