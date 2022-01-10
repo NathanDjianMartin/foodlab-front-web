@@ -40,7 +40,7 @@ export class IngredientWithinStepService {
   }
 
   getAllIngredientsInRecipe(id: number): Observable<Ingredient[]> {
-    return this.httpService.get<Ingredient[]>(`http://localhost:3000/ingredient-within-step/ingredients-in-recipe/${id}`);
+    return this.httpService.get<Ingredient[]>(`http://localhost:3000/recipe/ingredients-in-recipe/${id}`);
   }
 
   createIngredientWithinStep(ingredientWithinStep: IngredientWithinStep): Observable<IngredientWithinStep> {

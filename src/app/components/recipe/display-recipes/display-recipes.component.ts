@@ -49,6 +49,9 @@ export class DisplayRecipesComponent implements OnInit {
                 this.ingredientWithinStepService.getAllIngredientsInRecipe(recipe.id!).subscribe({
                   next: (ingredients) => {
                     recipe.ingredient = ingredients;
+                  },
+                  error: (err) => {
+                    console.log(err.error.message);
                   }
                 });
               }
