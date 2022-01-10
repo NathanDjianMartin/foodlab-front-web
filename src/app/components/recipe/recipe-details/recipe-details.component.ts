@@ -42,12 +42,18 @@ export class RecipeDetailsComponent implements OnInit {
     this.isAddProgressionComponentVisible = false;
     this.isAddStepComponentVisible = false;
     this.isStepsOrderManagementComponentVisible = false;
+    this.isCostsComponentVisible = false;
+    this.isRecipeSaleComponentVisible = false;
     this.stepToUpdate = undefined;
   }
 
   stepToUpdateDetected($event: RecipeExecution){
     this.stepToUpdate = $event;
-    console.log("jj")
+    this.isAddProgressionComponentVisible = false;
+    this.isAddStepComponentVisible = false;
+    this.isStepsOrderManagementComponentVisible = false;
+    this.isCostsComponentVisible = false;
+    this.isRecipeSaleComponentVisible = false;
     this.router.navigate(["recipe/details/" + this.recipe!.id!], { fragment: 'editstep'}).then( (data) => {
       console.log("recipe/details/" + this.recipe!.id! + "#editstep");
     }, (error) => {
@@ -56,6 +62,7 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   toggleAddStep() {
+    this.stepToUpdate = undefined;
     this.isAddStepComponentVisible = !this.isAddStepComponentVisible;
     this.isAddProgressionComponentVisible = false;
     this.isStepsOrderManagementComponentVisible = false;
@@ -64,6 +71,7 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   toggleAddProgression() {
+    this.stepToUpdate = undefined;
     this.isAddStepComponentVisible = false;
     this.isAddProgressionComponentVisible = !this.isAddProgressionComponentVisible;
     this.isStepsOrderManagementComponentVisible = false;
@@ -72,6 +80,7 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   toggleStepsOrderManagement() {
+    this.stepToUpdate = undefined;
     this.isAddStepComponentVisible = false;
     this.isAddProgressionComponentVisible = false;
     this.isStepsOrderManagementComponentVisible = !this.isStepsOrderManagementComponentVisible;
@@ -80,6 +89,7 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   toggleRecipeSale() {
+    this.stepToUpdate = undefined;
     this.isAddStepComponentVisible = false;
     this.isAddProgressionComponentVisible = false;
     this.isStepsOrderManagementComponentVisible = false;
@@ -88,6 +98,7 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   toggleCosts() {
+    this.stepToUpdate = undefined;
     this.isAddStepComponentVisible = false;
     this.isAddProgressionComponentVisible = false;
     this.isStepsOrderManagementComponentVisible = false;
