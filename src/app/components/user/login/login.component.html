@@ -1,16 +1,15 @@
+<img class="responsive-img" src="assets/login-bg.jpg">
 <div class="container">
     <div class="row">
-        <form class="login-form col s6 push-s3 z-depth-1" [formGroup]="loginFormGroup">
+        <form class="login-form glow col s6 push-s3 z-depth-1" [formGroup]="loginFormGroup">
             <div class="row">
                 <div class="input-field col s6 push-s3">
-                    <input id="email" type="email" class="validate" formControlName="email">
-                    <label for="email">Email address</label>
+                    <input placeholder="Email" id="email" type="email" formControlName="email">
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6 push-s3">
-                    <input id="password" type="password" class="validate" formControlName="password">
-                    <label for="password">Password</label>
+                    <input placeholder="Password" id="password" type="password" formControlName="password">
                 </div>
             </div>
             <div class="row">
