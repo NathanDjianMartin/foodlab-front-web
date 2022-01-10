@@ -3,6 +3,7 @@ import {IngredientCategory} from "../../../models/ingredient-category/ingredient
 import {IngredientCategoryService} from "../../../services/ingredient-category/ingredient-category.service";
 import {Observable} from "rxjs";
 import {LoggerService} from "../../../services/logger/logger.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
     selector: 'app-ingredient-category-list',
@@ -11,12 +12,21 @@ import {LoggerService} from "../../../services/logger/logger.service";
 })
 export class IngredientCategoryListComponent implements OnInit {
     ingredientCategories!: Observable<IngredientCategory[]>;
+    ingredientCategoryFormGroup!: FormGroup;
 
     constructor(private ingredientCategoryService: IngredientCategoryService,
-                private loggerService: LoggerService) {
+                private loggerService: LoggerService,
+                private fb: FormBuilder) {
     }
 
     ngOnInit(): void {
+        this.init();
+    }
+
+    init(){
+        this.ingredientCategoryFormGroup = this.fb.group({
+            name:[null,[Validators.required]]
+        })
         this.ingredientCategories = this.ingredientCategoryService.getAllIngredientCategories();
     }
 
@@ -28,6 +38,13 @@ export class IngredientCategoryListComponent implements OnInit {
             (error) => {
                 this.loggerService.displayError("This category corresponds to several ingredient, you cannot delete it")
             }
+        );
+    }
+
+    createIngredientCategory(){
+        let ingredientCategory = new IngredientCategory(this.ingredientCategoryFormGroup.get("name")?.value);
+        this.ingredientCategoryService.createIngredientCategory(ingredientCategory).subscribe( (data) => {
+            this.ngOnInit() }
         );
     }
 

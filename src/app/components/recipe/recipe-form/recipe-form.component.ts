@@ -81,10 +81,6 @@ export class RecipeFormComponent implements OnInit {
     }
 
 
-    manageRecipeCategoryAction() {
-        this.manageRecipeCategory = true;
-    }
-
     getRecipeFromForm(){
         let recipe: Recipe | null = null;
         if (this.recipeFormGroup.valid) {

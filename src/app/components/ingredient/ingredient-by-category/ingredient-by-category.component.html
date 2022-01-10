@@ -20,12 +20,12 @@
                 <span *ngIf="ingredient.allergenCategoryId" class="new badge" data-badge-caption="Allergen"></span>
             </td>
             <td>{{ingredient.unitaryPrice + "$/" + ingredient.unit}}</td>
-            <td>{{ingredient.stockQuantity + " " + ingredient.unit}}</td>
+            <td >{{ingredient.stockQuantity + " " + ingredient.unit}}</td>
             <td>
                 <!--                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>-->
                 <button class="btn-small waves-effect waves-light action" (click)="editIngredient(ingredient.id)">Edit</button>
             </td>
-            <td>
+            <td class="td1" >
                 <button class="btn-small waves-effect waves-light action" (click)="deleteIngredient(ingredient)">Delete</button>
             </td>
         </tr>

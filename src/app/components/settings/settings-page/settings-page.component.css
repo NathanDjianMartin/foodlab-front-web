@@ -1,0 +1,34 @@
+.heighted{
+    height: 100%;
+    background-color: #729598;
+}
+.collection{
+    background-color: #729598;
+}
+.card-panel{
+    background-color: rgba(114, 149, 152, 0.65);
+    margin-top: 40px;
+    height: 450px;
+}
+.heighte{
+    height: 50em;
+}
+
+.menu{
+    font-family: Verdana;
+}
+select{
+    display: block;
+}
+tr{
+    height: 50px !important;
+    padding-top: 10px;
+}
+.title-div{
+    margin-bottom: 2%;
+}
+.comment{
+    font-size: 0.85em;
+    font-weight: 510;
+}
+

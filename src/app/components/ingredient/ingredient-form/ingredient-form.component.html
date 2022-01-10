@@ -49,25 +49,6 @@
     </form>
 </div>
 
-
-<!-- ////////////////////// Categories management ////////////////////// -->
-
-<div class="row container center-align">
-    <button class="btn-small waves-effect waves-light" (click)="toggleIngredientCategoryManagement()">Manage ingredient category</button>
-    <button class="btn-small waves-effect waves-light" (click)="toggleAllergenCategoryManagement()">Manage allergen category</button>
-</div>
-<div class="container row">
-    <div *ngIf="manageIngredientCategory" class="col s6">
-        <app-ingredient-category-list></app-ingredient-category-list>
-        <app-add-ingredient-category></app-add-ingredient-category>
-    </div>
-    <div *ngIf="manageAllergenCategory" class="col s6">
-        <app-allergen-category-list></app-allergen-category-list>
-        <app-add-allergen-category></app-add-allergen-category>
-    </div>
-</div>
-
-
 <!-- Update or Submit buttons -->
 <div class="row container right-align">
 

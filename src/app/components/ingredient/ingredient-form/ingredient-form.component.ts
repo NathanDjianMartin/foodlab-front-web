@@ -103,13 +103,6 @@ export class IngredientFormComponent implements OnInit {
       allergenCategory:[allergenCategory]});
   }
 
-  toggleAllergenCategoryManagement() {
-    this.manageAllergenCategory = !this.manageAllergenCategory;
-  }
-
-  toggleIngredientCategoryManagement() {
-    this.manageIngredientCategory = !this.manageIngredientCategory;
-  }
 
   getIngredientFromForm(): Ingredient | null {
     if(this.ingredientFormGroup.valid) {

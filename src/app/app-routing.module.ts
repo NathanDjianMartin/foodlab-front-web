@@ -15,6 +15,7 @@ import {DisplayIngredientComponent} from "./components/ingredient/display-ingred
 import {AdminGuard} from "./guards/admin/admin.guard";
 import {LoginRedirectGuard} from "./guards/login-redirect/login-redirect.guard";
 import {AppComponent} from "./app.component";
+import {SettingsPageComponent} from "./components/settings/settings-page/settings-page.component";
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: "stock",
     component: DisplayIngredientStockComponent
+  },
+  {
+    path: "settings",
+    component: SettingsPageComponent
   },
   {
     path: '',
