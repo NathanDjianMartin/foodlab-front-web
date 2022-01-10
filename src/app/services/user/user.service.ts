@@ -30,7 +30,11 @@ export class UserService {
         });
       },
       error: (err) => {
-        this.loggerService.displayError(`Could not log in: ${err.error.message}`);
+        if(err.error.message == "Unauthorized"){
+          this.loggerService.displayError("Incorrect credentials!");
+        } else {
+          this.loggerService.displayError(`Could not log in: ${err.error.message}`);
+        }
       }
     });
   }
