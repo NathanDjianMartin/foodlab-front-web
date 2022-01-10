@@ -40,6 +40,7 @@ import { SearchbarComponent } from './components/general/searchbar/searchbar.com
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 import { RecipeSaleComponent } from './components/recipe/recipe-sale/recipe-sale.component';
 import {TokenInterceptorService} from "./services/interceptors/token-interceptor.service";
+import { SettingsPageComponent } from './components/settings/settings-page/settings-page.component';
 
 @NgModule({
     declarations: [
@@ -78,6 +79,7 @@ import {TokenInterceptorService} from "./services/interceptors/token-interceptor
         AddProgressionWithinRecipeExecutionComponent,
         UpdateOrderStepsComponent,
         RecipeSaleComponent,
+        SettingsPageComponent,
     ],
     imports: [
         BrowserModule,

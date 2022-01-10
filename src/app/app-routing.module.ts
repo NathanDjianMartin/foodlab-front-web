@@ -13,6 +13,7 @@ import {DisplayIngredientStockComponent} from "./components/ingredient/display-i
 import {DisplayRecipesComponent} from "./components/recipe/display-recipes/display-recipes.component";
 import {DisplayIngredientComponent} from "./components/ingredient/display-ingredient/display-ingredient.component";
 import {AdminGuard} from "./guards/admin/admin.guard";
+import {SettingsPageComponent} from "./components/settings/settings-page/settings-page.component";
 
 const routes: Routes = [
   {
@@ -60,6 +61,10 @@ const routes: Routes = [
   {
     path: "stock",
     component: DisplayIngredientStockComponent
+  },
+  {
+    path: "settings",
+    component: SettingsPageComponent
   }
 ];
 
