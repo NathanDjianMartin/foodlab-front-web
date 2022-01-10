@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {IngredientWithinStep} from "../../../models/ingredient-within-step/ingredient-within-step";
 import {RecipeExecution} from "../../../models/recipe-execution/recipe-execution";
 
 @Component({
@@ -13,9 +12,11 @@ import {RecipeExecution} from "../../../models/recipe-execution/recipe-execution
 export class RecipeDetailsComponent implements OnInit {
   id!: number;
   recipe!: Recipe;
-  addAStep: boolean = false;
-  addAProgression: boolean = false;
-  manageOrderSteps: boolean = false;
+  isAddStepComponentVisible: boolean = false;
+  isAddProgressionComponentVisible: boolean = false;
+  isStepsOrderManagementComponentVisible: boolean = false;
+  isRecipeSaleComponentVisible: boolean = false;
+  isCostsComponentVisible: boolean = false;
   isChange: number = 0;
   stepToUpdate: RecipeExecution | undefined;
 
@@ -38,15 +39,15 @@ export class RecipeDetailsComponent implements OnInit {
   changeDetected($event: number) {
     console.log("change detected ok in parent")
     this.isChange = this.isChange + $event;
-    this.addAProgression = false;
-    this.addAStep = false;
-    this.manageOrderSteps = false;
+    this.isAddProgressionComponentVisible = false;
+    this.isAddStepComponentVisible = false;
+    this.isStepsOrderManagementComponentVisible = false;
     this.stepToUpdate = undefined;
   }
 
   stepToUpdateDetected($event: RecipeExecution){
     this.stepToUpdate = $event;
-    console.log(this.stepToUpdate);
+    console.log("jj")
     this.router.navigate(["recipe/details/" + this.recipe!.id!], { fragment: 'editstep'}).then( (data) => {
       console.log("recipe/details/" + this.recipe!.id! + "#editstep");
     }, (error) => {
@@ -54,21 +55,44 @@ export class RecipeDetailsComponent implements OnInit {
     });
   }
 
-  addAStepAction(){
-    this.addAStep = !this.addAStep;
-    this.addAProgression = false;
+  toggleAddStep() {
+    this.isAddStepComponentVisible = !this.isAddStepComponentVisible;
+    this.isAddProgressionComponentVisible = false;
+    this.isStepsOrderManagementComponentVisible = false;
+    this.isRecipeSaleComponentVisible = false;
+    this.isCostsComponentVisible = false;
   }
 
-  addAProgressionAction(){
-    this.addAStep = false;
-    this.addAProgression = !this.addAProgression;
-    this.manageOrderSteps = false;
+  toggleAddProgression() {
+    this.isAddStepComponentVisible = false;
+    this.isAddProgressionComponentVisible = !this.isAddProgressionComponentVisible;
+    this.isStepsOrderManagementComponentVisible = false;
+    this.isRecipeSaleComponentVisible = false;
+    this.isCostsComponentVisible = false;
   }
 
-  manageOrderStepsAction(){
-    this.manageOrderSteps =!this.manageOrderSteps;
-    this.addAStep = false;
-    this.addAProgression = false;
+  toggleStepsOrderManagement() {
+    this.isAddStepComponentVisible = false;
+    this.isAddProgressionComponentVisible = false;
+    this.isStepsOrderManagementComponentVisible = !this.isStepsOrderManagementComponentVisible;
+    this.isRecipeSaleComponentVisible = false;
+    this.isCostsComponentVisible = false;
+  }
+
+  toggleRecipeSale() {
+    this.isAddStepComponentVisible = false;
+    this.isAddProgressionComponentVisible = false;
+    this.isStepsOrderManagementComponentVisible = false;
+    this.isRecipeSaleComponentVisible = !this.isRecipeSaleComponentVisible;
+    this.isCostsComponentVisible = false;
+  }
+
+  toggleCosts() {
+    this.isAddStepComponentVisible = false;
+    this.isAddProgressionComponentVisible = false;
+    this.isStepsOrderManagementComponentVisible = false;
+    this.isRecipeSaleComponentVisible = false;
+    this.isCostsComponentVisible = !this.isCostsComponentVisible;
   }
 
   printAction() {

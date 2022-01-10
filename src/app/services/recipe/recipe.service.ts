@@ -91,4 +91,12 @@ export class RecipeService {
   getDuration(id: number): Observable<number> {
     return this.httpService.get<number>(`http://localhost:3000/recipe/duration/${id}`)
   }
+
+  getAllIngredients(recipeId: number): Observable<Ingredient[]> {
+    return this.httpService.get<Ingredient[]>(`http://localhost:3000/recipe/ingredients-in-recipe/${recipeId}`);
+  }
+
+  sellRecipe(recipeId: number) {
+    return this.httpService.put(`http://localhost:3000/recipe/sell/${recipeId}`, {});
+  }
 }

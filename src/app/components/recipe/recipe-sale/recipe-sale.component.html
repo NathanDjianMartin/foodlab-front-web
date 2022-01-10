@@ -1,0 +1,18 @@
+<div *ngIf="this.recipe" class="row">
+    <div class="card z-depth-0">
+        <span class="card-title">{{this.recipe.name}}</span>
+        <div class="row">
+            <div *ngFor="let ingredient of recipe!.ingredient!" class="col ingredient">
+                <span *ngIf="ingredient.allergenCategoryId == undefined; else allergen">{{ingredient.name}}</span>
+                <ng-template #allergen>
+                    <span class="bold">{{ingredient.name}}</span>
+                </ng-template>
+                <span *ngIf="recipe!.ingredient!.indexOf(ingredient) != recipe!.ingredient!.length">,</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <button class="btn-small col" (click)="sellRecipe()">Sell recipe</button>
+    <button class="btn-small col" (click)="printLabel()">Print label</button>
+</div>

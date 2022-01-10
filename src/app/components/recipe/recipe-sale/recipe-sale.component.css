@@ -1,0 +1,21 @@
+.bold {
+    font-weight: bold;
+}
+
+.ingredient {
+    padding: 3px;
+}
+
+.card {
+    padding: 5px;
+}
+
+@media print {
+    * {
+        opacity: 0%;
+    }
+
+    app-recipe-sale {
+        opacity: 100%;
+    }
+}
