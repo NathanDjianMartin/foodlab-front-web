@@ -32,4 +32,11 @@ tab-center{
 .toast{
     transparent: true;
 }
-
+.loggerSuccess{
+    background-color: rgba(56, 120, 38, 0.71) !important;
+    backdrop-filter: blur(5px);
+}
+.loggerError{
+    background-color: rgba(184, 20, 23, 0.68) !important;
+    backdrop-filter: blur(5px);
+}
