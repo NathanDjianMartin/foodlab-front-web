@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IngredientCategory} from "../../models/ingredient-category/ingredient-category";
 import {map} from "rxjs/operators";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -19,16 +20,16 @@ export class IngredientCategoryService {
     }
 
     getAllIngredientCategories(): Observable<IngredientCategory[]> {
-        return this.httpService.get<IngredientCategory[]>("http://localhost:3000/ingredient-category").pipe(
+        return this.httpService.get<IngredientCategory[]>(`${environment.apiUrl}/ingredient-category`).pipe(
             map(data =>
                 data.map( json => this.jsonToIngredientCategory(json))));
     };
 
     createIngredientCategory(ingredientCategory: IngredientCategory): Observable<IngredientCategory> {
-        return this.httpService.post<IngredientCategory>("http://localhost:3000/ingredient-category", ingredientCategory);
+        return this.httpService.post<IngredientCategory>(`${environment.apiUrl}/ingredient-category`, ingredientCategory);
     }
 
     deleteIngredientCategory(id: number) {
-        return this.httpService.delete<number>(`http://localhost:3000/ingredient-category/${id}`);
+        return this.httpService.delete<number>(`${environment.apiUrl}/ingredient-category/${id}`);
     }
 }

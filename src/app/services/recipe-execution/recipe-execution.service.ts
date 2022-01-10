@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {RecipeExecution} from "../../models/recipe-execution/recipe-execution";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -21,29 +22,29 @@ export class RecipeExecutionService {
   }
 
   getAllRecipesExecution(): Observable<RecipeExecution[]> {
-    return this.httpService.get<RecipeExecution[]>("http://localhost:3000/recipe-execution").pipe(
+    return this.httpService.get<RecipeExecution[]>(`${environment.apiUrl}/recipe-execution`).pipe(
         map(data =>
             data.map( json => this.jsonToRecipeExecution(json))));
   }
 
   getAllProgressions(): Observable<RecipeExecution[]> {
-    return this.httpService.get<RecipeExecution[]>("http://localhost:3000/recipe-execution/progressions").pipe(
+    return this.httpService.get<RecipeExecution[]>(`${environment.apiUrl}/recipe-execution/progressions`).pipe(
         map(data =>
             data.map( json => this.jsonToRecipeExecution(json))));
   }
 
   getOne(id: number): Observable<RecipeExecution> {
-    return this.httpService.get<RecipeExecution>(`http://localhost:3000/recipe-execution/${id}`).pipe(
+    return this.httpService.get<RecipeExecution>(`${environment.apiUrl}/recipe-execution/${id}`).pipe(
         map( json => this.jsonToRecipeExecution(json))
     );
   }
 
   createRecipeExecution(recipeExecution: RecipeExecution): Observable<RecipeExecution>{
-    return this.httpService.post<RecipeExecution>("http://localhost:3000/recipe-execution", recipeExecution);
+    return this.httpService.post<RecipeExecution>(`${environment.apiUrl}/recipe-execution`, recipeExecution);
   }
 
   updateRecipeExecution(recipeExecution: RecipeExecution): Observable<RecipeExecution>{
-    return this.httpService.patch<RecipeExecution>(`http://localhost:3000/recipe-execution/${recipeExecution.id}`, {
+    return this.httpService.patch<RecipeExecution>(`${environment.apiUrl}/recipe-execution/${recipeExecution.id}`, {
       stepTitle: recipeExecution.stepTitle,
       stepDescription: recipeExecution.stepDescription,
       duration: recipeExecution.duration
@@ -51,6 +52,6 @@ export class RecipeExecutionService {
   }
 
   deleteRecipeExecution(id: number){
-    return this.httpService.delete<number>(`http://localhost:3000/recipe-execution/${id}`);
+    return this.httpService.delete<number>(`${environment.apiUrl}/recipe-execution/${id}`);
   }
 }
