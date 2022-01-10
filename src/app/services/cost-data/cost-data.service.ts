@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {CostData} from "../../models/cost-data/cost-data";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +22,13 @@ export class CostDataService {
   }
 
   getCostData(id: number): Observable<CostData> {
-    return this.httpService.get<CostData>(`http://localhost:3000/cost-data/${id}`).pipe(
+    return this.httpService.get<CostData>(`${environment.apiUrl}/cost-data/${id}`).pipe(
         map( json => this.jsonToIngredient(json)));
   }
 
   updateDefaultCostData(costData: CostData){
     let id = 1;
-    return this.httpService.patch<CostData>(`http://localhost:3000/cost-data/${id}`, {
+    return this.httpService.patch<CostData>(`${environment.apiUrl}/cost-data/${id}`, {
       averageHourlyCost: Number(costData.averageHourlyCost),
       flatrateHourlyCost: Number(costData.flatrateHourlyCost),
       coefWithCharges: Number(costData.coefWithCharges),

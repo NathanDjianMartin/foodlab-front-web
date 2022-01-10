@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {LocalStorageService} from "../local-storage/local-storage.service";
 import {User} from "../../models/user/user";
 import {LoggerService} from "../logger/logger.service";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class UserService {
   ) { }
 
   login(credentials: Credentials) {
-    this.httpClient.post('http://localhost:3000/auth/login', credentials).subscribe({
+    this.httpClient.post(`${environment.apiUrl}/auth/login`, credentials).subscribe({
       next: (data) => {
         const token: string = JSON.parse(JSON.stringify(data)).access_token;
         this.localStorageService.set('jwt', token);
@@ -45,10 +46,7 @@ export class UserService {
   }
 
   getProfile() {
-/*    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${jwt}`
-    });*/
-    return this.httpClient.get('http://localhost:3000/user/profile');
+    return this.httpClient.get(`${environment.apiUrl}/user/profile`);
   }
 
   isLoggedIn() {
@@ -56,14 +54,14 @@ export class UserService {
   }
 
   findAll() {
-    return this.httpClient.get('http://localhost:3000/user');
+    return this.httpClient.get(`${environment.apiUrl}/user`);
   }
 
   create(user: User) {
-    return this.httpClient.post('http://localhost:3000/user', { ...user });
+    return this.httpClient.post(`${environment.apiUrl}/user`, { ...user });
   }
 
   delete(id: number) {
-    return this.httpClient.delete(`http://localhost:3000/user/${id}`)
+    return this.httpClient.delete(`${environment.apiUrl}/user/${id}`)
   }
 }
