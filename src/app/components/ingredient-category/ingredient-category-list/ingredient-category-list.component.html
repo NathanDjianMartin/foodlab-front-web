@@ -1,8 +1,16 @@
 <div class="row">
     <ul class="collection col s10">
         <li *ngFor="let category of ingredientCategories  | async" class="collection-item">
-            <button class="btn-floating btn-small waves-effect waves-light right" (click)="deleteIngredientCategory(category)">X</button>
+            <button class="btn-floating btn-small waves-effect waves-light right delete"
+                    (click)="deleteIngredientCategory(category)"><i class="tiny material-icons">clear</i>
+            </button>
             {{category.name}}
         </li>
     </ul>
+    <div class="input-field col s8" [formGroup]="ingredientCategoryFormGroup">
+        <input id="name" type="text" class="validate" formControlName="name">
+        <label for="name">Name</label>
+    </div>
+    <button class="btn-small waves-effect waves-light col s2 add" (click)="createIngredientCategory()">Add</button>
+
 </div>

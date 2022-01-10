@@ -12,7 +12,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./allergen-category-list.component.css']
 })
 export class AllergenCategoryListComponent implements OnInit {
-  allergenCategories!: AllergenCategory[];
+  allergenCategories!: Observable<AllergenCategory[]>;
   allergenCategoryFormGroup!: FormGroup;
 
   constructor(
@@ -21,15 +21,11 @@ export class AllergenCategoryListComponent implements OnInit {
       private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.allergenCategoryService.getAllAllergenCategories().subscribe({
-      next: (allergenCategories) => {
-        this.allergenCategories = allergenCategories;
-      }
-    });
     this.init();
   }
 
   init(){
+    this.allergenCategories = this.allergenCategoryService.getAllAllergenCategories();
     this.allergenCategoryFormGroup = this.fb.group({
       name:[null,[Validators.required]]
     })
@@ -38,8 +34,7 @@ export class AllergenCategoryListComponent implements OnInit {
   deleteAllergenCategory(allergenCategory: AllergenCategory) {
     this.allergenCategoryService.deleteAllergenCategory(allergenCategory.id!).subscribe(
         (data) => {
-          let index = this.allergenCategories.indexOf(allergenCategory);
-          this.allergenCategories.splice(index,1);
+          this.init();
         },
         (error) => {
           this.loggerService.displayError("This category corresponds to several ingredient, you cannot delete it")
@@ -50,7 +45,6 @@ export class AllergenCategoryListComponent implements OnInit {
   createAllergenCategory(){
     let allergenCategory = new AllergenCategory(this.allergenCategoryFormGroup.get("name")?.value);
     this.allergenCategoryService.createAllergenCategory(allergenCategory).subscribe((data) => {
-      this.allergenCategories.push(allergenCategory);
       this.init();
     });
   }

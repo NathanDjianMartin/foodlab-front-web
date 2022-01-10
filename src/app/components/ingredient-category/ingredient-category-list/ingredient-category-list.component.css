@@ -1,7 +1,6 @@
-.btn-small{
+.delete{
     background-color: #903739;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    align-content: center;
+}
+.add{
+    margin-top: 25px ;
 }
