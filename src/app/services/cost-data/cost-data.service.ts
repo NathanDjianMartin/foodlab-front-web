@@ -24,4 +24,15 @@ export class CostDataService {
     return this.httpService.get<CostData>(`http://localhost:3000/cost-data/${id}`).pipe(
         map( json => this.jsonToIngredient(json)));
   }
+
+  updateDefaultCostData(costData: CostData){
+    let id = 1;
+    return this.httpService.patch<CostData>(`http://localhost:3000/cost-data/${id}`, {
+      averageHourlyCost: Number(costData.averageHourlyCost),
+      flatrateHourlyCost: Number(costData.flatrateHourlyCost),
+      coefWithCharges: Number(costData.coefWithCharges),
+      coefWithoutCharges: Number(costData.coefWithoutCharges)
+    }).pipe(
+        map( json => this.jsonToIngredient(json)));
+  }
 }

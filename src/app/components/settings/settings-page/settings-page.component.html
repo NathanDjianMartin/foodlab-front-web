@@ -15,5 +15,29 @@
 
         <h4>Manage cost data</h4>
         <h6>Update the default cost data</h6>
+
+        <form [formGroup]="costDataFormGroup">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="averageHourlyCost" type="number" step="0.01" min="0" class="validate" formControlName="averageHourlyCost">
+                        <label for="averageHourlyCost" class="active">Average hourly cost</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="flatrateHourlyCost" type="number" step="0.01" min="0" class="validate" formControlName="flatrateHourlyCost">
+                        <label for="flatrateHourlyCost" class="active">Flatrate Hourly Cost</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="coefWithCharges" type="number" step="0.01" min="0" class="validate" formControlName="coefWithCharges">
+                        <label for="coefWithCharges" class="active">Coefficient With Charges</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="coefWithoutCharges" type="number" step="0.01" min="0" class="validate" formControlName="coefWithoutCharges">
+                        <label for="coefWithoutCharges" class="active">Coefficient Without Charges</label>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-small waves-effect waves-light right-align" (click)="updateDefaultCostData()">Saved cost</button>
+        </form>
     </div>
 </div>
