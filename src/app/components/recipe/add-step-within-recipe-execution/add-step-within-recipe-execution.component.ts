@@ -151,7 +151,6 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit, OnChanges 
             } else {
                 await this.createSimpleStep();
             }
-            //TODO: peut être mieux mettre toutes les étapes dans le service
         } else {
             this.loggerService.displayError('Please fill in the step form correctly.')
         }
@@ -168,8 +167,8 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit, OnChanges 
             if (this.ingredientsSelected != undefined) {
                 this.addAllIngredientsInAStep(step.id!, this.ingredientsSelected);
             }
+            this.loggerService.displaySuccess("Step added");
         });
-        //TODO: vérifier que tout est ok
         this.isChangeEvent.emit(1);
     }
 

@@ -11,6 +11,9 @@
     border-radius: 10px;
     opacity: 90%;
 }
+input{
+    color: white;
+}
 
 .login-form {
     border-radius: 10px;

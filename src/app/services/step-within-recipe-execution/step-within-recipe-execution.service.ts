@@ -68,7 +68,6 @@ export class StepWithinRecipeExecutionService {
     }
 
     //Update all steps within recipe execution
-    //TODO : renommer voir nom back
     updateStepsOrderOfRecipeExecution(stepsWithinRecipeExecution: StepWithinRecipeExecution[]): Observable<StepWithinRecipeExecution[]> {
         let dto = [];
         for(let stepWithinRecipeExecution of stepsWithinRecipeExecution){

@@ -51,15 +51,12 @@ export class TabRecipesByCategoryComponent implements OnInit{
 
   deleteRecipe(recipe: Recipe){
     this.recipeService.deleteRecipe(recipe.id!).subscribe(
-        //TODO: correct this function
         (data) => {
           this.ngOnInit()
         },
         (error) => {
-          //ne s'affiche pas puisque c'est recipe execution qui est present
           this.loggerService.displayError("This recipe is present in other recipes as a sub-recipe, you cannot delete it");
     });
-    //TODO: ça ne se met pas a jour
     this.init();
     this.init();
   }

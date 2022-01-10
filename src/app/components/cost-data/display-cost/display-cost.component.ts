@@ -22,7 +22,6 @@ export class DisplayCostComponent implements OnInit, OnChanges {
     salesPricesWithoutCharges!: number;
     productionCost!: number;
     portionProfit!: number;
-    breakEvenPoint!: number;//TODO
 
     averageHourlyCost!: number
     flatrateHourlyCost!: number
@@ -70,7 +69,7 @@ export class DisplayCostComponent implements OnInit, OnChanges {
     calculateCosts() {
         this.recipeService.getIngredientsCost(this.recipeId!).subscribe((cost) => {
             let ingredientsCost = cost;
-            this.materialCost = this.round(ingredientsCost + ingredientsCost * 0.05); //TODO: def assaisonnement autrement
+            this.materialCost = this.round(ingredientsCost + ingredientsCost * 0.05);
             this.salesPricesWithoutCharges = this.round(this.materialCost * this.coefWithoutCharges);
 
             this.recipeService.getDuration(this.recipeId!).subscribe((duration) => {

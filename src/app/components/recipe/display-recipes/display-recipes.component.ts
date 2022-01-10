@@ -63,7 +63,6 @@ export class DisplayRecipesComponent implements OnInit {
   }
 
   onSearch(event: string) {
-    // TODO manage multiple filter types (cost, number of guests...)
     if (event !== "") {
       for (let entry of this.filteredRecipesByCategory.entries()) {
         let category: RecipeCategory = entry[0];

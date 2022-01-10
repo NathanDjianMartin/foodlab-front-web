@@ -10,10 +10,10 @@ export class LoggerService {
 
 
   displayError(message: string){
-    M.toast({html: message, classes: 'red darken-4 rounded'})
+    M.toast({html: message, classes: 'rounded loggerError'})
   }
 
   displaySuccess(message: string){
-    M.toast({html: message, classes: 'toast green darken-4 rounded'})
+    M.toast({html: message, classes: 'toast rounded loggerSuccess'})
   }
 }

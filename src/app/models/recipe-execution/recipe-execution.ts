@@ -16,7 +16,6 @@ export class RecipeExecution {
     public ingredients?: Ingredient[];
     public steps?: StepWithinRecipeExecution[];
     //Pour connaitre le numéro de l'étape dans la recette
-    //TODO: il faudra surement le placer ailleurs
     public number?: number;
 
     constructor(isStep: boolean, stepTitle: string, @Optional()stepDescription?: string, @Optional()duration?: number) {
