@@ -15,9 +15,7 @@ export class AdminGuard implements CanActivate {
       private userService: UserService,
       private localStorageService: LocalStorageService,
       private loggerService: LoggerService
-  ) {
-  }
-
+  ) {}
 
   canActivate(
       route: ActivatedRouteSnapshot,
@@ -34,7 +32,11 @@ export class AdminGuard implements CanActivate {
           }
         },
         error: (err) => {
-          this.loggerService.displayError(`Error while loading your profile : ${err.error.message}`);
+          if (err.error.message == "Unauthorized") {
+            this.loggerService.displayError(`You must be logged in to access this page!`);
+          } else {
+            this.loggerService.displayError(`Error while loading your profile : ${err.error.message}`);
+          }
           observable.next(false);
         }
       });

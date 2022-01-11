@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {Recipe} from "../../../models/recipe/recipe";
 import {RecipeService} from "../../../services/recipe/recipe.service";
 import {LoggerService} from "../../../services/logger/logger.service";
 import {Router} from "@angular/router";
+import {UserService} from "../../../services/user/user.service";
 
 @Component({
   selector: 'app-recipe-list',
@@ -17,6 +18,7 @@ export class RecipeListComponent implements OnInit {
   constructor(
       private recipeService: RecipeService,
       private loggerService: LoggerService,
+      private userService: UserService,
       private router: Router
   ) { }
 
@@ -38,6 +40,7 @@ export class RecipeListComponent implements OnInit {
   selectRecipe(selectedRecipe: Recipe){
     this.router.navigate(["/recipe/details",selectedRecipe.id])
   }
+
   editRecipe(recipeId: number){
     console.log("Edit recipe")
     this.router.navigate([`/recipe/edit/${recipeId}`]);

@@ -6,6 +6,7 @@ import {LocalStorageService} from "../local-storage/local-storage.service";
 import {User} from "../../models/user/user";
 import {LoggerService} from "../logger/logger.service";
 import {environment} from "../../../environments/environment";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -46,11 +47,43 @@ export class UserService {
   }
 
   getProfile() {
-    return this.httpClient.get(`${environment.apiUrl}/user/profile`);
+    return this.httpClient.get<User>(`${environment.apiUrl}/user/profile`);
   }
 
+  /*
   isLoggedIn() {
     return this.localStorageService.get('jwt') !== null;
+  }
+
+   */
+
+  isLoggedIn(): Observable<boolean> {
+    return new Observable<boolean>(observable => {
+      this.getProfile().subscribe({
+        next: (profile) => {
+          observable.next(true);
+        }, error: (err) => {
+          observable.next(false);
+        }
+      });
+    });
+  }
+
+  isAdmin(): Observable<boolean> {
+    return new Observable<boolean>(observable => {
+      this.getProfile().subscribe({
+        next: (profile) => {
+          const user: User = JSON.parse(JSON.stringify(profile));
+          if (user.isAdmin) {
+            observable.next(true);
+          } else {
+            observable.next(false);
+          }
+        }, error: (err) => {
+          observable.next(false);
+        }
+      });
+    });
   }
 
   findAll() {

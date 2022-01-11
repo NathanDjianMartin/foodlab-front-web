@@ -24,12 +24,12 @@ const routes: Routes = [
   {
     path: 'ingredients/add',
     component: IngredientFormComponent,
-    canActivate: [AuthenticatedGuardGuard, AdminGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'ingredients/edit/:id',
     component: IngredientFormComponent,
-    canActivate: [AuthenticatedGuardGuard, AdminGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'recipes',
@@ -39,11 +39,12 @@ const routes: Routes = [
   {
     path: 'recipes/add',
     component: RecipeFormComponent,
-    canActivate: [AuthenticatedGuardGuard, AdminGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [LoginRedirectGuard]
   },
   {
     path: 'profile',
@@ -53,7 +54,7 @@ const routes: Routes = [
   {
     path: 'user-creation',
     component: UserCreationComponent,
-    canActivate: [AuthenticatedGuardGuard, AdminGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: "recipe/details/:id",
@@ -63,17 +64,17 @@ const routes: Routes = [
   {
     path: "recipe/edit/:id",
     component: RecipeFormComponent,
-    canActivate: [AuthenticatedGuardGuard, AdminGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: "stock",
     component: DisplayIngredientStockComponent,
-    canActivate: [AuthenticatedGuardGuard, AdminGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: "settings",
     component: SettingsPageComponent,
-    canActivate: [AuthenticatedGuardGuard, AdminGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: '',

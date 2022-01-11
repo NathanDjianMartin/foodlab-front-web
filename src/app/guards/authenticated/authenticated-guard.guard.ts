@@ -17,14 +17,30 @@ export class AuthenticatedGuardGuard implements CanActivate {
       private router: Router
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.userService.isLoggedIn() == false) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+
+    return new Observable<boolean>(observable => {
+      this.userService.isLoggedIn().subscribe({
+        next: (isLoggedIn) => {
+          if (isLoggedIn) {
+            observable.next(true);
+          } else {
+            this.loggerService.displayError('You must be logged in to access this page.');
+            this.router.navigate(['login']);
+            observable.next(false);
+          }
+        }
+      });
+    });
+
+
+    /*if (this.userService.isLoggedIn() == false) {
       this.loggerService.displayError('You must be logged in to access this page.');
       this.router.navigate(['login']);
       return false;
     } else {
+      this.loggerService.displaySuccess("OK");
       return true;
-    }
+    }*/
   }
-
 }

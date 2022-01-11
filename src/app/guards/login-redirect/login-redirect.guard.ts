@@ -21,11 +21,17 @@ export class LoginRedirectGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    if (this.userService.isLoggedIn()) {
-      this.router.navigate(['recipes']);
-    } else {
-      this.router.navigate(['login']);
-    }
+    this.userService.isLoggedIn().subscribe({
+      next: (isLoggedIn) => {
+        if (isLoggedIn) {
+          this.router.navigate(['recipes']);
+        } else {
+          this.router.navigate(['login']);
+        }
+      }, error: (err) => {
+        this.router.navigate(['login']);
+      }
+    });
     return true;
   }
   
