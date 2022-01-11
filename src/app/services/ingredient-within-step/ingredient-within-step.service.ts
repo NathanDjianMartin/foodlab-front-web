@@ -53,7 +53,7 @@ export class IngredientWithinStepService {
     return this.httpService.post<IngredientWithinStep>(`${environment.apiUrl}/ingredient-within-step`, {
       "ingredientId": ingredientWithinStep.ingredientId,
       "recipeExecutionId": ingredientWithinStep.recipeExecutionId,
-      "quantity": ingredientWithinStep.quantity
+      "quantity": Number(ingredientWithinStep.quantity)
     });
   }
 

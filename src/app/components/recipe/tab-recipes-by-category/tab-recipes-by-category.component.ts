@@ -32,33 +32,16 @@ export class TabRecipesByCategoryComponent implements OnInit{
     }
   }
 
-  /*ngAfterViewInit(){
-    (function ($) {
-      $(function () {
-
-        //initialize all modals
-        $('.modal').modal();
-
-        //now you can open modal from code
-        $('#modal1').modal('open');
-
-        //or by click on trigger
-        $('.trigger-modal').modal();
-
-      }); //end of document ready
-    })(jQuery); //end of jQuery name space
-  }*/
-
   deleteRecipe(recipe: Recipe){
     this.recipeService.deleteRecipe(recipe.id!).subscribe(
         (data) => {
-          this.ngOnInit()
+          this.loggerService.displaySuccess("Recipe deleted!");
+          this.init();
+          this.init();
         },
         (error) => {
           this.loggerService.displayError("This recipe is present in other recipes as a sub-recipe, you cannot delete it");
     });
-    this.init();
-    this.init();
   }
 
   selectRecipe(selectedRecipe: Recipe){
