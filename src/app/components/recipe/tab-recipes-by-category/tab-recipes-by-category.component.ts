@@ -49,6 +49,7 @@ export class TabRecipesByCategoryComponent implements OnInit{
   }
 
   editRecipe(recipeId: number){
+    console.log("Edit recipe")
     this.router.navigate([`/recipe/edit/${recipeId}`]);
   }
 

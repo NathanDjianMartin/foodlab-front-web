@@ -38,4 +38,8 @@ export class RecipeListComponent implements OnInit {
   selectRecipe(selectedRecipe: Recipe){
     this.router.navigate(["/recipe/details",selectedRecipe.id])
   }
+  editRecipe(recipeId: number){
+    console.log("Edit recipe")
+    this.router.navigate([`/recipe/edit/${recipeId}`]);
+  }
 }
