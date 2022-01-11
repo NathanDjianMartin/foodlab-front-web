@@ -53,7 +53,7 @@
 
     </div>
     <div *ngIf="isStepsOrderManagementComponentVisible">
-        <app-update-order-steps class="print-exclude" [recipeExecutionId]="recipe.recipeExecutionId!" ></app-update-order-steps>
+        <app-update-order-steps class="print-exclude" [recipeExecutionId]="recipe.recipeExecutionId!" (isChangeEvent)="changeDetected($event)" ></app-update-order-steps>
     </div>
     <div *ngIf="this.isRecipeSaleComponentVisible" class="print-exclude">
         <app-recipe-sale [recipe]="this.recipe" ></app-recipe-sale>

@@ -22,8 +22,9 @@ export class AuthenticatedGuardGuard implements CanActivate {
       this.loggerService.displayError('You must be logged in to access this page.');
       this.router.navigate(['login']);
       return false;
+    } else {
+      return true;
     }
-    return true;
   }
 
 }
