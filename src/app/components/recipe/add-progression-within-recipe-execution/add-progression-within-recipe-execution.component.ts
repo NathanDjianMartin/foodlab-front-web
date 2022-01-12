@@ -61,7 +61,8 @@ export class AddProgressionWithinRecipeExecutionComponent implements OnInit {
     this.stepWithinRecipeExecutionService.createStepWithinRecipeExecution(
         new StepWithinRecipeExecution(this.progression.id!, this.recipeExecutionId)
     ).subscribe( (data) => {
-          this.loggerService.displaySuccess("Progression added!")
+          window.location.reload();
+          //this.loggerService.displaySuccess("Progression added!")
         }, (error) => {
           this.loggerService.displayError(error.error.error);
         }

@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
 
   deleteUser(id: number): void {
 
-    this.userService.delete(id).subscribe({
+    this.userService.delete(Number(id)).subscribe({
       next: (data) => {
         // removes the user from the users array
         const deletedUserIndex = this.users.indexOf(this.users.find(user => user.id == id)!);

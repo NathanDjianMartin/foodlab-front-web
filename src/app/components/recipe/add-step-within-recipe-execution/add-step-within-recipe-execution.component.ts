@@ -167,7 +167,8 @@ export class AddStepWithinRecipeExecutionComponent implements OnInit, OnChanges 
             if (this.ingredientsSelected != undefined) {
                 this.addAllIngredientsInAStep(step.id!, this.ingredientsSelected);
             }
-            this.loggerService.displaySuccess("Step added");
+            window.location.reload();
+            //this.loggerService.displaySuccess("Step added");
         });
         this.isChangeEvent.emit(1);
     }

@@ -29,12 +29,14 @@ export class RecipeListComponent implements OnInit {
     this.recipeService.deleteRecipe(recipe.id!).subscribe(
         (data) => {
           this.ngOnInit();
+          window.location.reload();
         },
         (error) => {
           //ne s'affiche pas puisque c'est recipe execution qui est present
           this.loggerService.displayError("This recipe is present in other recipes as a sub-recipe, you cannot delete it");
         });
-    this.router.navigateByUrl("/recipes");
+
+    //this.router.navigateByUrl("/recipes");
   }
 
   selectRecipe(selectedRecipe: Recipe){
