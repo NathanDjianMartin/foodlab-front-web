@@ -31,17 +31,17 @@ export class DisplayRecipesComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // loads the select element
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   let elems = document.querySelectorAll('select');
+    //   M.FormSelect.init(elems);
+    // });
+
     this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
         window.location.reload();
       }
-    });
-
-    // loads the select element
-    document.addEventListener('DOMContentLoaded', function() {
-      let elems = document.querySelectorAll('select');
-      M.FormSelect.init(elems);
     });
 
     this.initRecipes();

@@ -6,14 +6,17 @@
         <div class="col s5">
             <app-searchbar [title]="'Search a recipe'" (searchEvent)="onSearch($event)"></app-searchbar>
         </div>
-        <div class="input-field col s3">
+        <div class="col valign-wrapper">
+            <label>Choose your filter</label>
+
+        <div class="input-field col s8">
+
             <select [(ngModel)]="filterSelect">
-                <option value="" disabled selected>Choose your filter</option>
-                <option value="1">Name</option>
+                <option value="1" selected>Name</option>
                 <option value="2">Ingredient</option>
                 <option value="3">Author</option>
             </select>
-            <label>Filter by</label>
+        </div>
         </div>
     </div>
 
