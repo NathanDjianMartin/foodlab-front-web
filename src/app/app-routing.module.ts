@@ -34,7 +34,8 @@ const routes: Routes = [
   {
     path: 'recipes',
     component: DisplayRecipesComponent,
-    canActivate: [AuthenticatedGuardGuard]
+    canActivate: [AuthenticatedGuardGuard],
+    runGuardsAndResolvers: "always"
   },
   {
     path: 'recipes/add',

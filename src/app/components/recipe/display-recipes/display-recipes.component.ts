@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {IngredientWithinStepService} from "../../../services/ingredient-within-step/ingredient-within-step.service";
 import {Ingredient} from "../../../models/ingredient/ingredient";
 import {IngredientWithinStep} from "../../../models/ingredient-within-step/ingredient-within-step";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-display-recipes',
@@ -24,10 +25,18 @@ export class DisplayRecipesComponent implements OnInit {
   constructor(
       private recipeCategoryService: RecipeCategoryService,
       private recipeService: RecipeService,
-      private ingredientWithinStepService: IngredientWithinStepService
+      private ingredientWithinStepService: IngredientWithinStepService,
+      private router: Router
   ) {}
 
   ngOnInit(): void {
+
+    this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        window.location.reload();
+      }
+    });
 
     // loads the select element
     document.addEventListener('DOMContentLoaded', function() {
@@ -35,6 +44,11 @@ export class DisplayRecipesComponent implements OnInit {
       M.FormSelect.init(elems);
     });
 
+    this.initRecipes();
+  }
+
+  initRecipes() {
+    this.recipesByCategory = new Map();
     this.categories = this.recipeCategoryService.getAllRecipeCategories();
     this.categories.subscribe({
       next: (categories) => {

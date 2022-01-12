@@ -20,7 +20,6 @@
 
     <div *ngFor="let entry of filteredRecipesByCategory.entries()">
         <app-recipe-list [title]="entry[0].name" [recipeList]="entry[1]"></app-recipe-list>
-        <!-- <app-tab-recipes-by-category [category]="category"></app-tab-recipes-by-category> -->
     </div>
 
     <div class="row right-align">
